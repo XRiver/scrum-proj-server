@@ -18,7 +18,12 @@ pipeline {
         }
         stage('SonarQube analyze') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.projectKey=XRiver_scrum-proj-server -Dsonar.organization=xriver-github  -Dsonar.host.url=https://sonarcloud.io  -Dsonar.login=d474fa7fd1c788dc17e93549ff62f9606546c001'
+                sh 'mvn sonar:sonar \
+  -Dsonar.projectKey=XRiver_scrum-proj-server \
+  -Dsonar.organization=xriver-github \
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.login=07979a1e408cd6fdc91073a17604e4b02bb54f9b
+  -Dsonar.java.binaries=Jenkins/out'
             }
         }
     }
