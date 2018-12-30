@@ -29,7 +29,8 @@ cp $BUILDDIR/$JARNAME $DEPLOYDIR
 # Must use scheduled job to avoid spawned child process to block Jenkins' wrapper.
 # That's a disadvantage of Jenkins.
 # https://wiki.jenkins-ci.org/display/JENKINS/Spawning+processes+from+build
-daemonize -E BUILD_ID=dontKillMe -E JENKINS_NODE_COOKIE=dontKillMe -o $DEPLOYDIR/out.log -e $DEPLOYDIR/err.log /usr/bin/java -jar $DEPLOYDIR/$JARNAME
+BUILD_ID=do_not_kill_me
+JENKINS_NODE_COOKIE=do_not_kill_me
+nohup java -jar $DEPLOYDIR/$JARNAME $> $DEPLOYDIR/out.log 2>&1 &
 
-
-exit 0
+exit
