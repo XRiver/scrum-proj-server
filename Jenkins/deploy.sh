@@ -28,3 +28,4 @@ cp $BUILDDIR/$JARNAME $DEPLOYDIR
 # Execute the jar.
 java -jar $DEPLOYDIR/$JARNAME > $DEPLOYDIR/out.log & disown
 
+exit 0
