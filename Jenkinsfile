@@ -22,7 +22,7 @@ pipeline {
   -Dsonar.projectKey=XRiver_scrum-proj-server \
   -Dsonar.organization=xriver-github \
   -Dsonar.host.url=https://sonarcloud.io \
-  -Dsonar.login=07979a1e408cd6fdc91073a17604e4b02bb54f9b
+  -Dsonar.login=07979a1e408cd6fdc91073a17604e4b02bb54f9b \
   -Dsonar.java.binaries=Jenkins/out'
             }
         }
