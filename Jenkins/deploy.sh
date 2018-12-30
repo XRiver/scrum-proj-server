@@ -7,7 +7,7 @@ NAME=`mvn help:evaluate -Dexpression=project.name | grep "^[^\[]"`
 VERSION=`mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"`
 
 # Environment variables needed.
-JARNAME=$NAME-$VERSION
+JARNAME=$NAME-$VERSION.jar
 BUILDDIR=target/
 DEPLOYDIR=/tmp/project-jar/
 
