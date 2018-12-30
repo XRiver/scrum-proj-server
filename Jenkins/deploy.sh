@@ -25,11 +25,11 @@ rm -f $DEPLOYDIR/$JARNAME
 # Copy new jar to DEPLOYDIR.
 cp $BUILDDIR/$JARNAME $DEPLOYDIR
 
-
-echo 'Starting artifact...'
 # Execute the jar.
-java -jar $DEPLOYDIR/$JARNAME > $DEPLOYDIR/out.log & disown
+# Must use scheduled job to avoid spawned child process to block Jenkins' wrapper.
+# That's a disadvantage of Jenkins.
+# https://wiki.jenkins-ci.org/display/JENKINS/Spawning+processes+from+build
+echo java -jar $DEPLOYDIR/$JARNAME '>' $DEPLOYDIR/out.log | at now +1 minutes
 
-echo 'Started java process.'
 
 exit 0
