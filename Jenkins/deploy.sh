@@ -26,5 +26,5 @@ rm -f $DEPLOYDIR/$JARNAME
 cp $BUILDDIR/$JARNAME $DEPLOYDIR
 
 # Execute the jar.
-nohup java -jar $DEPLOYDIR/$JARNAME > $DEPLOYDIR/out.log &
+java -jar $DEPLOYDIR/$JARNAME > $DEPLOYDIR/out.log & disown
 
