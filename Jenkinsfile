@@ -16,6 +16,11 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                sh './Jenkins/deploy.sh'
+            }
+        }
         stage('SonarQube analyze') {
             steps {
                 sh 'mvn sonar:sonar \
