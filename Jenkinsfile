@@ -6,7 +6,7 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
-	    stage('Test') {
+	    stage('TestAndDeploy') {
             steps {
                 sh 'mvn test'
             }
@@ -14,12 +14,12 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'chmod a+x ./Jenkins/deploy.sh'
-                sh './Jenkins/deploy.sh'
+                success {
+                    sh 'chmod a+x ./Jenkins/deploy.sh'
+                    BUILD_ID=do_not_kill_me
+                    JENKINS_NODE_COOKIE=do_not_kill_me
+                    sh './Jenkins/deploy.sh'
+                }
             }
         }
         stage('SonarQube analyze') {
