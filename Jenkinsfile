@@ -16,9 +16,7 @@ pipeline {
                 }
                 success {
                     sh 'chmod a+x ./Jenkins/deploy.sh'
-                    BUILD_ID=do_not_kill_me
-                    JENKINS_NODE_COOKIE=do_not_kill_me
-                    sh './Jenkins/deploy.sh'
+                    BUILD_ID=do_not_kill_me JENKINS_NODE_COOKIE=do_not_kill_me sh './Jenkins/deploy.sh'
                 }
             }
         }
