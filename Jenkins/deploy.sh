@@ -25,10 +25,6 @@ rm -f $DEPLOYDIR/$JARNAME
 # Copy new jar to DEPLOYDIR.
 cp $BUILDDIR/$JARNAME $DEPLOYDIR
 
-# Execute the jar and wait for a little log.
-java -jar $DEPLOYDIR/$JARNAME > $DEPLOYDIR/out.log &
+# Execute the jar.
+nohup java -jar $DEPLOYDIR/$JARNAME > $DEPLOYDIR/out.log &
 
-if [ $? = 0 ];then
-        sleep 30
-        tail -n 50 out.log
-fi
