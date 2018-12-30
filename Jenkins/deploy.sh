@@ -25,7 +25,11 @@ rm -f $DEPLOYDIR/$JARNAME
 # Copy new jar to DEPLOYDIR.
 cp $BUILDDIR/$JARNAME $DEPLOYDIR
 
+
+echo 'Starting artifact...'
 # Execute the jar.
 java -jar $DEPLOYDIR/$JARNAME > $DEPLOYDIR/out.log & disown
+
+echo 'Started java process.'
 
 exit 0
