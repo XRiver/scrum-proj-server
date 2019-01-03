@@ -24,7 +24,7 @@ public class AttractionController {
             List<Attraction> list = attractionService.selectAll();
             return list;
         }else {
-            aid=4;
+//             aid=4;
             Attraction a=attractionService.selectByPrimaryKey(aid);
             List<Attraction> list=new ArrayList<Attraction>();
             list.add(a);
