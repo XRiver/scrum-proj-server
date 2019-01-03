@@ -1,7 +1,0 @@
-#spring:
-#  datasource:
-#    username: root
-#    password: 930908
-#    url: jdbc:mysql://localhost:3306/nanjing_travel
-#server:
-#  port: 8081
