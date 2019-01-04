@@ -64,6 +64,6 @@ public interface UserMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(User record);
-    @Select("SELECT * FROM USER WHERE openId=#{openid}")
+    @Select("select * from user where openId=#{openid}")
     List<User> selectByOpenId(String openid);
 }

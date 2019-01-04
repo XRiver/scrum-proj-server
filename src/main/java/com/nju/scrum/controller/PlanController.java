@@ -34,17 +34,17 @@ public class PlanController {
     }
     @GetMapping("/plans")
     public List<Plan> attractions(String type, String aName,String uName) {
+        List<Plan> list=new ArrayList<>();
         //模拟试验通过
 //        type="aName";
         if(type.equals("aName")) {
-//            aName="雨花台";
-            List<Plan> list = planService.selectByAttraction(aName);
-            return list;
+//            aName="nju";
+            list=planService.selectByAttraction(aName);
         }else{
-//            uName="Jack";
-            List<Plan> list = planService.selectByCreator(uName);
-            return list;
+//            uName="jack";
+            list = planService.selectByCreator(uName);
         }
+        return list;
     }
     @PostMapping("/joinPlan")
     public String joinPlan(User user,Plan plan,String mess) {

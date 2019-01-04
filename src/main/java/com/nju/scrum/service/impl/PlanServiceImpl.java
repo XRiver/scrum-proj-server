@@ -16,12 +16,14 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<Plan> selectByAttraction(String aName) {
-        return planMapper.selectByAttraction(aName);
+        List<Plan> list=planMapper.selectByAttraction(aName);
+        return list;
     }
 
     @Override
     public List<Plan> selectByCreator(String uName) {
-        return planMapper.selectByCreator(uName);
+        List<Plan> list=planMapper.selectByCreator(uName);
+        return list;
     }
 
     @Override

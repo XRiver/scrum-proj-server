@@ -70,8 +70,8 @@ public interface PlanMapper {
      */
     @Update("update plan set applyList = #{applylist,jdbcType=VARCHAR} where pId = #{pid,jdbcType=INTEGER}")
     int updateByPrimaryKey(Plan record);
-    @Select("SELECT * FROM PLAN WHERE aName=#{aName}")
+    @Select("select * from plan where aName=#{aName}")
     List<Plan> selectByAttraction(String aName);
-    @Select("SELECT * FROM PLAN WHERE creatorName=#{uName}")
+    @Select("select * from plan where creatorName=#{uName}")
     List<Plan> selectByCreator(String uName);
 }
