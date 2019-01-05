@@ -1,4 +1,4 @@
-package com.how2java.pojo;
+package com.nju.scrum.pojo;
 
 public class Apply {
 
@@ -6,7 +6,7 @@ public class Apply {
 
     private String openid;
 
-    private String pid;
+    private Integer pid;
 
     private String mess;
 
@@ -26,12 +26,12 @@ public class Apply {
         this.openid = openid == null ? null : openid.trim();
     }
 
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid == null ? null : pid.trim();
+    public void setPid(Integer pid) {
+        this.pid=pid;
     }
 
     public String getMess() {

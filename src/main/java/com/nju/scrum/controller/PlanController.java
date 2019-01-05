@@ -1,5 +1,4 @@
 package com.nju.scrum.controller;
-
 import com.nju.scrum.pojo.Attraction;
 import com.nju.scrum.pojo.Plan;
 import com.nju.scrum.pojo.R;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 @ResponseBody
 @Controller
 @RequestMapping("/api/")

@@ -1,6 +1,4 @@
 package com.nju.scrum.mapper;
-
-
 import com.nju.scrum.pojo.Plan;
 import com.nju.scrum.pojo.planExample;
 import org.apache.ibatis.annotations.Insert;

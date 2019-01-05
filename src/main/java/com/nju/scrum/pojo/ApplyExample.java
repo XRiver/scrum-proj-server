@@ -1,4 +1,4 @@
-package com.how2java.pojo;
+package com.nju.scrum.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -334,62 +334,52 @@ public class ApplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andPidEqualTo(String value) {
+        public Criteria andPidEqualTo(Integer value) {
             addCriterion("pid =", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidNotEqualTo(String value) {
+        public Criteria andPidNotEqualTo(Integer value) {
             addCriterion("pid <>", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidGreaterThan(String value) {
+        public Criteria andPidGreaterThan(Integer value) {
             addCriterion("pid >", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidGreaterThanOrEqualTo(String value) {
+        public Criteria andPidGreaterThanOrEqualTo(Integer value) {
             addCriterion("pid >=", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidLessThan(String value) {
+        public Criteria andPidLessThan(Integer value) {
             addCriterion("pid <", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidLessThanOrEqualTo(String value) {
+        public Criteria andPidLessThanOrEqualTo(Integer value) {
             addCriterion("pid <=", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidLike(String value) {
-            addCriterion("pid like", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidNotLike(String value) {
-            addCriterion("pid not like", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidIn(List<String> values) {
+        public Criteria andPidIn(List<Integer> values) {
             addCriterion("pid in", values, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidNotIn(List<String> values) {
+        public Criteria andPidNotIn(List<Integer> values) {
             addCriterion("pid not in", values, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidBetween(String value1, String value2) {
+        public Criteria andPidBetween(Integer value1, Integer value2) {
             addCriterion("pid between", value1, value2, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPidNotBetween(String value1, String value2) {
+        public Criteria andPidNotBetween(Integer value1, Integer value2) {
             addCriterion("pid not between", value1, value2, "pid");
             return (Criteria) this;
         }

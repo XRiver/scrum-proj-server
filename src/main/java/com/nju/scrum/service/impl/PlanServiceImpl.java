@@ -1,6 +1,8 @@
 package com.nju.scrum.service.impl;
 
+import com.nju.scrum.mapper.ApplyMapper;
 import com.nju.scrum.mapper.PlanMapper;
+import com.nju.scrum.pojo.Apply;
 import com.nju.scrum.pojo.Plan;
 import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.PlanService;
@@ -13,6 +15,8 @@ import java.util.List;
 public class PlanServiceImpl implements PlanService {
     @Autowired
     private PlanMapper planMapper;
+    @Autowired
+    private ApplyMapper applyMapper;
 
     @Override
     public List<Plan> selectByAttraction(String aName) {
@@ -41,6 +45,13 @@ public class PlanServiceImpl implements PlanService {
         if (openid==null||pid==null){
             return "0";
         }else {
+            //在apply表中添加相关记录（openid pid mess）
+            Apply apply=new Apply();
+            apply.setOpenid(openid);
+            apply.setPid(pid);
+            apply.setMess(mess);
+            applyMapper.insert(apply);
+            //将openid添加进pid所在Plan的applylist中
             Plan chosenPlan=planMapper.selectByPid(pid);
             String string=chosenPlan.getApplylist();
             StringBuffer stringBuffer=new StringBuffer();
