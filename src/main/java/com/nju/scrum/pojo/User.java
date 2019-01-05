@@ -5,6 +5,9 @@ public class User {
     private String uname;
     private String school;
     private String pictureurl;
+    private String sex;
+    private String nickname;
+    private String city;
     public Integer getUid() {
         return uid;
     }
@@ -34,5 +37,23 @@ public class User {
     }
     public void setPictureurl(String pictureurl) {
         this.pictureurl = pictureurl;
+    }
+    public String getSex() {
+        return sex;
+    }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
     }
 }
