@@ -33,16 +33,16 @@ public class PlanController {
         return number;
     }
     @GetMapping("/plans")
-    public List<Plan> attractions(String type, String aName,String uName) {
+    public List<Plan> attractions(String type, String aname,String uname) {
         List<Plan> list=new ArrayList<>();
         //模拟试验通过
 //        type="aName";
-        if(type.equals("aName")) {
+        if(type.equals("aname")) {
 //            aName="nju";
-            list=planService.selectByAttraction(aName);
+            list=planService.selectByAttraction(aname);
         }else{
 //            uName="jack";
-            list = planService.selectByCreator(uName);
+            list = planService.selectByCreator(uname);
         }
         return list;
     }
