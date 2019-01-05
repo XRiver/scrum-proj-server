@@ -1,5 +1,6 @@
 package com.nju.scrum.controller;
 
+import com.nju.scrum.pojo.R;
 import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class UserController {
         }
     }
     @PostMapping("/signon")
-    public String signon(User user) {
+    public R signon(User user) {
         String number;
         //模拟试验通过
 //        User user=new User();
@@ -40,6 +41,14 @@ public class UserController {
 //        user.setSchool(school);
 //        user.setPictureurl(pictureurl);
         number=userService.register(user);
-        return number;
+        R r=new R();
+        r.setCode(number);
+        if(number.equals("1")){
+            r.setMsg("注册成功");
+            r.setData(user);
+        }else {
+            r.setMsg("注册失败");
+        }
+        return r;
     }
 }

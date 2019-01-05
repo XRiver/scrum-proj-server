@@ -26,8 +26,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String register(User user) {
-        userMapper.insert(user);
-        return "1";
+        if(user.getOpenid()==null){
+            return "0";
+        }else {
+            userMapper.insert(user);
+            return "1";
+        }
     }
 
     @Override

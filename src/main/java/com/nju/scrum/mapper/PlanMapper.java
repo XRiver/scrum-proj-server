@@ -74,4 +74,6 @@ public interface PlanMapper {
     List<Plan> selectByAttraction(String aName);
     @Select("select * from plan where creatorName=#{uName}")
     List<Plan> selectByCreator(String uName);
+    @Select("select * from plan where pId=#{pid}")
+    Plan selectByPid(Integer pid);
 }

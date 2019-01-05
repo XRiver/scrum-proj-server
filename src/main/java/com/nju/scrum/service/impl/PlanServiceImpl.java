@@ -37,15 +37,19 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public String joinPlan(User user, Plan plan, String mess) {
-        if (user.getUid()==null||plan.getPid()==null){
+    public String joinPlan(String openid, Integer pid, String mess) {
+        if (openid==null||pid==null){
             return "0";
         }else {
-            String string=plan.getApplylist();
-            StringBuffer stringBuffer=new StringBuffer(string);
-            stringBuffer.append(user.getUid()).append(",");
-            plan.setApplylist(stringBuffer.toString());
-            planMapper.updateByPrimaryKey(plan);
+            Plan chosenPlan=planMapper.selectByPid(pid);
+            String string=chosenPlan.getApplylist();
+            StringBuffer stringBuffer=new StringBuffer();
+            if(string!=null){
+                stringBuffer.append(string);
+            }
+            stringBuffer.append(openid).append(",");
+            chosenPlan.setApplylist(stringBuffer.toString());
+            planMapper.updateByPrimaryKey(chosenPlan);
             return "1";
         }
     }

@@ -2,6 +2,7 @@ package com.nju.scrum.controller;
 
 import com.nju.scrum.pojo.Attraction;
 import com.nju.scrum.pojo.Plan;
+import com.nju.scrum.pojo.R;
 import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class PlanController {
     @Autowired
     private PlanService planService;
     @PostMapping("/createPlan")
-    public String createPlan(Plan plan) {
+    public R createPlan(Plan plan) {
         //模拟试验通过
 //        plan=new Plan();
 //        plan.setAname("雨花台");
@@ -30,7 +31,15 @@ public class PlanController {
 //        plan.setDetail("nice!!!");
 //        plan.setTraveltime(new Date());
         String number=planService.createPlan(plan);
-        return number;
+        R r=new R();
+        r.setCode(number);
+        if(number.equals("1")){
+            r.setMsg("创建成功");
+            r.setData(plan);
+        }else {
+            r.setMsg("创建失败");
+        }
+        return r;
     }
     @GetMapping("/plans")
     public List<Plan> attractions(String type, String aname,String uname) {
@@ -47,9 +56,16 @@ public class PlanController {
         return list;
     }
     @PostMapping("/joinPlan")
-    public String joinPlan(User user,Plan plan,String mess) {
+    public R joinPlan(String openid,Integer pid,String mess) {
         //模拟试验通过
-        String number=planService.joinPlan(user,plan,mess);
-        return number;
+        String number=planService.joinPlan(openid,pid,mess);
+        R r=new R();
+        r.setCode(number);
+        if(number.equals("1")){
+            r.setMsg("申请成功");
+        }else {
+            r.setMsg("申请失败");
+        }
+        return r;
     }
 }
