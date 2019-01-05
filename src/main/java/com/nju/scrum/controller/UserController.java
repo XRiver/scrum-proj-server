@@ -34,10 +34,11 @@ public class UserController {
     public String signon(User user) {
         String number;
         //模拟试验通过
-//        user=new User();
-//        user.setOpenid("222");
-//        user.setUname("lisi");
-//        user.setSchool("pekingUniversity");
+//        User user=new User();
+//        user.setOpenid(openid);
+//        user.setUname(uname);
+//        user.setSchool(school);
+//        user.setPictureurl(pictureurl);
         number=userService.register(user);
         return number;
     }
