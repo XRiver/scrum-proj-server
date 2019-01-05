@@ -4,11 +4,14 @@
 
 ```typescript
 User {
-    uId: string; // 数据库自增id，也是用户唯一标识
-    openId: string; // 微信号唯一标识
-    uName： string; // 真实姓名
+    uid: Integer; // 数据库自增id，也是用户唯一标识
+    openid: string; // 微信号唯一标识
+    uname： string; // 真实姓名
 	school: string;// 学校名称
-    picture：string；// 用户头像
+    pictureurl：string；// 用户头像地址
+    sex: string;      //性别
+    nickname:string  //用户昵称
+    city: string    //用户所在城市
 }
 ```
 
@@ -16,10 +19,10 @@ User {
 
 ```typescript
 Attraction {
-    aId: String; // 数据库自增id，也是唯一标识
-	aName: String; // 景点名称
+    aid: Integer; // 数据库自增id，也是唯一标识
+	aname: String; // 景点名称
     location: String; // 景点位置
-    pictureUrl: String; // 景点图片URL
+    pictureurl: String; // 景点图片URL
     description: String; // 对景点的描述
 }
 ```
@@ -28,12 +31,12 @@ Attraction {
 
 ```typescript
 Plan {
-	pId: String; // 数据库自增id，也是唯一标识
-    creatorName: String; // 创建者姓名
-    aName: String; // 景点名字
-    travelTime: DateTime; // 出行时间
+	pid: Integer; // 数据库自增id，也是唯一标识
+    creatorname: String; // 创建者姓名
+    aname: String; // 景点名字
+    traveltime: Date; // 出行时间
 	detail: String; // 计划详细信息
-	applyList: List<String>; // 申请者的列表，存放申请加入此出行计划的用户uId
+	applylist: String; // 申请者的列表，存放申请加入此出行计划的用户uId
 }
 ```
 
@@ -54,21 +57,19 @@ Plan {
 request
 
 ```html
-GET /api/login?openid=openid
+GET /api/login?openid=value
 ```
 
-```
-{
-	'openid': openid // 登录者的openid
-}
-```
+​      //参数openid为'string'类型,表示用户微信号唯一标识
 
 response
 
 ```json
 {
-    'status'： number 或 'data':user的json对象                                                                  // 失败——返回字符串0；登录成功——返回改user的json对象；
-                       //无此用户,需要注册——返回字符串2.
+    'data': {Proble实体} 或 字符串0/2
+                         //失败（如未传openid）————返回字符串0；
+    					//登录成功————返回user对象；
+                       //无此用户,需要注册————返回字符串2.
 }
 ```
 
@@ -82,7 +83,7 @@ POST /api/signon
 
 ```json
 {
-    User的json对象（包含User各个属性）
+    User的json对象（包含User属性：openid uname school pictureurl sex nickname city）
 }
 ```
 
@@ -99,14 +100,10 @@ response
 request
 
 ```shell
-GET /api/attractions
+GET /api/attractions？type=all
 ```
 
-```json
-{
-	type: "all"//表示查询所有景点
-}
-```
+​	//参数 type 为'string'类型, 值为 all 则表示查询所有景点
 
 response
 
@@ -121,15 +118,12 @@ response
 request
 
 ```shell
-GET /api/attractions
+GET /api/attractions？type=single&aid=value
 ```
 
-```json
-{
-	type: "single";//表示查询单个景点详细信息 
-    aId: String; // 景点唯一标识号
-}
-```
+​	//参数 type 为'string'类型,值为 single 则表示查询具体单个景点
+
+​	//参数 aid 为'int'类型,表示具体查询的景点编号
 
 response
 
@@ -149,7 +143,7 @@ post /api/createPlan
 
 ```json
 {
-	Plan的Json对象（包含Plan各个属性）
+	Plan的Json对象（包含Plan属性：aname creatorname traveltime detail）
 }
 ```
 
@@ -166,15 +160,12 @@ response
 request
 
 ```shell
-GET /api/plans
+GET /api/plans?type=aname&aname=value
 ```
 
-```json
-{
-	aName: String; // 景点名称 
-    type: "aName";//表示根据景点名查询
-}
-```
+​       //参数 type 为'string'类型,值为 aname 则表示根据景点名搜索出行计划
+
+​       //参数 aname 为'string'类型,表示景点名字	
 
 response
 
@@ -189,15 +180,12 @@ response
 request
 
 ```shell
-GET /api/plans
+GET /api/plans?type=uname&uname=value
 ```
 
-```json
-{
-	uName： string; // 创建者姓名   
-    type:"uName";//表示根据创建者姓名查询
-}
-```
+​	//参数 type 为'string'类型,值为 uname 则表示根据创建者姓名搜索出行计划
+
+​       //参数 uname 为'string'类型,表示创建者姓名	
 
 response
 
@@ -217,8 +205,8 @@ POST /api/joinPlan
 
 ```json
 {
-	openId: string; // 申请者的微信号唯一标识  
-    pId: String; // 出行计划的唯一标识号
+	openid: string; // 申请者的微信号唯一标识  
+    pid: String; // 出行计划的唯一标识号
 	mess: String; // 申请者的留言
 }
 ```
