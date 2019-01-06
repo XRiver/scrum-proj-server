@@ -79,10 +79,9 @@ response
 
 ```json
 {
-    'data': {Proble实体} 或 字符串0/2
-                         //失败（如未传openid）————返回字符串0；
-    					//登录成功————返回user对象；
-                       //无此用户,需要注册————返回字符串2.
+    'code'： number  //0-登录成功   1-未传入openid   2-无此用户,需要注册
+    'msg':   string  //说明 
+    'data':  {User实体}    //登录成功时返回json对象
 }
 ```
 
@@ -91,7 +90,7 @@ response
 request
 
 ```shell
-POST /api/signon
+POST /api/register
 ```
 
 ```json
@@ -104,7 +103,7 @@ response
 
 ```json
 {
-    'code'： number  //0-失败 1-注册成功
+    'code'： number  //0-注册成功  1-没有传入openid  2-此openid已经存在
     'msg':   string  //说明 
     'data':  {}    //json对象
 }
@@ -153,7 +152,7 @@ response
 request
 
 ```shell
-post /api/createPlan
+post /api/plan/create
 ```
 
 ```json
@@ -166,7 +165,7 @@ response
 
 ```json
 {
-    'code'： number  //0-失败 1-创建成功
+    'code'： number  //0-创建成功  1-创建失败，未传入aname或creatorname
     'msg':   string  //说明 
     'data':  {}    //json对象
 }
@@ -217,7 +216,7 @@ response
 request
 
 ```shell
-POST /api/joinPlan
+POST /api/plan/apply
 ```
 
 ```json
@@ -232,7 +231,7 @@ response
 
 ```json
 {
-    'code'： number  //0-失败 1-申请成功
+    'code'： number  //0-申请成功  1-申请失败,未传入openid或pid  2-该用户已申请过此出行计划
     'msg':   string  //说明 
     'data':  {}    //json对象
 }
