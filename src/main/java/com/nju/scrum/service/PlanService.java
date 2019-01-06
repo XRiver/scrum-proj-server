@@ -11,5 +11,5 @@ public interface PlanService {
     List<Plan> selectByCreator(String uName);
     String createPlan(Plan plan);
 
-    String joinPlan(String openid, Integer pid, String mess);
+    String applyPlan(String openid, Integer pid, String mess);
 }

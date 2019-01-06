@@ -54,15 +54,17 @@ public class PlanController {
         return list;
     }
     @PostMapping("/plan/apply")
-    public R joinPlan(String openid,Integer pid,String mess) {
+    public R applyPlan(String openid,Integer pid,String mess) {
         //模拟试验通过
-        String number=planService.joinPlan(openid,pid,mess);
+        String number=planService.applyPlan(openid,pid,mess);
         R r=new R();
         r.setCode(Integer.parseInt(number));
         if(number.equals("0")){
             r.setMsg("申请成功");
-        }else {
+        } else if (number.equals("1")){
             r.setMsg("申请失败,未传入openid或pid");
+        }else {
+            r.setMsg("该用户已申请过此出行计划");
         }
         return r;
     }
