@@ -14,23 +14,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(String openid) {
         if (openid==null){
-            return "0";
+            return "1";
         }
         List<User> list=userMapper.selectByOpenId(openid);
         if (list.isEmpty()){
             return "2";
         }else {
-            return "1";
+            return "0";
         }
     }
 
     @Override
     public String register(User user) {
         if(user.getOpenid()==null){
-            return "0";
-        }else {
-            userMapper.insert(user);
             return "1";
+        }else if (!userMapper.selectByOpenId(user.getOpenid()).isEmpty()){
+            return "2";
+        } else {
+            userMapper.insert(user);
+            return "0";
         }
     }
 

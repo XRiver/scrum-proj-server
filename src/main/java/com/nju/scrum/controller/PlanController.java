@@ -20,7 +20,7 @@ import java.util.List;
 public class PlanController {
     @Autowired
     private PlanService planService;
-    @PostMapping("/createPlan")
+    @PostMapping("/plan/create")
     public R createPlan(Plan plan) {
         //模拟试验通过
 //        plan=new Plan();
@@ -30,12 +30,12 @@ public class PlanController {
 //        plan.setTraveltime(new Date());
         String number=planService.createPlan(plan);
         R r=new R();
-        r.setCode(number);
-        if(number.equals("1")){
+        r.setCode(Integer.parseInt(number));
+        if(number.equals("0")){
             r.setMsg("创建成功");
             r.setData(plan);
         }else {
-            r.setMsg("创建失败");
+            r.setMsg("创建失败,未传入aname或creatorname");
         }
         return r;
     }
@@ -53,16 +53,16 @@ public class PlanController {
         }
         return list;
     }
-    @PostMapping("/joinPlan")
+    @PostMapping("/plan/apply")
     public R joinPlan(String openid,Integer pid,String mess) {
         //模拟试验通过
         String number=planService.joinPlan(openid,pid,mess);
         R r=new R();
-        r.setCode(number);
-        if(number.equals("1")){
+        r.setCode(Integer.parseInt(number));
+        if(number.equals("0")){
             r.setMsg("申请成功");
         }else {
-            r.setMsg("申请失败");
+            r.setMsg("申请失败,未传入openid或pid");
         }
         return r;
     }

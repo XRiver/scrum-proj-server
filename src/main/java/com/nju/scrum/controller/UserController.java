@@ -22,17 +22,23 @@ public class UserController {
         //模拟试验通过
 //        openid="111";
         number=userService.login(openid);
-        if(number.equals("1")){
+        R r=new R();
+        r.setCode(Integer.parseInt(number));
+        if(number.equals("0")){
             User user=userService.selectUserByOpenId(openid);
-            return user;
+            r.setMsg("登录成功");
+            r.setData(user);
+            return r;
         }else if(number.equals("2")){
-            return "2";
+            r.setMsg("无此用户,需要注册");
+            return r;
         }else {
-            return "0";
+            r.setMsg("未传入openid");
+            return r;
         }
     }
-    @PostMapping("/signon")
-    public R signon(User user) {
+    @PostMapping("/register")
+    public R register(User user) {
         String number;
         //模拟试验通过
 //        User user=new User();
@@ -42,12 +48,14 @@ public class UserController {
 //        user.setPictureurl(pictureurl);
         number=userService.register(user);
         R r=new R();
-        r.setCode(number);
-        if(number.equals("1")){
+        r.setCode(Integer.parseInt(number));
+        if(number.equals("0")){
             r.setMsg("注册成功");
             r.setData(user);
-        }else {
-            r.setMsg("注册失败");
+        }else if (number.equals("1")) {
+            r.setMsg("没有传入openid");
+        } else {
+            r.setMsg("此openid已经存在");
         }
         return r;
     }

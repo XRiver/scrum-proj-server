@@ -32,18 +32,18 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public String createPlan(Plan plan) {
-        if (plan.getCreatorname()==null){
-            return "0";
+        if (plan.getCreatorname()==null||plan.getAname()==null){
+            return "1";
         }else {
             planMapper.insert(plan);
-            return "1";
+            return "0";
         }
     }
 
     @Override
     public String joinPlan(String openid, Integer pid, String mess) {
         if (openid==null||pid==null){
-            return "0";
+            return "1";
         }else {
             //在apply表中添加相关记录（openid pid mess）
             Apply apply=new Apply();
@@ -61,7 +61,7 @@ public class PlanServiceImpl implements PlanService {
             stringBuffer.append(openid).append(",");
             chosenPlan.setApplylist(stringBuffer.toString());
             planMapper.updateByPrimaryKey(chosenPlan);
-            return "1";
+            return "0";
         }
     }
 }
