@@ -12,4 +12,3 @@ public class ScrumProjServerApplication {
         SpringApplication.run(ScrumProjServerApplication.class, args);
     }
 }
-//8个具体用例的API都已开发完成，前端可以尝试调用

@@ -31,14 +31,27 @@ Attraction {
 
 ```typescript
 Plan {
-	pid: Integer; // 数据库自增id，也是唯一标识
+    pid: Integer; // 数据库自增id，也是唯一标识
     creatorname: String; // 创建者姓名
     aname: String; // 景点名字
     traveltime: Date; // 出行时间
 	detail: String; // 计划详细信息
-	applylist: String; // 申请者的列表，存放申请加入此出行计划的用户uId
+	applylist: String; // 申请者的列表，存放申请加入此出行计划的用户openid
 }
 ```
+
+##### 4 申请信息
+
+```typescript
+Apply {
+	applyid: Integer;// 数据库自增id，也是唯一标识
+    openid: String; // 申请者微信openid
+    pid: Integer;  // 景点编号
+    mess: String; // 申请者留言
+}
+```
+
+
 
 ### 二、对于空的处理
 
@@ -91,7 +104,9 @@ response
 
 ```json
 {
-    'status'： number, // 0-失败 1-注册成功
+    'code'： number  //0-失败 1-注册成功
+    'msg':   string  //说明 
+    'data':  {}    //json对象
 }
 ```
 
@@ -151,7 +166,9 @@ response
 
 ```json
 {
-    'status'： number, // 0-创建失败 1-创建成功
+    'code'： number  //0-失败 1-创建成功
+    'msg':   string  //说明 
+    'data':  {}    //json对象
 }
 ```
 
@@ -215,6 +232,8 @@ response
 
 ```json
 {
-    'status'： number, // 0-申请失败 1-申请成功
+    'code'： number  //0-失败 1-申请成功
+    'msg':   string  //说明 
+    'data':  {}    //json对象
 }
 ```

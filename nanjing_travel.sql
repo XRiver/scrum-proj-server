@@ -16,6 +16,20 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`nanjing_travel` /*!40100 DEFAULT CHARAC
 
 USE `nanjing_travel`;
 
+/*Table structure for table `apply` */
+
+DROP TABLE IF EXISTS `apply`;
+
+CREATE TABLE `apply` (
+  `applyid` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(50) DEFAULT NULL COMMENT '申请加入者的openid',
+  `pid` int(11) DEFAULT NULL COMMENT '申请加入的景点pid',
+  `mess` varchar(200) DEFAULT NULL COMMENT '申请者的留言',
+  PRIMARY KEY (`applyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='申请信息';
+
+/*Data for the table `apply` */
+
 /*Table structure for table `attraction` */
 
 DROP TABLE IF EXISTS `attraction`;
@@ -53,9 +67,13 @@ CREATE TABLE `plan` (
   `detail` varchar(200) DEFAULT NULL COMMENT '备注',
   `applyList` varchar(200) DEFAULT NULL COMMENT '申请加入者的ID列表',
   PRIMARY KEY (`pId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出行计划信息';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='出行计划信息';
 
 /*Data for the table `plan` */
+
+insert  into `plan`(`pId`,`creatorName`,`aName`,`travelTime`,`detail`,`applyList`) values 
+(1,'张三','总统府','2019-01-01','come on guys!!!','007,111,'),
+(2,'劫','雨花台','2019-01-31','please join us...','007,');
 
 /*Table structure for table `user` */
 
@@ -67,13 +85,18 @@ CREATE TABLE `user` (
   `uName` varchar(50) DEFAULT NULL COMMENT '用户姓名',
   `school` varchar(100) DEFAULT NULL COMMENT '用户所在高校',
   `pictureUrl` varchar(100) DEFAULT NULL COMMENT '用户头像url',
+  `sex` enum('男','女') DEFAULT NULL COMMENT '性别',
+  `nickName` varchar(100) DEFAULT NULL COMMENT '用户昵称',
+  `city` varchar(50) DEFAULT NULL COMMENT '用户所在城市',
   PRIMARY KEY (`uId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户信息';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户信息';
 
 /*Data for the table `user` */
 
-insert  into `user`(`uId`,`openId`,`uName`,`school`,`pictureUrl`) values 
-(1,'111','张三','南京大学','/root/picture/111');
+insert  into `user`(`uId`,`openId`,`uName`,`school`,`pictureUrl`,`sex`,`nickName`,`city`) values 
+(1,'111','张三','南京大学','/root/picture/111','男','小三','南京'),
+(2,'1','劫','河海大学','/root/picture/112','男','影流之主','纽约'),
+(3,'7','JamesBond','HaFo','/root/picture/111','男','特工','Samfronsisco');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
