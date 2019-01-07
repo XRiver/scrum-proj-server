@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -37,9 +38,18 @@ public class ScrumProjServerApplicationTests {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
     @Test
+//    public void testLogin() throws Exception {
+//        this.mockMvc.perform(get("/api/login")
+//                .param("openid", "111")).andDo(print());
+//    }
     public void testLogin() throws Exception {
-        this.mockMvc.perform(get("/api/login")
-                .param("openid", "111")).andDo(print());
+        RequestBuilder request = MockMvcRequestBuilders.get("/api/login")
+                .param("openid", "111");
+        MvcResult result = mockMvc.perform(request).andReturn();
+        String content = result.getResponse().getContentAsString();
+        int status = result.getResponse().getStatus();
+        System.out.println(content);
+        System.out.println(status);
     }
 
 
