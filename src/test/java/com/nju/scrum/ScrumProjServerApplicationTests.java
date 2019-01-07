@@ -1,19 +1,18 @@
 package com.nju.scrum;
 
 
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 //静态导入 省的写MockMvcRequestBuilders 这几个Builder了
@@ -43,13 +42,20 @@ public class ScrumProjServerApplicationTests {
 //                .param("openid", "111")).andDo(print());
 //    }
     public void testLogin() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.get("/api/login")
-                .param("openid", "111");
-        MvcResult result = mockMvc.perform(request).andReturn();
-        String content = result.getResponse().getContentAsString();
-        int status = result.getResponse().getStatus();
-        System.out.println(content);
-        System.out.println(status);
+        //this.mockMvc.perform 返回ResultAction接口的实现类 有andReturn andDo等方法
+        //andReturn返回MvcResult类型 有getResponse等方法
+        //getResponse返回MockHttpServletResponse类型，有getXXX等一些列Resp应有属性的方法
+        //可以通过getContentAsString获得Response中Content属性的值，可以后续转成JSON格式
+        MvcResult res = this.mockMvc.perform(get("/api/login")
+                .param("openid", "111")).andReturn();
+        String  content = res.getResponse().getContentAsString();
+        Integer statusNum = res.getResponse().getStatus();
+        JSONObject json = new JSONObject(content);
+        System.out.println(json.getInt("code"));
+        System.out.println(json.getString("msg"));
+        System.out.println(json.getJSONObject("data").getInt("uid"));
+        System.out.println(json.getJSONObject("data").getString("openid"));
+        System.out.println(json.getJSONObject("data").getString("uname"));
     }
 
 
