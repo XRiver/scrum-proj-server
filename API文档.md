@@ -32,8 +32,8 @@ Attraction {
 ```typescript
 Plan {
     pid: Integer; // 数据库自增id，也是唯一标识
-    creatorname: String; // 创建者姓名
-    aname: String; // 景点名字
+    openid: String; // 创建者用户openid
+    aid: Integer; // 景点编号
     traveltime: Date; // 出行时间
 	detail: String; // 计划详细信息
 	applylist: String; // 申请者的列表，存放申请加入此出行计划的用户openid
@@ -157,7 +157,7 @@ post /api/plan/create
 
 ```json
 {
-	Plan的Json对象（包含Plan属性：aname creatorname traveltime detail）
+	Plan的Json对象（包含Plan属性：aid openid traveltime detail）
 }
 ```
 

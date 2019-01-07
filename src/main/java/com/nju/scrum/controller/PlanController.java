@@ -28,7 +28,7 @@ public class PlanController {
             r.setMsg("创建成功");
             r.setData(plan);
         }else {
-            r.setMsg("创建失败,未传入aname或creatorname");
+            r.setMsg("创建失败,未传入aid或openid");
         }
         return r;
     }
@@ -38,8 +38,10 @@ public class PlanController {
 
         if(type.equals("aname")) {
             list=planService.selectByAttraction(aname);
-        }else{
+        }else if (type.equals("uname")){
             list = planService.selectByCreator(uname);
+        }else {
+            list=null;
         }
         return list;
     }
