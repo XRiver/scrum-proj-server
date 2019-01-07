@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @GetMapping("/login")
-    public Object login(String openid) {
+    public R login(String openid) {
         String number;
         //模拟试验通过
 //        openid="111";
