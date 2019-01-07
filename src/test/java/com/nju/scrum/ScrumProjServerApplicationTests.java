@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 //静态导入 省的写MockMvcRequestBuilders 这几个Builder了
@@ -53,13 +54,10 @@ public class ScrumProjServerApplicationTests {
         JSONObject json = new JSONObject(content);
         System.out.println(json.getInt("code"));
         System.out.println(json.getString("msg"));
+        System.out.println(json.getJSONObject("data"));
         System.out.println(json.getJSONObject("data").getInt("uid"));
         System.out.println(json.getJSONObject("data").getString("openid"));
         System.out.println(json.getJSONObject("data").getString("uname"));
     }
-
-
-
-
 }
 
