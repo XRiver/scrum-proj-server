@@ -19,8 +19,6 @@ public class UserController {
     @GetMapping("/login")
     public R login(String openid) {
         String number;
-        //模拟试验通过
-//        openid="111";
         number=userService.login(openid);
         R r=new R();
         r.setCode(Integer.parseInt(number));
@@ -40,12 +38,6 @@ public class UserController {
     @PostMapping("/register")
     public R register(User user) {
         String number;
-        //模拟试验通过
-//        User user=new User();
-//        user.setOpenid(openid);
-//        user.setUname(uname);
-//        user.setSchool(school);
-//        user.setPictureurl(pictureurl);
         number=userService.register(user);
         R r=new R();
         r.setCode(Integer.parseInt(number));

@@ -22,12 +22,6 @@ public class PlanController {
     private PlanService planService;
     @PostMapping("/plan/create")
     public R createPlan(Plan plan) {
-        //模拟试验通过
-//        plan=new Plan();
-//        plan.setAname("雨花台");
-//        plan.setCreatorname("Jack");
-//        plan.setDetail("nice!!!");
-//        plan.setTraveltime(new Date());
         String number=planService.createPlan(plan);
         R r=new R();
         r.setCode(Integer.parseInt(number));
@@ -41,21 +35,17 @@ public class PlanController {
     }
     @GetMapping("/plans")
     public List<Plan> attractions(String type, String aname,String uname) {
-        List<Plan> list=new ArrayList<>();
-        //模拟试验通过
-//        type="aName";
+        List<Plan> list;
+
         if(type.equals("aname")) {
-//            aName="nju";
             list=planService.selectByAttraction(aname);
         }else{
-//            uName="jack";
             list = planService.selectByCreator(uname);
         }
         return list;
     }
     @PostMapping("/plan/apply")
     public R applyPlan(String openid,Integer pid,String mess) {
-        //模拟试验通过
         String number=planService.applyPlan(openid,pid,mess);
         R r=new R();
         r.setCode(Integer.parseInt(number));

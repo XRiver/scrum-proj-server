@@ -18,13 +18,11 @@ public class AttractionController {
     private AttractionService attractionService;
     @GetMapping("/attractions")
     public List<Attraction> attractions(String type,Integer aid) {
-        //模拟试验通过
-//        type="single";
+
         if(type.equals("all")) {
             List<Attraction> list = attractionService.selectAll();
             return list;
         }else {
-//            aid=4;
             Attraction a=attractionService.selectByPrimaryKey(aid);
             List<Attraction> list=new ArrayList<Attraction>();
             list.add(a);
@@ -32,11 +30,4 @@ public class AttractionController {
         }
     }
 
-//    @GetMapping("attraction")
-//    public Attraction attraction(Integer aid) {
-//        //模拟试验通过
-//        aid=4;
-//        Attraction a=attractionService.selectByPrimaryKey(aid);
-//        return a;
-//    }
 }
