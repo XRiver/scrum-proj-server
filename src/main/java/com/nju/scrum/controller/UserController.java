@@ -5,10 +5,9 @@ import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @ResponseBody
 @Controller
@@ -36,8 +35,16 @@ public class UserController {
         }
     }
     @PostMapping("/register")
-    public R register(User user) {
+    public R register(@RequestBody User user) {
         String number;
+//        User user=new User();
+//        user.setOpenid((String) params.get("openid"));
+//        user.setUname((String) params.get("uname"));
+//        user.setSchool((String) params.get("school"));
+//        user.setPictureurl((String) params.get("pictureurl"));
+//        user.setSex((String) params.get("sex"));
+//        user.setNickname((String) params.get("nickname"));
+//        user.setCity((String) params.get("city"));
         number=userService.register(user);
         R r=new R();
         r.setCode(Integer.parseInt(number));
