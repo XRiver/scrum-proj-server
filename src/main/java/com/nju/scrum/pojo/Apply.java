@@ -10,6 +10,9 @@ public class Apply {
 
     private String mess;
 
+    //这是申请人的信息
+    private User applicant;
+
     public Integer getApplyid() {
         return applyid;
     }
@@ -40,5 +43,24 @@ public class Apply {
 
     public void setMess(String mess) {
         this.mess = mess == null ? null : mess.trim();
+    }
+
+    public User getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(User applicant) {
+        this.applicant = applicant;
+    }
+
+    @Override
+    public String toString() {
+        return "Apply{" +
+                "applyid=" + applyid +
+                ", openid='" + openid + '\'' +
+                ", pid=" + pid +
+                ", mess='" + mess + '\'' +
+                ", applicant=" + applicant +
+                '}';
     }
 }

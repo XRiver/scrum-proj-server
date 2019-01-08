@@ -73,7 +73,7 @@ request
 GET /api/login?openid=value
 ```
 
-​      //参数openid为'string'类型,表示用户微信号唯一标识
+      //参数openid为'string'类型,表示用户微信号唯一标识
 
 response
 
@@ -117,7 +117,7 @@ request
 GET /api/attractions？type=all
 ```
 
-​	//参数 type 为'string'类型, 值为 all 则表示查询所有景点
+	//参数 type 为'string'类型, 值为 all 则表示查询所有景点
 
 response
 
@@ -135,9 +135,9 @@ request
 GET /api/attractions？type=single&aid=value
 ```
 
-​	//参数 type 为'string'类型,值为 single 则表示查询具体单个景点
+	//参数 type 为'string'类型,值为 single 则表示查询具体单个景点
 
-​	//参数 aid 为'int'类型,表示具体查询的景点编号
+	//参数 aid 为'int'类型,表示具体查询的景点编号
 
 response
 
@@ -179,9 +179,9 @@ request
 GET /api/plans?type=aname&aname=value
 ```
 
-​       //参数 type 为'string'类型,值为 aname 则表示根据景点名搜索出行计划
+       //参数 type 为'string'类型,值为 aname 则表示根据景点名搜索出行计划
 
-​       //参数 aname 为'string'类型,表示景点名字	
+       //参数 aname 为'string'类型,表示景点名字	
 
 response
 
@@ -199,9 +199,9 @@ request
 GET /api/plans?type=uname&uname=value
 ```
 
-​	//参数 type 为'string'类型,值为 uname 则表示根据创建者姓名搜索出行计划
+	//参数 type 为'string'类型,值为 uname 则表示根据创建者姓名搜索出行计划
 
-​       //参数 uname 为'string'类型,表示创建者姓名	
+       //参数 uname 为'string'类型,表示创建者姓名	
 
 response
 
@@ -249,12 +249,13 @@ response
 
 ```json
 {
-
-    'data':  [{User实体对象,"message": string,"applyid": number}]   
+	'code'： number  //0-查询成功  1-查询失败
+    'msg':   string  //说明 
+    'data':  [{"mess": string,"applyid": number,"applicant":{User实体类}}，]   
 }
 ```
 
-//返回的是每个申请的申请人的信息+申请的message+申请的applyid
+//返回的是申请的mess+申请的applyid+每个申请的申请人的信息（封装成一个嵌套的User实体类）
 
 ##### 10 同意/拒绝对出行计划的申请
 
@@ -266,7 +267,7 @@ PUT /api/plan/apply
 ```json
 {
     'applyid': number  //申请的applyid编号
-    'pass': nunber  //表示是否通过该申请 1代表通过 0代表不通过
+    'pass': nunber  //表示是否同意该申请 1代表同意 0代表不同意 NULL表示未审核状态
 }
 ```
 
@@ -274,7 +275,7 @@ response
 
 ```json
 {
-    'code'： number  //0-通过成功  1-通过失败,未传入openid或pid  
+    'code'： number  //0-同意/拒绝申请成功  1-同意/拒绝申请失败 
     'msg':   string  //说明
 }
 ```

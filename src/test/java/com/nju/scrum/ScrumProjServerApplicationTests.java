@@ -2,6 +2,7 @@ package com.nju.scrum;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nju.scrum.service.ApplyService;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +34,8 @@ public class ScrumProjServerApplicationTests {
     //  传入springmvc的iod容器本身
     @Autowired
     WebApplicationContext context;
+    @Autowired
+    ApplyService applyService;
     //  虚拟mvc请求，获取到处理结果
     private MockMvc mockMvc;
 
@@ -67,7 +70,7 @@ public class ScrumProjServerApplicationTests {
         map.put("uname","刘正元");
         JSONObject js = new JSONObject(map);
         MvcResult res = this.mockMvc.perform(post("/api/register")
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                 .content(js.toString())).andDo(print()).andReturn();
         String  content = res.getResponse().getContentAsString();
         JSONObject json = new JSONObject(content);
@@ -75,6 +78,32 @@ public class ScrumProjServerApplicationTests {
         //使用spring自己的断言类Assert
         Assert.isTrue(statusNum==200,"http状态码不是200");
         Assert.isTrue(json.getInt("code") == 0 ,"返回状态码不是0");
+    }
+
+    @Test
+    public void testApplyService() {
+        System.out.println(applyService.selectByPid(3));
+        applyService.confirmApply(1,1);
+    }
+
+
+    @Test
+    public void testSelectByPid() throws Exception{
+        MvcResult res = this.mockMvc.perform(get("/api/plan/apply")
+                .param("pid","3")).andDo(print()).andReturn();
+    }
+
+    @Test
+    public void testConfirmApply () throws Exception {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("applyid", 2);
+        map.put("pass",0);
+        JSONObject js = new JSONObject(map);
+
+
+        MvcResult res = this.mockMvc.perform(put("/api/plan/apply")
+                .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+                .content(js.toString())).andDo(print()).andReturn();
     }
 
 }
