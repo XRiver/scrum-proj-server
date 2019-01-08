@@ -236,3 +236,45 @@ response
     'data':  {}    //json对象
 }
 ```
+
+##### 9 查询出行计划申请的相关信息
+
+request
+
+```shell
+GET /api/plan/apply?pid=pid
+```
+
+response
+
+```json
+{
+
+    'data':  [{User实体对象,"message": string,"applyid": number}]   
+}
+```
+
+//返回的是每个申请的申请人的信息+申请的message+申请的applyid
+
+##### 10 同意/拒绝对出行计划的申请
+
+request
+
+```shell
+PUT /api/plan/apply
+```
+```json
+{
+    'applyid': number  //申请的applyid编号
+    'pass': nunber  //表示是否通过该申请 1代表通过 0代表不通过
+}
+```
+
+response
+
+```json
+{
+    'code'： number  //0-通过成功  1-通过失败,未传入openid或pid  
+    'msg':   string  //说明
+}
+```

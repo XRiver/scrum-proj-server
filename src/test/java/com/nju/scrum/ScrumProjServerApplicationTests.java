@@ -1,12 +1,14 @@
 package com.nju.scrum;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -16,6 +18,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Assert;
 import org.springframework.web.context.WebApplicationContext;
 //静态导入 省的写MockMvcRequestBuilders 这几个Builder了
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -45,7 +50,7 @@ public class ScrumProjServerApplicationTests {
         MvcResult res = this.mockMvc.perform(get("/api/login")
                 .param("openid", "111")).andDo(print()).andReturn();
         String  content = res.getResponse().getContentAsString();
-        Integer statusNum = res.getResponse().getStatus();
+        int statusNum = res.getResponse().getStatus();
         JSONObject json = new JSONObject(content);
         //使用spring自己的断言类Assert
         Assert.isTrue(statusNum==200,"http状态码不是200");
@@ -53,11 +58,24 @@ public class ScrumProjServerApplicationTests {
         Assert.isTrue(json.getString("msg").equals("登录成功"),"不是登录成功");
         Assert.isTrue(json.getJSONObject("data").getInt("uid") == 1,"uid不对");
         Assert.isTrue(json.getJSONObject("data").getString("openid").equals("111"),"openid不对");
-        Assert.isTrue(json.getJSONObject("data").getString("uname").equals("张三"),"uname不对");
+        Assert.isTrue(json.getJSONObject("data").getString("uname").equals("张三"), "uname不对");
     }
-
-
-
+    @Test
+    public void testRegister() throws Exception {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("openid", "19960305");
+        map.put("uname","刘正元");
+        JSONObject js = new JSONObject(map);
+        MvcResult res = this.mockMvc.perform(post("/api/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(js.toString())).andDo(print()).andReturn();
+        String  content = res.getResponse().getContentAsString();
+        JSONObject json = new JSONObject(content);
+        int statusNum = res.getResponse().getStatus();
+        //使用spring自己的断言类Assert
+        Assert.isTrue(statusNum==200,"http状态码不是200");
+        Assert.isTrue(json.getInt("code") == 0 ,"返回状态码不是0");
+    }
 
 }
 
