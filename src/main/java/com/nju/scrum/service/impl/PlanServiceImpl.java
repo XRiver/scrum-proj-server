@@ -32,7 +32,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public String createPlan(Plan plan) {
-        if (plan.getCreatorname()==null||plan.getAname()==null){
+        if (plan.getOpenid()==null||plan.getAid()==null){
             return "1";
         }else {
             planMapper.insert(plan);

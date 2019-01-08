@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.0 (64 bit)
-MySQL - 5.5.15 : Database - nanjing_travel
+MySQL - 5.6.42 : Database - nanjing_travel
 *********************************************************************
 */
 
@@ -26,9 +26,19 @@ CREATE TABLE `apply` (
   `pid` int(11) DEFAULT NULL COMMENT '申请加入的景点pid',
   `mess` varchar(200) DEFAULT NULL COMMENT '申请者的留言',
   PRIMARY KEY (`applyid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='申请信息';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='申请信息';
 
 /*Data for the table `apply` */
+
+insert  into `apply`(`applyid`,`openid`,`pid`,`mess`) values 
+(1,'007',3,'take me away~'),
+(2,'007',6,'take me away~'),
+(3,'111',6,'take me away~'),
+(4,'111',3,NULL),
+(5,'111',3,NULL),
+(6,'112',3,NULL),
+(20,'112',3,NULL),
+(21,'88888888',3,NULL);
 
 /*Table structure for table `attraction` */
 
@@ -61,19 +71,21 @@ DROP TABLE IF EXISTS `plan`;
 
 CREATE TABLE `plan` (
   `pId` int(11) NOT NULL AUTO_INCREMENT,
-  `creatorName` varchar(50) DEFAULT NULL COMMENT '计划创建者姓名',
-  `aName` varchar(50) DEFAULT NULL COMMENT '景点名字',
+  `openId` varchar(50) DEFAULT NULL COMMENT '计划创建者微信标识号',
+  `aId` varchar(50) DEFAULT NULL COMMENT '景点编号',
   `travelTime` date DEFAULT NULL COMMENT '出行时间',
   `detail` varchar(200) DEFAULT NULL COMMENT '备注',
   `applyList` varchar(200) DEFAULT NULL COMMENT '申请加入者的ID列表',
   PRIMARY KEY (`pId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='出行计划信息';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='出行计划信息';
 
 /*Data for the table `plan` */
 
-insert  into `plan`(`pId`,`creatorName`,`aName`,`travelTime`,`detail`,`applyList`) values 
-(1,'张三','总统府','2019-01-01','come on guys!!!','007,111,'),
-(2,'劫','雨花台','2019-01-31','please join us...','007,');
+insert  into `plan`(`pId`,`openId`,`aId`,`travelTime`,`detail`,`applyList`) values 
+(1,'111','1','2019-01-01','come on guys!!!','007,111,112,'),
+(2,'2','2','2019-01-31','please join us!!!','111,007,'),
+(3,'88888888','3','2019-02-28',NULL,'112,88888888,'),
+(8,'88888888','5',NULL,NULL,NULL);
 
 /*Table structure for table `user` */
 
@@ -84,19 +96,23 @@ CREATE TABLE `user` (
   `openId` varchar(50) DEFAULT NULL COMMENT '微信身份标识',
   `uName` varchar(50) DEFAULT NULL COMMENT '用户姓名',
   `school` varchar(100) DEFAULT NULL COMMENT '用户所在高校',
-  `pictureUrl` varchar(100) DEFAULT NULL COMMENT '用户头像url',
+  `pictureUrl` text COMMENT '用户头像url',
   `sex` enum('男','女') DEFAULT NULL COMMENT '性别',
   `nickName` varchar(100) DEFAULT NULL COMMENT '用户昵称',
   `city` varchar(50) DEFAULT NULL COMMENT '用户所在城市',
   PRIMARY KEY (`uId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户信息';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户信息';
 
 /*Data for the table `user` */
 
 insert  into `user`(`uId`,`openId`,`uName`,`school`,`pictureUrl`,`sex`,`nickName`,`city`) values 
 (1,'111','张三','南京大学','/root/picture/111','男','小三','南京'),
 (2,'1','劫','河海大学','/root/picture/112','男','影流之主','纽约'),
-(3,'7','JamesBond','HaFo','/root/picture/111','男','特工','Samfronsisco');
+(3,'007','JamesBund','HaFo','www.halliwood','男','特工','Samfromsisco'),
+(4,'11',NULL,NULL,NULL,'女',NULL,NULL),
+(5,'o9VBV4x48dxVHVXeozv_jKb9MQHE','徐江河','南京大学','https://wx.qlogo.cn/mmopen/vi_32/fcnvXSfjbaib862WeK7ibia442aSU1TqdEfOKs45I22TuIQmgNrzAGAibhG7g0pibHGwTE3ZEniaUGZf8Xia0YJlkYaEw/132','男',NULL,'Zibo'),
+(6,'19960305','刘正元',NULL,NULL,NULL,NULL,NULL),
+(7,'88888888','张三','金陵学院','/root/jinling','男','dasan','nanjing');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

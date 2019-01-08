@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Plan {
     private Integer pid;
-    private String creatorname;
-    private String aname;
+    private String openid;
+    private Integer aid;
     private Date traveltime;
     private String detail;
     private String applylist;
@@ -21,20 +21,20 @@ public class Plan {
         this.pid = pid;
     }
 
-    public String getCreatorname() {
-        return this.creatorname;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setCreatorname(String creatorname) {
-        this.creatorname = creatorname == null ? null : creatorname.trim();
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
-    public String getAname() {
-        return this.aname;
+    public Integer getAid() {
+        return aid;
     }
 
-    public void setAname(String aname) {
-        this.aname = aname == null ? null : aname.trim();
+    public void setAid(Integer aid) {
+        this.aid = aid;
     }
 
     public Date getTraveltime() {
