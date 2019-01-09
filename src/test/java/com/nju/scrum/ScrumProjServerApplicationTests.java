@@ -77,7 +77,7 @@ public class ScrumProjServerApplicationTests {
         int statusNum = res.getResponse().getStatus();
         //使用spring自己的断言类Assert
         Assert.isTrue(statusNum==200,"http状态码不是200");
-        Assert.isTrue(json.getInt("code") == 0 ,"返回状态码不是0");
+        Assert.isTrue(json.getInt("code") != 1 ,"返回状态码是1,未传入openid");
     }
 
     @Test
@@ -99,8 +99,6 @@ public class ScrumProjServerApplicationTests {
         map.put("applyid", 2);
         map.put("pass",0);
         JSONObject js = new JSONObject(map);
-
-
         MvcResult res = this.mockMvc.perform(put("/api/plan/apply")
                 .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                 .content(js.toString())).andDo(print()).andReturn();

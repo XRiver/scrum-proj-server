@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.nju.scrum.pojo.Apply;
 import com.nju.scrum.pojo.R;
 import com.nju.scrum.service.ApplyService;
+import org.apache.logging.log4j.Logger;
 import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,6 @@ public class ApplyController {
     public  R confirmApply(@RequestBody Map<String,Integer> params) {
         int applyid = params.get("applyid");
         int pass = params.get("pass");
-
         R r = new R();
         try {
             applyService.confirmApply(applyid, pass);

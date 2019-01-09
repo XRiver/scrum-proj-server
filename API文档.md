@@ -97,6 +97,13 @@ POST /api/register
 {
     User的json对象（包含User属性：openid uname school pictureurl sex nickname city）
 }
+    //openid: string;  微信号唯一标识
+    //uname： string;  真实姓名
+	//school: string;  学校名称
+    //pictureurl：string； 用户头像地址
+    //sex: string;  (必须为汉字"男"或“女”)  性别
+    //nickname:string  用户昵称
+    //city: string    用户所在城市
 ```
 
 response
@@ -136,7 +143,7 @@ GET /api/attractions？type=single&aid=value
 ```
 
 	//参数 type 为'string'类型,值为 single 则表示查询具体单个景点
-
+	
 	//参数 aid 为'int'类型,表示具体查询的景点编号
 
 response
@@ -159,6 +166,10 @@ post /api/plan/create
 {
 	Plan的Json对象（包含Plan属性：aid openid traveltime detail）
 }
+	//aid: Integer;  景点编号
+    //openid: String;  创建者openid
+    //traveltime: Date;（传入格式："xxxx-xx-xx"）出行时间
+	//detail: String;  计划详细信息
 ```
 
 response
@@ -171,17 +182,16 @@ response
 }
 ```
 
-##### 6 按照景点名搜索出行计划
+##### 6 按照景点名或创建者姓名搜索出行计划
 
 request
 
 ```shell
-GET /api/plans?type=aname&aname=value
+GET /api/plans?condition=value
 ```
 
-       //参数 type 为'string'类型,值为 aname 则表示根据景点名搜索出行计划
-
-       //参数 aname 为'string'类型,表示景点名字	
+        //参数 condition 为'string'类型,可以输入景点的名字或创建者的真实姓名两种形式	
+        （系统会按景点名搜索，若结果不为空则返回;若结果为空则返回按创建者姓名搜索的结果）
 
 response
 
@@ -191,27 +201,7 @@ response
 }
 ```
 
-##### 7 按照计划创建者搜索出行计划
-
-request
-
-```shell
-GET /api/plans?type=uname&uname=value
-```
-
-	//参数 type 为'string'类型,值为 uname 则表示根据创建者姓名搜索出行计划
-
-       //参数 uname 为'string'类型,表示创建者姓名	
-
-response
-
-```json
-{
-    'data': [{Plan实体1}，{Plan实体2}...]
-}
-```
-
-##### 8 申请加入某个出行计划
+##### 7 申请加入某个出行计划
 
 request
 
@@ -237,7 +227,7 @@ response
 }
 ```
 
-##### 9 查询出行计划申请的相关信息
+##### 8 查询出行计划申请的相关信息
 
 request
 
@@ -257,7 +247,7 @@ response
 
 //返回的是申请的mess+申请的applyid+每个申请的申请人的信息（封装成一个嵌套的User实体类）
 
-##### 10 同意/拒绝对出行计划的申请
+##### 9 同意/拒绝对出行计划的申请
 
 request
 
