@@ -6,7 +6,7 @@ public class Plan {
     private Integer pid;
     private String openid;
     private Integer aid;
-    private String traveltime;
+    private Date traveltime;
     private String detail;
     private String applylist;
 
@@ -37,11 +37,11 @@ public class Plan {
         this.aid = aid;
     }
 
-    public String getTraveltime() {
-        return traveltime;
+    public Date getTraveltime() {
+        return this.traveltime;
     }
 
-    public void setTraveltime(String traveltime) {
+    public void setTraveltime(Date traveltime) {
         this.traveltime = traveltime;
     }
 
@@ -59,17 +59,5 @@ public class Plan {
 
     public void setApplylist(String applylist) {
         this.applylist = applylist == null ? null : applylist.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "Plan{" +
-                "pid=" + pid +
-                ", openid='" + openid + '\'' +
-                ", aid=" + aid +
-                ", traveltime='" + traveltime + '\'' +
-                ", detail='" + detail + '\'' +
-                ", applylist='" + applylist + '\'' +
-                '}';
     }
 }
