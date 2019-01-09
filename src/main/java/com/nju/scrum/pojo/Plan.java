@@ -5,7 +5,9 @@ import java.util.Date;
 public class Plan {
     private Integer pid;
     private String openid;
+    private String uname;
     private Integer aid;
+    private String aname;
     private String traveltime;
     private String detail;
     private String applylist;
@@ -59,6 +61,22 @@ public class Plan {
 
     public void setApplylist(String applylist) {
         this.applylist = applylist == null ? null : applylist.trim();
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
     }
 
     @Override

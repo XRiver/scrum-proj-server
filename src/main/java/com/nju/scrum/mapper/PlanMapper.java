@@ -25,13 +25,13 @@ public interface PlanMapper {
     @Update("update plan set applyList = #{applylist,jdbcType=VARCHAR} where pId = #{pid,jdbcType=INTEGER}")
     int updateByPrimaryKey(Plan record);
 
-    @Select("select * from plan,attraction where plan.aId=attraction.aId and aName=#{aName}")
+    @Select("select * from plan,attraction,user where plan.aId=attraction.aId and plan.openId = user.openId and aName=#{aName}")
     List<Plan> selectByAttraction(String aName);
 
-    @Select("select * from plan,user where plan.openId=user.openId and user.uName=#{uName}")
+    @Select("select * from plan,user,attraction where plan.openId=user.openId and attraction.aId = plan.aId and user.uName=#{uName}")
     List<Plan> selectByCreatorName(String uName);
 
-    @Select("select * from plan join user on plan.openId=user.openId and user.openId=#{openid}")
+    @Select("select * from plan,user,attraction where plan.openId=user.openId and attraction.aId = plan.aId and user.openId=#{openid}")
     List<Plan> selectByCreatorOpenId(String openid);
 
     @Select("select * from plan where pId=#{pid}")
