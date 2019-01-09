@@ -33,13 +33,13 @@ public class PlanController {
         return r;
     }
     @GetMapping("/plans")
-    public List<Plan> attractions(String aname,String uname) {
+    public List<Plan> attractions(String condition) {
         List<Plan> list;
-        list=planService.selectByAttraction(aname);
+        list=planService.selectByAttraction(condition);
         if (!list.isEmpty()){
             return list;
         }else {
-            list = planService.selectByCreator(uname);
+            list = planService.selectByCreator(condition);
             return list;
         }
     }
