@@ -37,6 +37,9 @@ Plan {
     traveltime: String; // 出行时间 时间戳
 	detail: String; // 计划详细信息
 	applylist: String; // 申请者的列表，存放申请加入此出行计划的用户openid
+	aname：String；   //景点名称
+	uname：String；   //创建者姓名
+	applylist：String； //申请者的编号，以逗号分隔
 }
 ```
 
@@ -207,10 +210,14 @@ response
 [
     {Plan实体1}，{Plan实体2}...
 ]
+	//pid: Integer;  计划编号
 	//aid: Integer;  景点编号
     //openid: String;  创建者openid
+	//aname：String；   景点名称
+	//uname：String；   创建者姓名
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
+	//applylist：String； 申请者的编号，以逗号分隔
 ```
 
 ##### 7 按照用户姓名搜索出行计划
@@ -227,10 +234,14 @@ response
 [
     {Plan实体1}，{Plan实体2}...
 ]
+	//pid: Integer;  计划编号
 	//aid: Integer;  景点编号
     //openid: String;  创建者openid
+	//aname：String；   景点名称
+	//uname：String；   创建者姓名
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
+	//applylist：String； 申请者的编号，以逗号分隔
 ```
 ##### 8 按照景点名搜索出行计划
 
@@ -246,10 +257,14 @@ response
 [
     {Plan实体1}，{Plan实体2}...
 ]
+	//pid: Integer;  计划编号
 	//aid: Integer;  景点编号
     //openid: String;  创建者openid
+	//aname：String；   景点名称
+	//uname：String；   创建者姓名
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
+	//applylist：String； 申请者的编号，以逗号分隔
 ```
 
 ##### 9 申请加入某个出行计划
