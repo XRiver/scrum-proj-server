@@ -33,17 +33,15 @@ public class PlanController {
         return r;
     }
     @GetMapping("/plans")
-    public List<Plan> attractions(String type, String aname,String uname) {
+    public List<Plan> attractions(String aname,String uname) {
         List<Plan> list;
-
-        if(type.equals("aname")) {
-            list=planService.selectByAttraction(aname);
-        }else if (type.equals("uname")){
-            list = planService.selectByCreator(uname);
+        list=planService.selectByAttraction(aname);
+        if (!list.isEmpty()){
+            return list;
         }else {
-            list=null;
+            list = planService.selectByCreator(uname);
+            return list;
         }
-        return list;
     }
     @PostMapping("/plan/apply")
     public R applyPlan(@RequestBody Map<String,Object> params) {
