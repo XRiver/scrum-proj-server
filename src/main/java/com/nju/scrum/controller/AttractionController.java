@@ -4,6 +4,7 @@ import com.nju.scrum.service.AttractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,8 +17,8 @@ import java.util.List;
 public class AttractionController {
     @Autowired
     private AttractionService attractionService;
-    @GetMapping("/attractions")
-    public List<Attraction> attractions(String type,Integer aid) {
+    @GetMapping("/attractions/{type}/{aid}")
+    public List<Attraction> attractions(@PathVariable("type") String type, @PathVariable("aid") Integer aid) {
 
         if(type.equals("all")) {
             List<Attraction> list = attractionService.selectAll();

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
-    @GetMapping("/login")
-    public R login(String openid) {
+    @GetMapping("/login/{openid}")
+    public R login(@PathVariable("openid") String openid) {
         String number;
         number=userService.login(openid);
         R r=new R();

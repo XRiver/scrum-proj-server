@@ -34,7 +34,7 @@ Plan {
     pid: Integer; // 数据库自增id，也是唯一标识
     openid: String; // 创建者用户openid
     aid: Integer; // 景点编号
-    traveltime: Date; // 出行时间
+    traveltime: String; // 出行时间 时间戳
 	detail: String; // 计划详细信息
 	applylist: String; // 申请者的列表，存放申请加入此出行计划的用户openid
 }
@@ -70,7 +70,7 @@ Apply {
 request
 
 ```html
-GET /api/login?openid=value
+GET /api/login/{openid}
 ```
 
       //参数openid为'string'类型,表示用户微信号唯一标识
@@ -121,7 +121,7 @@ response
 request
 
 ```shell
-GET /api/attractions？type=all
+GET /api/attractions/{type}
 ```
 
 	//参数 type 为'string'类型, 值为 all 则表示查询所有景点
@@ -129,9 +129,15 @@ GET /api/attractions？type=all
 response
 
 ```json
-{
-    'data': [{Attraction实体(仅包含id、名称、图片URL)}...]
-}
+[
+    {Attraction实体},
+    ...
+]
+    //aid: Integer; // 数据库自增id，也是唯一标识
+	//aname: String; // 景点名称
+    //location: String; // 景点位置
+    //pictureurl: String; // 景点图片URL
+    //description: String; // 对景点的描述
 ```
 
 ##### 4 获取单个景点详细信息
@@ -139,7 +145,7 @@ response
 request
 
 ```shell
-GET /api/attractions？type=single&aid=value
+GET /api/attractions/{type}/{aid}
 ```
 
 	//参数 type 为'string'类型,值为 single 则表示查询具体单个景点
@@ -149,9 +155,14 @@ GET /api/attractions？type=single&aid=value
 response
 
 ```json
-{
-    'data': {Attraction实体}
-}
+[
+    {Attraction实体}
+]
+    //aid: Integer; // 数据库自增id，也是唯一标识
+	//aname: String; // 景点名称
+    //location: String; // 景点位置
+    //pictureurl: String; // 景点图片URL
+    //description: String; // 对景点的描述
 ```
 
 ##### 5 创建出行计划
@@ -159,7 +170,7 @@ response
 request
 
 ```shell
-post /api/plan/create
+post /api/plan
 ```
 
 ```json
@@ -168,7 +179,7 @@ post /api/plan/create
 }
 	//aid: Integer;  景点编号
     //openid: String;  创建者openid
-    //traveltime: Date;（传入格式："xxxx-xx-xx"）出行时间
+    //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
 ```
 
@@ -182,26 +193,66 @@ response
 }
 ```
 
-##### 6 按照景点名或创建者姓名搜索出行计划
+##### 6 按照用户openid搜索出行计划
 
 request
 
 ```shell
-GET /api/plans?condition=value
+GET /api/plan/openid/{openid}
 ```
-
-        //参数 condition 为'string'类型,可以输入景点的名字或创建者的真实姓名两种形式	
-        （系统会按景点名搜索，若结果不为空则返回;若结果为空则返回按创建者姓名搜索的结果）
 
 response
 
 ```json
-{
-    'data': [{Plan实体1}，{Plan实体2}...]
-}
+[
+    {Plan实体1}，{Plan实体2}...
+]
+	//aid: Integer;  景点编号
+    //openid: String;  创建者openid
+    //traveltime: String;出行时间 时间戳
+	//detail: String;  计划详细信息
 ```
 
-##### 7 申请加入某个出行计划
+##### 7 按照用户姓名搜索出行计划
+
+request
+
+```shell
+GET /api/plan/uname/{uname}
+```
+
+response
+
+```json
+[
+    {Plan实体1}，{Plan实体2}...
+]
+	//aid: Integer;  景点编号
+    //openid: String;  创建者openid
+    //traveltime: String;出行时间 时间戳
+	//detail: String;  计划详细信息
+```
+##### 8 按照景点名搜索出行计划
+
+request
+
+```shell
+GET /api/plan/attraction/{aname}
+```
+
+response
+
+```json
+[
+    {Plan实体1}，{Plan实体2}...
+]
+	//aid: Integer;  景点编号
+    //openid: String;  创建者openid
+    //traveltime: String;出行时间 时间戳
+	//detail: String;  计划详细信息
+```
+
+##### 9 申请加入某个出行计划
 
 request
 
@@ -227,12 +278,12 @@ response
 }
 ```
 
-##### 8 查询出行计划申请的相关信息
+##### 10 查询出行计划申请的相关信息
 
 request
 
 ```shell
-GET /api/plan/apply?pid=pid
+GET /api/plan/apply/{pid}
 ```
 
 response
@@ -243,11 +294,18 @@ response
     'msg':   string  //说明 
     'data':  [{"mess": string,"applyid": number,"applicant":{User实体类}}，]   
 }
+    //openid: string;  微信号唯一标识
+    //uname： string;  真实姓名
+	//school: string;  学校名称
+    //pictureurl：string； 用户头像地址
+    //sex: string;  (必须为汉字"男"或“女”)  性别
+    //nickname:string  用户昵称
+    //city: string    用户所在城市
 ```
 
 //返回的是申请的mess+申请的applyid+每个申请的申请人的信息（封装成一个嵌套的User实体类）
 
-##### 9 同意/拒绝对出行计划的申请
+##### 11 同意/拒绝对出行计划的申请
 
 request
 

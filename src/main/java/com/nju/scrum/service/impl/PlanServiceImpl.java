@@ -1,5 +1,6 @@
 package com.nju.scrum.service.impl;
 
+import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.nju.scrum.mapper.ApplyMapper;
 import com.nju.scrum.mapper.PlanMapper;
 import com.nju.scrum.pojo.Apply;
@@ -25,10 +26,13 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<Plan> selectByCreator(String uName) {
-        List<Plan> list=planMapper.selectByCreator(uName);
-        return list;
+    public List<Plan> selectByCreatorName(String name) {
+        return planMapper.selectByCreatorName(name);
     }
+    public List<Plan> selectByCreatorOpenid(String openid) {
+        return planMapper.selectByCreatorOpenId(openid);
+    }
+
 
     @Override
     public String createPlan(Plan plan) {

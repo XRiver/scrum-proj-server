@@ -19,8 +19,8 @@ public class ApplyController {
     @Autowired
     ApplyService applyService;
 
-    @GetMapping("/plan/apply")
-    public R selectByPid(Integer pid) {
+    @GetMapping("/plan/apply/{pid}")
+    public R selectByPid(@PathVariable("pid") Integer pid) {
         R r = new R();
         if (pid == null) {
             r.setCode(1);

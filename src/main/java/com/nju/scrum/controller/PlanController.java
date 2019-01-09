@@ -19,7 +19,7 @@ import java.util.Map;
 public class PlanController {
     @Autowired
     private PlanService planService;
-    @PostMapping("/plan/create")
+    @PostMapping("/plan")
     public R createPlan(@RequestBody Plan plan) {
         String number=planService.createPlan(plan);
         R r=new R();
@@ -32,17 +32,22 @@ public class PlanController {
         }
         return r;
     }
-    @GetMapping("/plans")
-    public List<Plan> attractions(String condition) {
-        List<Plan> list;
-        list=planService.selectByAttraction(condition);
-        if (!list.isEmpty()){
-            return list;
-        }else {
-            list = planService.selectByCreator(condition);
-            return list;
-        }
+
+    @GetMapping("/plan/openid/{openid}")
+    public List<Plan> getPlansByopenid(@PathVariable("openid") String openid) {
+        return planService.selectByCreatorOpenid(openid);
+
     }
+    @GetMapping("/plan/uname/{uname}")
+    public List<Plan> getPlansByUname(@PathVariable("uname") String uname){
+        return planService.selectByCreatorName(uname);
+    }
+
+    @GetMapping("/plan/attraction/{aname}")
+    public List<Plan> getPlansByAname(@PathVariable("aname") String aname){
+        return planService.selectByAttraction(aname);
+    }
+
     @PostMapping("/plan/apply")
     public R applyPlan(@RequestBody Map<String,Object> params) {
         String openid=(String)params.get("openid");

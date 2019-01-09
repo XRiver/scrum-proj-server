@@ -104,5 +104,17 @@ public class ScrumProjServerApplicationTests {
                 .content(js.toString())).andDo(print()).andReturn();
     }
 
+    @Test
+    public void testAttractions() throws Exception {
+        MvcResult res = this.mockMvc.perform(get("/api/attractions")
+                .param("type","all")
+                ).andDo(print()).andReturn();
+    }
+    @Test
+    public void testGetPlan() throws Exception {
+        MvcResult res1 = this.mockMvc.perform(get("/api/plan/openid/111").characterEncoding("utf-8")).andDo(print()).andReturn();
+        MvcResult res2 = this.mockMvc.perform(get("/api/plan/uname/张三").characterEncoding("utf-8")).andDo(print()).andReturn();
+        MvcResult res3 = this.mockMvc.perform(get("/api/plan/attraction/夫子庙").characterEncoding("utf-8")).andDo(print()).andReturn();
+    }
 }
 
