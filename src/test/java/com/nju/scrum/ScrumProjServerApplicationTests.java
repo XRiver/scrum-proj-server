@@ -116,5 +116,11 @@ public class ScrumProjServerApplicationTests {
         MvcResult res2 = this.mockMvc.perform(get("/api/plan/uname/张三").characterEncoding("utf-8")).andDo(print()).andReturn();
         MvcResult res3 = this.mockMvc.perform(get("/api/plan/attraction/夫子庙").characterEncoding("utf-8")).andDo(print()).andReturn();
     }
+
+    @Test
+    public void testGetAttraction() throws Exception {
+        MvcResult res1 = this.mockMvc.perform(get("/api/attractions/").characterEncoding("utf-8")).andDo(print()).andReturn();
+        MvcResult res2 = this.mockMvc.perform(get("/api/attractions/1").characterEncoding("utf-8")).andDo(print()).andReturn();
+    }
 }
 

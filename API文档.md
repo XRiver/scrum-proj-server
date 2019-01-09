@@ -124,10 +124,10 @@ response
 request
 
 ```shell
-GET /api/attractions/{type}
+GET /api/attractions
 ```
 
-	//参数 type 为'string'类型, 值为 all 则表示查询所有景点
+
 
 response
 
@@ -148,10 +148,9 @@ response
 request
 
 ```shell
-GET /api/attractions/{type}/{aid}
+GET /api/attractions/{aid}
 ```
 
-	//参数 type 为'string'类型,值为 single 则表示查询具体单个景点
 	
 	//参数 aid 为'int'类型,表示具体查询的景点编号
 

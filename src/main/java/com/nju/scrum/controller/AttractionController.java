@@ -1,4 +1,5 @@
 package com.nju.scrum.controller;
+
 import com.nju.scrum.pojo.Attraction;
 import com.nju.scrum.service.AttractionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @ResponseBody
 @Controller
 //上面两者叠加等价于@RestController
@@ -17,18 +19,21 @@ import java.util.List;
 public class AttractionController {
     @Autowired
     private AttractionService attractionService;
-    @GetMapping("/attractions/{type}/{aid}")
-    public List<Attraction> attractions(@PathVariable("type") String type, @PathVariable("aid") Integer aid) {
 
-        if(type.equals("all")) {
-            List<Attraction> list = attractionService.selectAll();
-            return list;
-        }else {
-            Attraction a=attractionService.selectByPrimaryKey(aid);
-            List<Attraction> list=new ArrayList<Attraction>();
-            list.add(a);
-            return list;
-        }
+    @GetMapping("/attractions/{aid}")
+    public List<Attraction> getAttraction(@PathVariable("aid") Integer aid) {
+
+        Attraction a = attractionService.selectByPrimaryKey(aid);
+        List<Attraction> list = new ArrayList<Attraction>();
+        list.add(a);
+        return list;
+
     }
+
+    @GetMapping("/attractions/")
+    public List<Attraction> getAttractions() {
+        return attractionService.selectAll();
+    }
+
 
 }
