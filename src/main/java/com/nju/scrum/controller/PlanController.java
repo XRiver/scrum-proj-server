@@ -36,8 +36,8 @@ public class PlanController {
     @GetMapping("/plan/openid/{openid}")
     public List<Plan> getPlansByopenid(@PathVariable("openid") String openid) {
         return planService.selectByCreatorOpenid(openid);
-
     }
+
     @GetMapping("/plan/uname/{uname}")
     public List<Plan> getPlansByUname(@PathVariable("uname") String uname){
         return planService.selectByCreatorName(uname);

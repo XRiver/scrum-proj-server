@@ -19,15 +19,22 @@ public class AttractionController {
     private AttractionService attractionService;
     @GetMapping("/attractions/{type}/{aid}")
     public List<Attraction> attractions(@PathVariable("type") String type, @PathVariable("aid") Integer aid) {
-
-        if(type.equals("all")) {
-            List<Attraction> list = attractionService.selectAll();
-            return list;
-        }else {
+        if(type.equals("single")) {
             Attraction a=attractionService.selectByPrimaryKey(aid);
             List<Attraction> list=new ArrayList<Attraction>();
             list.add(a);
             return list;
+        }else {
+            return null;
+        }
+    }
+    @GetMapping("/attractions/{type}")
+    public List<Attraction> attractions(@PathVariable("type") String type) {
+        if(type.equals("all")) {
+            List<Attraction> list = attractionService.selectAll();
+            return list;
+        }else {
+            return null;
         }
     }
 
