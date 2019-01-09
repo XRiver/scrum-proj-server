@@ -9,7 +9,8 @@ public class Plan {
     private Date traveltime;
     private String detail;
     private String applylist;
-
+    private String aname;
+    private String uname;
     public Plan() {
     }
 
@@ -59,5 +60,21 @@ public class Plan {
 
     public void setApplylist(String applylist) {
         this.applylist = applylist == null ? null : applylist.trim();
+    }
+
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 }
