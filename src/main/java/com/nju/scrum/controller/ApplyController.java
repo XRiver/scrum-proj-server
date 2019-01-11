@@ -19,6 +19,7 @@ public class ApplyController {
     @Autowired
     ApplyService applyService;
 
+    //返回的是尚未经过审批的申请者信息列表
     @GetMapping("/plan/apply/{pid}")
     public R selectByPid(@PathVariable("pid") Integer pid) {
         R r = new R();
@@ -47,6 +48,7 @@ public class ApplyController {
             applyService.confirmApply(applyid, pass);
             r.setCode(0);
             r.setMsg("同意/拒绝申请成功");
+            applyService.isDealed(applyid);
         } catch (Exception e) {
             e.printStackTrace();
             r.setCode(1);

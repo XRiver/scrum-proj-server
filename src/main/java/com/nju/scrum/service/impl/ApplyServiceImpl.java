@@ -22,4 +22,9 @@ public class ApplyServiceImpl implements ApplyService {
     public void confirmApply(int applyid, int pass) {
         applyMapper.confirmApply(applyid, pass);
     }
+
+    @Override
+    public void isDealed(int applyid) {
+        applyMapper.isDealed(applyid);
+    }
 }

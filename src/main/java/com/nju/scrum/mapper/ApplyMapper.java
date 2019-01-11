@@ -12,7 +12,7 @@ public interface ApplyMapper {
     int insert(Apply record);
 
     //根据出行计划的pid查询所有相关的申请
-    @Select({"select * from apply a join user u on a.openid = u.openid where a.pid = #{pid}"})
+    @Select({"select * from apply a join user u on a.openid = u.openid where a.pid = #{pid} and a.deal=0"})
     @Results(id = "applyResult",value = {
             @Result(column = "applyid", property = "applyid"),
             @Result(column = "mess", property = "mess"),
@@ -28,7 +28,10 @@ public interface ApplyMapper {
     })
     List<Apply> selectByPid(int pid);
 
-    //通过或拒绝申请 0 拒绝 1 统一
+    //通过或拒绝申请 0 拒绝 1 通过
     @Update("update apply set pass = #{pass} where applyid = #{applyid}")
     void confirmApply(@Param("applyid") int applyid, @Param("pass") int pass);
+    //将审批过的apply的deal改为1
+    @Update("update apply set deal=1 where applyid = #{applyid}")
+    void isDealed(int applyid);
 }

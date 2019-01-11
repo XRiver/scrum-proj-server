@@ -10,4 +10,6 @@ public interface ApplyService {
 
     //通过或拒绝申请 0 拒绝 1 统一
     void confirmApply(int applyid, int pass);
+
+    void isDealed(int applyid);
 }
