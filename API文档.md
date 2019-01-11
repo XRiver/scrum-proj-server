@@ -51,6 +51,8 @@ Apply {
     openid: String; // 申请者微信openid
     pid: Integer;  // 景点编号
     mess: String; // 申请者留言
+    pass: Integer //通过或拒绝申请 0-拒绝  1-通过
+    deal: Integer //该申请是否已被审批过  0-尚未处理  1-已处理
 }
 ```
 
@@ -151,7 +153,7 @@ request
 GET /api/attractions/{aid}
 ```
 
-	
+
 	//参数 aid 为'int'类型,表示具体查询的景点编号
 
 response
@@ -292,7 +294,7 @@ response
 }
 ```
 
-##### 10 查询出行计划申请的相关信息
+##### 10 查询尚未审批的的出行申请信息
 
 request
 
