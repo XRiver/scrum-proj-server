@@ -30,7 +30,7 @@ public class AttractionController {
 
     }
 
-    @GetMapping("/attractions/")
+    @GetMapping("/attractions")
     public List<Attraction> getAttractions() {
         return attractionService.selectAll();
     }
