@@ -112,9 +112,9 @@ public class ScrumProjServerApplicationTests {
     }
     @Test
     public void testGetPlan() throws Exception {
-        MvcResult res1 = this.mockMvc.perform(get("/api/plan/openid/111").characterEncoding("utf-8")).andDo(print()).andReturn();
-        MvcResult res2 = this.mockMvc.perform(get("/api/plan/uname/张三").characterEncoding("utf-8")).andDo(print()).andReturn();
-        MvcResult res3 = this.mockMvc.perform(get("/api/plan/attraction/夫子庙").characterEncoding("utf-8")).andDo(print()).andReturn();
+        MvcResult res1 = this.mockMvc.perform(get("/api/plan/openid/111").param("state","0123").characterEncoding("utf-8")).andDo(print()).andReturn();
+        MvcResult res2 = this.mockMvc.perform(get("/api/plan/uname/张三").param("state","0123").characterEncoding("utf-8")).andDo(print()).andReturn();
+        MvcResult res3 = this.mockMvc.perform(get("/api/plan/attraction/夫子庙").param("state","0123").characterEncoding("utf-8")).andDo(print()).andReturn();
     }
 
     @Test
