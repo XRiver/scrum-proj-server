@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>后台管理系统－－登录</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+td img {display: block;}.STYLE4 {font-size: 10pt}
+a:link {
+	font-size: 10pt;
+	text-decoration: none;
+	color: #333333;
+}
+a:hover {
+	color: #0066CC;
+	text-decoration: underline;
+}
+.bluesubmit {
+    font-family: "tahoma", "宋体"; /*www.xxcss.com*/
+    font-size: 9pt; color: #003366;
+    border: 0px #93bee2 solid;
+    background-image:url(images/manager_login_r8_c3.gif);
+    background-color: #ffffff;
+    cursor: hand;
+    font-style: normal ;
+	width:60px;
+	height:18px;
+}
+.blueclear {
+    font-family: "tahoma", "宋体"; /*www.xxcss.com*/
+    font-size: 9pt; color: #003366;
+    border: 0px #93bee2 solid;
+    background-image:url(images/manager_login_r8_c5.gif);
+    background-color: #ffffff;
+    cursor: hand;
+    font-style: normal ;
+	width:60px;
+	height:19px;
+}
+</style>
+<!--Fireworks 8 Dreamweaver 8 target.  Created Sun Mar 29 02:08:25 GMT+0800 2009-->
+</head>
+<!--用户信息判断  -->
+<script type="text/javascript">
+	function init(){
+  var name = getUser();
+  LoginForm.loginname.value = name;
+  if(name == ""){
+  	LoginForm.loginname.focus();}
+  else{
+  	LoginForm.password.focus();}
+}
+function lastUser(user){
+	var date = new Date();
+	date.setDate(date.getDate()+5);
+        document.cookie = "demolastuser="+user+";expires="+date.toGMTString();
+}
+function getUser(){
+	var s = document.cookie;
+	var u = "";
+	var idx = s.indexOf("demolastuser=");
+	if(idx == -1){
+		return u;
+	}
+	var idx1 = s.indexOf(";",idx+13);
+	if(idx1 == -1){
+		u = s.substring(idx+13);
+	}else{
+		u = s.substring(idx+13,idx1);
+	}
+	return u;
+}
+function next()
+{
+  if(window.event.keyCode == 13)
+     window.event.keyCode = 9;
+}
+function login()
+{
+	if(LoginForm.loginname.value == "")
+	{
+		alert("还没有输入用户名，请先输入！");
+		LoginForm.loginname.focus();
+		return false;
+	}
+	if(LoginForm.password.value == "")
+	{
+		alert("密码不能为空，请输入！");
+		LoginForm.password.focus();
+		return false;
+	}
+	// if(LoginForm.rand.value == "")
+	// {
+	// 	alert("附加码不能为空，请输入！");
+	// 	LoginForm.rand.focus();
+	// 	return false;
+	// }
+	
+    lastUser(LoginForm.loginname.value);
+	return true;
+}
+function cancel(){
+  LoginForm.reset();
+  LoginForm.loginname.focus();
+}
+</script>
+<body  onload="init()"><center>
+<form id="LoginForm" name="LoginForm" method="post" action="LoginServlet" onsubmit="return login();">
+<table border="0" cellpadding="0" cellspacing="0" width="446">
+<!-- fwtable fwsrc="未命名" fwbase="manager_login.gif" fwstyle="Dreamweaver" fwdocid = "951626001" fwnested="0" -->
+  <tr>
+   <td><img src="images/spacer.gif" width="151" height="1" border="0" alt="" /></td>
+   <td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
+   <td><img src="images/spacer.gif" width="62" height="1" border="0" alt="" /></td>
+   <td><img src="images/spacer.gif" width="41" height="1" border="0" alt="" /></td>
+   <td><img src="images/spacer.gif" width="47" height="1" border="0" alt="" /></td>
+   <td><img src="images/spacer.gif" width="15" height="1" border="0" alt="" /></td>
+   <td><img src="images/spacer.gif" width="128" height="1" border="0" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="1" border="0" alt="" /></td>
+  </tr>
+
+  <tr>
+   <td colspan="7"><img name="manager_login_r1_c1" src="images/manager_login_r1_c1.gif" width="446" height="132" border="0" id="manager_login_r1_c1" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="132" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td rowspan="8"><img name="manager_login_r2_c1" src="images/manager_login_r2_c1.gif" width="151" height="167" border="0" id="manager_login_r2_c1" alt="" /></td>
+   <td colspan="4"><input type="text" name="loginname" style="width:145px; height:13px" border="0" id="manager_login_r2_c2" alt="" /></td>
+   <td colspan="2" rowspan="6" align="left" valign="bottom" background="images/manager_login_r2_c6.gif"><table width="120">
+     <!--<tr>-->
+       <!--<td width="118" height="50" align="left" valign="bottom">-->
+       <!--<img name="imageField" style="cursor:hand" alt="点击查看下一张" onclick="imageRefurbish()" id="imageField" src="images/rand.jsp" width="57px" height="17"/>-->
+                    <!--<script type="text/javascript">-->
+                        <!--function imageRefurbish(){-->
+                        	<!--document.getElementById("imageField").src ="images/rand.jsp?"+Math.random();-->
+                        <!--}-->
+                        <!--</script>-->
+       <!--</td>-->
+     <!--</tr>-->
+	 <tr><td height="25"></td></tr>
+   </table></td>
+   <td><img src="images/spacer.gif" width="1" height="21" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td colspan="4"><img name="manager_login_r3_c2" src="images/manager_login_r3_c2.gif" width="152" height="7" border="0" id="manager_login_r3_c2" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="7" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td colspan="4"><input type="password" name="password" style="width:145px; height:13px" border="0" id="manager_login_r4_c2" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="21" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td colspan="4"><img name="manager_login_r5_c2" src="images/manager_login_r5_c2.gif" width="152" height="7" border="0" id="manager_login_r5_c2" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="7" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td colspan="4"><input type="text" name="rand" style="width:145px; height:13px" border="0" id="manager_login_r6_c2" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="21" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td colspan="4"><img name="manager_login_r7_c2" src="images/manager_login_r7_c2.gif" width="152" height="30" border="0" id="manager_login_r7_c2" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="30" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td rowspan="2"><img name="manager_login_r8_c2" src="images/manager_login_r8_c2.gif" width="2" height="60" border="0" id="manager_login_r8_c2" alt="" /></td>
+   <td bgcolor="#C9E5F9"><label>
+     <input name="Submit" type="submit" class="bluesubmit" value="" />
+   </label></td>
+   <td rowspan="2"><img name="manager_login_r8_c4" src="images/manager_login_r8_c4.gif" width="41" height="60" border="0" id="manager_login_r8_c4" alt="" /></td>
+   <td colspan="2" bgcolor="#D4EBFA"><label>
+   <input name="Submit2" type="reset" class="blueclear" value="" onClick="window.cancel()" />
+   </label></td>
+   <td rowspan="2"><img name="manager_login_r8_c7" src="images/manager_login_r8_c7.gif" width="128" height="60" border="0" id="manager_login_r8_c7" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="23" border="0" alt="" /></td>
+  </tr>
+  <tr>
+   <td><img name="manager_login_r9_c3" src="images/manager_login_r9_c3.gif" width="62" height="37" border="0" id="manager_login_r9_c3" alt="" /></td>
+   <td colspan="2"><img name="manager_login_r9_c5" src="images/manager_login_r9_c5.gif" width="62" height="37" border="0" id="manager_login_r9_c5" alt="" /></td>
+   <td><img src="images/spacer.gif" width="1" height="37" border="0" alt="" /></td>
+  </tr>
+</table>
+</form>
+</center>
+</body>
+</html>

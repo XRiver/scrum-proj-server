@@ -40,6 +40,7 @@ Plan {
 	aname：String；   //景点名称
 	uname：String；   //创建者姓名
 	applylist：String； //申请者的编号，以逗号分隔
+    state: String  //出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 }
 ```
 
@@ -49,13 +50,24 @@ Plan {
 Apply {
 	applyid: Integer;// 数据库自增id，也是唯一标识
     openid: String; // 申请者微信openid
-    pid: Integer;  // 景点编号
+    pid: Integer;  // 出行计划编号
     mess: String; // 申请者留言
     pass: Integer //通过或拒绝申请 0-拒绝  1-通过
     deal: Integer //该申请是否已被审批过  0-尚未处理  1-已处理
 }
 ```
 
+##### 5 团队成员的评价
+
+```typescript
+Evaluation {
+	eid: Integer;// 数据库自增id，也是唯一标识
+    pid: Integer // 出行计划编号pid
+    fromid: String; // 评价者的微信openid
+    toid: String;  // 被评价者的微信openid
+    mess: String; // 评价信息
+}
+```
 
 
 ### 二、对于空的处理
@@ -202,7 +214,9 @@ response
 request
 
 ```shell
-GET /api/plan/openid/{openid}
+GET /api/plan/openid/{openid}？state=value
+//传入的state是一个字符串，为几种状态码的组合，其中状态吗0-未出行、1-正在进行、2-行程结束、3-过期作废
+//state形如 "0"、"3"、"012"、"013"、"0123" 等
 ```
 
 response
@@ -226,7 +240,9 @@ response
 request
 
 ```shell
-GET /api/plan/uname/{uname}
+GET /api/plan/uname/{uname}？state=value
+//传入的state是一个字符串，为几种状态码的组合，其中状态吗0-未出行、1-正在进行、2-行程结束、3-过期作废
+//state形如 "0"、"3"、"012"、"013"、"0123" 等
 ```
 
 response
@@ -249,7 +265,9 @@ response
 request
 
 ```shell
-GET /api/plan/attraction/{aname}
+GET /api/plan/attraction/{aname}？state=value
+//传入的state是一个字符串，为几种状态码的组合，其中状态吗0-未出行、1-正在进行、2-行程结束、3-过期作废
+//state形如 "0"、"3"、"012"、"013"、"0123" 等
 ```
 
 response
@@ -279,7 +297,7 @@ POST /api/plan/apply
 ```json
 {
 	openid: string; // 申请者的微信号唯一标识  
-    pid: String; // 出行计划的唯一标识号
+    pid: Integer; // 出行计划的唯一标识号
 	mess: String; // 申请者的留言
 }
 ```
@@ -341,5 +359,57 @@ response
 {
     'code'： number  //0-同意/拒绝申请成功  1-同意/拒绝申请失败 
     'msg':   string  //说明
+}
+```
+##### 12 切换出行计划的状态码
+
+request
+
+```shell
+PUT /api/plan/state
+```
+```json
+{
+    ‘pid’: Integer; // 出行计划的唯一标识号
+	‘state’: String; // 改成哪种状态吗 ”0“-未出行、”1“-正在进行、”2“-行程结束、”3“-过期作废
+}
+```
+
+response
+
+```json
+{
+	'code'： number  //0-修改成功   1-本来就是这个状态，不用修改   2-修改失败
+    'msg':   string  //说明 
+    'data':  {Plan实体类} 
+}
+```
+
+##### 13 评价团队成员
+
+request
+
+```shell
+post /api/plan/evaluation
+```
+
+```json
+{
+	Evaluation的Json对象（包含Evaluation属性：eid pid fromid toid mess）
+}
+	//eid: Integer;    数据库自增id，也是唯一标识
+    //pid: Integer     出行计划编号pid
+    //fromid: String;  评价者的微信openid
+    //toid: String;    被评价者的微信openid
+    //mess: String;    评价信息
+```
+
+response
+
+```json
+{
+    'code'： number  //0-评价成功  1-评价失败
+    'msg':   string  //说明 
+    'data':  {Evaluation实体类}    //json对象
 }
 ```

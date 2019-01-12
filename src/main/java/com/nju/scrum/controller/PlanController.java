@@ -34,18 +34,18 @@ public class PlanController {
     }
 
     @GetMapping("/plan/openid/{openid}")
-    public List<Plan> getPlansByopenid(@PathVariable("openid") String openid) {
-        return planService.selectByCreatorOpenid(openid);
+    public List<Plan> getPlansByopenid(@PathVariable("openid") String openid,String state) {
+        return planService.selectByCreatorOpenid(openid,state);
     }
 
     @GetMapping("/plan/uname/{uname}")
-    public List<Plan> getPlansByUname(@PathVariable("uname") String uname){
-        return planService.selectByCreatorName(uname);
+    public List<Plan> getPlansByUname(@PathVariable("uname") String uname,String state){
+        return planService.selectByCreatorName(uname,state);
     }
 
     @GetMapping("/plan/attraction/{aname}")
-    public List<Plan> getPlansByAname(@PathVariable("aname") String aname){
-        return planService.selectByAttraction(aname);
+    public List<Plan> getPlansByAname(@PathVariable("aname") String aname,String state){
+        return planService.selectByAttraction(aname,state);
     }
 
     @PostMapping("/plan/apply")
@@ -62,6 +62,27 @@ public class PlanController {
             r.setMsg("申请失败,未传入openid或pid");
         }else {
             r.setMsg("该用户已申请过此出行计划");
+        }
+        return r;
+    }
+
+    @PutMapping("/plan/state")
+    public  R confirmApply(@RequestBody Map<String,Object> params) {
+        R r=new R();
+        int pid = (Integer) params.get("pid");
+        String state = (String) params.get("state");
+        String number=planService.changeState(pid,state);
+        Plan plan=planService.selectByPid(pid);
+        r.setCode(Integer.parseInt(number));
+        if(number.equals("0")){
+            r.setMsg("修改成功");
+            r.setData(plan);
+        } else if (number.equals("1")){
+            r.setMsg("本来就是这个状态，不用修改");
+            r.setData(plan);
+        }else {
+            r.setMsg("修改失败");
+            r.setData(plan);
         }
         return r;
     }

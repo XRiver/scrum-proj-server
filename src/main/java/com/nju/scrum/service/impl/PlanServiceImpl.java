@@ -1,11 +1,9 @@
 package com.nju.scrum.service.impl;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.nju.scrum.mapper.ApplyMapper;
 import com.nju.scrum.mapper.PlanMapper;
 import com.nju.scrum.pojo.Apply;
 import com.nju.scrum.pojo.Plan;
-import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +18,67 @@ public class PlanServiceImpl implements PlanService {
     private ApplyMapper applyMapper;
 
     @Override
-    public List<Plan> selectByAttraction(String aName) {
+    public List<Plan> selectByAttraction(String aName, String state) {
         List<Plan> list=planMapper.selectByAttraction(aName);
+        for (int j=0;j<list.size();j++){
+            Plan plan=list.get(j);
+            boolean flag=false;
+            for (int i=0;i<state.length();i++) {
+                char c=state.charAt(i);
+                String s=String.valueOf(c);
+                if (plan.getState().equals(s)){
+                    flag=true;
+                    break;
+                }
+            }
+            if (flag==false){
+                list.remove(plan);
+                j--;
+            }
+        }
         return list;
     }
 
     @Override
-    public List<Plan> selectByCreatorName(String name) {
-        return planMapper.selectByCreatorName(name);
+    public List<Plan> selectByCreatorName(String name, String state) {
+        List<Plan> list=planMapper.selectByCreatorName(name);
+        for (int j=0;j<list.size();j++){
+            Plan plan=list.get(j);
+            boolean flag=false;
+            for (int i=0;i<state.length();i++) {
+                char c=state.charAt(i);
+                String s=String.valueOf(c);
+                if (plan.getState().equals(s)){
+                    flag=true;
+                    break;
+                }
+            }
+            if (flag==false){
+                list.remove(plan);
+                j--;
+            }
+        }
+        return list;
     }
-    public List<Plan> selectByCreatorOpenid(String openid) {
-        return planMapper.selectByCreatorOpenId(openid);
+    public List<Plan> selectByCreatorOpenid(String openid, String state) {
+        List<Plan> list = planMapper.selectByCreatorOpenId(openid);
+        for (int j=0;j<list.size();j++){
+            Plan plan=list.get(j);
+            boolean flag=false;
+            for (int i=0;i<state.length();i++) {
+                char c=state.charAt(i);
+                String s=String.valueOf(c);
+                if (plan.getState().equals(s)){
+                    flag=true;
+                    break;
+                }
+            }
+            if (flag==false){
+                list.remove(plan);
+                j--;
+            }
+        }
+        return list;
     }
 
 
@@ -79,5 +127,31 @@ public class PlanServiceImpl implements PlanService {
             applyMapper.insert(apply);
             return "0";
         }
+    }
+
+    @Override
+    public String changeState(int pid, String state) {
+        try {
+            Plan plan=planMapper.selectByPid(pid);
+            String pid1=plan.getState();
+            System.out.println(pid1);
+            planMapper.updateStateByPrimaryKey(pid,state);
+            plan=planMapper.selectByPid(pid);
+            String pid2=plan.getState();
+            System.out.println(pid2);
+            if (pid1.equals(pid2)){
+                return "1";
+            }else {
+                return "0";
+            }
+        }catch (Exception e){
+            e.getStackTrace();
+            return "2";
+        }
+    }
+
+    @Override
+    public Plan selectByPid(int pid) {
+        return planMapper.selectByPid(pid);
     }
 }

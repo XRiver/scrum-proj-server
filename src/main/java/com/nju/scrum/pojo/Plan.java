@@ -11,6 +11,7 @@ public class Plan {
     private String traveltime;
     private String detail;
     private String applylist;
+    private String state;
 
     public Plan() {
     }
@@ -77,6 +78,14 @@ public class Plan {
 
     public void setAname(String aname) {
         this.aname = aname;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     @Override

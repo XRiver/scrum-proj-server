@@ -36,4 +36,7 @@ public interface PlanMapper {
 
     @Select("select * from plan where pId=#{pid}")
     Plan selectByPid(Integer pid);
+
+    @Update("update plan set state = #{state,jdbcType=VARCHAR} where pId = #{pid,jdbcType=INTEGER}")
+    void updateStateByPrimaryKey(int pid, String state);
 }
