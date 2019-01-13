@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 @Controller
 public class LoginController {
@@ -21,8 +22,16 @@ public class LoginController {
         return "addAttraction";
     }
     @RequestMapping("/addAttraction")
-    public String addAttraction(String loginname,String passwd,String rand) {
+    public String addAttraction(HttpServletRequest req) {
         System.out.println("add in db");
+        String name=req.getParameter("name");
+        System.out.println(name);
+        String location=req.getParameter("location");
+        System.out.println(location);
+        String url=req.getParameter("url");
+        System.out.println(url);
+        String description=req.getParameter("description");
+        System.out.println(description);
         return "addAttraction";
     }
 }
