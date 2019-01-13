@@ -6,13 +6,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 @Controller
 public class LoginController {
     //返回的是尚未经过审批的申请者信息列表
-    @RequestMapping("/login")
-    public String selectByPid() {
+    @RequestMapping(value = "/login",method =RequestMethod.GET )
+    public String login() {
         System.out.println("ok");
         return "login";
+    }
+    @RequestMapping("/loginin")
+    public String loginin(String loginname,String passwd,String rand) {
+        System.out.println("login passed");
+        return "addAttraction";
+    }
+    @RequestMapping("/addAttraction")
+    public String addAttraction(HttpServletRequest req) {
+        System.out.println("add in db");
+        String name=req.getParameter("name");
+        System.out.println(name);
+        String location=req.getParameter("location");
+        System.out.println(location);
+        String url=req.getParameter("url");
+        System.out.println(url);
+        String description=req.getParameter("description");
+        System.out.println(description);
+        return "addAttraction";
     }
 }
