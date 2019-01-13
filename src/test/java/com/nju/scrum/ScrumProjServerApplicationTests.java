@@ -122,5 +122,18 @@ public class ScrumProjServerApplicationTests {
         MvcResult res1 = this.mockMvc.perform(get("/api/attractions/").characterEncoding("utf-8")).andDo(print()).andReturn();
         MvcResult res2 = this.mockMvc.perform(get("/api/attractions/1").characterEncoding("utf-8")).andDo(print()).andReturn();
     }
+
+    @Test
+    public void testEvalutePeople() throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("pid", 35);
+        map.put("fromid","mf1832113");
+        map.put("toid","111");
+        map.put("mess","你是个好人");
+        JSONObject js = new JSONObject(map);
+        MvcResult res1 = this.mockMvc.perform(post("/api/plan/evaluation")
+                .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+                .content(js.toString())).andDo(print()).andReturn();
+    }
 }
 

@@ -410,6 +410,7 @@ response
 {
     'code'： number  //0-评价成功  1-评价失败
     'msg':   string  //说明 
-    'data':  {Evaluation实体类}    //json对象
+    'data':  {}    //空
 }
 ```
+

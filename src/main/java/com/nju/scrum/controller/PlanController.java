@@ -1,15 +1,10 @@
 package com.nju.scrum.controller;
-import com.nju.scrum.pojo.Attraction;
-import com.nju.scrum.pojo.Plan;
-import com.nju.scrum.pojo.R;
-import com.nju.scrum.pojo.User;
+import com.nju.scrum.pojo.*;
 import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -85,5 +80,22 @@ public class PlanController {
             r.setData(plan);
         }
         return r;
+    }
+
+    @PostMapping("/plan/evaluation")
+    public R evaluatePeople(@RequestBody Evaluation evaluation) {
+        R r = new R();
+        try {
+            planService.evaluatePeople(evaluation);
+            r.setMsg("评价成功");
+            r.setCode(0);
+
+        } catch (Exception e) {
+            r.setMsg("评价失败");
+            r.setCode(1);
+            return r;
+        }
+        return r;
+
     }
 }

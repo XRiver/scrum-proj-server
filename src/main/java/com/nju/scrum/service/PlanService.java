@@ -1,5 +1,6 @@
 package com.nju.scrum.service;
 
+import com.nju.scrum.pojo.Evaluation;
 import com.nju.scrum.pojo.Plan;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface PlanService {
 
     Plan selectByPid(int pid);
 
+    void evaluatePeople(Evaluation evaluation);
 }

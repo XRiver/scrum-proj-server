@@ -1,4 +1,5 @@
 package com.nju.scrum.mapper;
+import com.nju.scrum.pojo.Evaluation;
 import com.nju.scrum.pojo.Plan;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -39,4 +40,7 @@ public interface PlanMapper {
 
     @Update("update plan set state = #{state,jdbcType=VARCHAR} where pId = #{pid,jdbcType=INTEGER}")
     void updateStateByPrimaryKey(int pid, String state);
+
+    @Insert("insert into evaluation(pid,fromid,toid,mess) values(#{pid},#{fromid},#{toid},#{mess})")
+    void evaluatePeople(Evaluation evaluation);
 }
