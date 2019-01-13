@@ -20,7 +20,7 @@ a:hover {
     font-family: "tahoma", "宋体"; /*www.xxcss.com*/
     font-size: 9pt; color: #003366;
     border: 0px #93bee2 solid;
-    background-image:url(images/manager_login_r8_c3.gif);
+    background-image:url(static/images/manager_login_r8_c3.gif);
     background-color: #ffffff;
     cursor: hand;
     font-style: normal ;
@@ -31,7 +31,7 @@ a:hover {
     font-family: "tahoma", "宋体"; /*www.xxcss.com*/
     font-size: 9pt; color: #003366;
     border: 0px #93bee2 solid;
-    background-image:url(images/manager_login_r8_c5.gif);
+    background-image:url(static/images/manager_login_r8_c5.gif);
     background-color: #ffffff;
     cursor: hand;
     font-style: normal ;
@@ -90,12 +90,12 @@ function login()
 		LoginForm.password.focus();
 		return false;
 	}
-	// if(LoginForm.rand.value == "")
-	// {
-	// 	alert("附加码不能为空，请输入！");
-	// 	LoginForm.rand.focus();
-	// 	return false;
-	// }
+	if(LoginForm.rand.value == "")
+	{
+		alert("附加码不能为空，请输入！");
+		LoginForm.rand.focus();
+		return false;
+	}
 	
     lastUser(LoginForm.loginname.value);
 	return true;
@@ -106,7 +106,7 @@ function cancel(){
 }
 </script>
 <body  onload="init()"><center>
-<form id="LoginForm" name="LoginForm" method="post" action="LoginServlet" onsubmit="return login();">
+<form id="LoginForm" name="LoginForm" method="get" action="loginin" onsubmit="return login();">
 <table border="0" cellpadding="0" cellspacing="0" width="446">
 <!-- fwtable fwsrc="未命名" fwbase="manager_login.gif" fwstyle="Dreamweaver" fwdocid = "951626001" fwnested="0" -->
   <tr>

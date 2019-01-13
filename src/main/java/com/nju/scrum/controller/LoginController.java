@@ -10,9 +10,19 @@ import java.util.Map;
 @Controller
 public class LoginController {
     //返回的是尚未经过审批的申请者信息列表
-    @RequestMapping("/login")
-    public String selectByPid() {
+    @RequestMapping(value = "/login",method =RequestMethod.GET )
+    public String login() {
         System.out.println("ok");
         return "login";
+    }
+    @RequestMapping("/loginin")
+    public String loginin(String loginname,String passwd,String rand) {
+        System.out.println("login passed");
+        return "addAttraction";
+    }
+    @RequestMapping("/addAttraction")
+    public String addAttraction(String loginname,String passwd,String rand) {
+        System.out.println("add in db");
+        return "addAttraction";
     }
 }
