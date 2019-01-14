@@ -15,6 +15,7 @@ public class PlanController {
     @Autowired
     private PlanService planService;
     @PostMapping("/plan")
+    //创建新计划
     public R createPlan(@RequestBody Plan plan) {
         String number=planService.createPlan(plan);
         R r=new R();
@@ -28,7 +29,24 @@ public class PlanController {
         return r;
     }
 
+    @GetMapping("/plan/pid/{pid}")
+    //根据pid查询计划以及所有计划内的正式成员
+    public Plan2 getMembersByPid(@PathVariable("pid") Integer pid) {
+        List<User> userList=planService.selectMembersByPid(pid);
+        Plan plan=planService.selectByPid(pid);
+        Plan2 plan2=new Plan2();
+        plan2.setPid(plan.getPid());
+        plan2.setAname(plan.getAname());
+        plan2.setUname(plan.getUname());
+        plan2.setDetail(plan.getDetail());
+        plan2.setState(plan.getState());
+        plan2.setTraveltime(plan.getTraveltime());
+        plan2.setUserList(userList);
+        return plan2;
+    }
+
     @GetMapping("/plan/openid/{openid}")
+    //根据openid查询计划
     public List<Plan> getPlansByopenid(@PathVariable("openid") String openid,String state) {
         try {
 
@@ -39,6 +57,7 @@ public class PlanController {
     }
 
     @GetMapping("/plan/uname/{uname}")
+    //根据创建者姓名查询计划
     public List<Plan> getPlansByUname(@PathVariable("uname") String uname,String state){
         try {
             return planService.selectByCreatorName(uname, state);
@@ -48,9 +67,9 @@ public class PlanController {
     }
 
     @GetMapping("/plan/attraction/{aname}")
+    //根据景点名字查询计划
     public List<Plan> getPlansByAname(@PathVariable("aname") String aname,String state){
         try {
-
             return planService.selectByAttraction(aname, state);
         } catch (Exception e) {
             return null;
@@ -58,6 +77,7 @@ public class PlanController {
     }
 
     @PostMapping("/plan/apply")
+    //申请加入某计划
     public R applyPlan(@RequestBody Map<String,Object> params) {
         String openid=(String)params.get("openid");
         Integer pid=(Integer) params.get("pid");
@@ -76,6 +96,7 @@ public class PlanController {
     }
 
     @PutMapping("/plan/state")
+    //修改某计划的状态
     public  R confirmApply(@RequestBody Map<String,Object> params) {
         R r=new R();
         int pid = (Integer) params.get("pid");
@@ -103,7 +124,6 @@ public class PlanController {
             planService.evaluatePeople(evaluation);
             r.setMsg("评价成功");
             r.setCode(0);
-
         } catch (Exception e) {
             r.setMsg("评价失败");
             r.setCode(1);
@@ -112,4 +132,5 @@ public class PlanController {
         return r;
 
     }
+
 }

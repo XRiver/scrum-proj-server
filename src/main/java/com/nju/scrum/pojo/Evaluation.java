@@ -7,6 +7,7 @@ public class Evaluation {
     private String fromid;
     private String toid;
     private String mess;
+    private Integer star;
 
     @Override
     public String toString() {
@@ -57,5 +58,13 @@ public class Evaluation {
 
     public void setMess(String mess) {
         this.mess = mess;
+    }
+
+    public Integer getStar() {
+        return star;
+    }
+
+    public void setStar(Integer star) {
+        this.star = star;
     }
 }
