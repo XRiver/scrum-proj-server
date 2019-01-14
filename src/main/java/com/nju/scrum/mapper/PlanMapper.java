@@ -45,7 +45,7 @@ public interface PlanMapper {
     @Select("select * from apply a,user u where a.openid=u.openId and a.pass=1 and a.pid= #{pid,jdbcType=INTEGER}")
     List<User> selectMembersByPid(Integer pid);
 
-    @Insert("insert into evaluation(pid,fromid,toid,mess) values(#{pid},#{fromid},#{toid},#{mess})")
+    @Insert("insert into evaluation(pid,fromid,toid,mess,star) values(#{pid},#{fromid},#{toid},#{mess},#{star})")
     void evaluatePeople(Evaluation evaluation);
 
 }

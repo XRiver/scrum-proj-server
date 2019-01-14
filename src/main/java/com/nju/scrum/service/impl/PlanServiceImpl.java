@@ -161,7 +161,11 @@ public class PlanServiceImpl implements PlanService {
     public List<User> selectMembersByPid(Integer pid) {
         return planMapper.selectMembersByPid(pid);
 
+
+    }
+
+    @Override
     public void evaluatePeople(Evaluation evaluation) {
-            planMapper.evaluatePeople(evaluation);
-        }
+        planMapper.evaluatePeople(evaluation);
+    }
 }

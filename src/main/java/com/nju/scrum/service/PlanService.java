@@ -15,11 +15,9 @@ public interface PlanService {
 
     String applyPlan(String openid, Integer pid, String mess);
 
-
     String changeState(int pid, String state);
 
     Plan selectByPid(int pid);
-
 
     List<User> selectMembersByPid(Integer pid);
 

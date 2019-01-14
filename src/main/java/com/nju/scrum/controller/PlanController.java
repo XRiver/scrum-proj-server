@@ -30,7 +30,7 @@ public class PlanController {
     }
 
     @GetMapping("/plan/pid/{pid}")
-    //根据openid查询计划
+    //根据pid查询计划以及所有计划内的正式成员
     public Plan2 getMembersByPid(@PathVariable("pid") Integer pid) {
         List<User> userList=planService.selectMembersByPid(pid);
         Plan plan=planService.selectByPid(pid);
@@ -70,7 +70,6 @@ public class PlanController {
     //根据景点名字查询计划
     public List<Plan> getPlansByAname(@PathVariable("aname") String aname,String state){
         try {
-
             return planService.selectByAttraction(aname, state);
         } catch (Exception e) {
             return null;
@@ -125,7 +124,6 @@ public class PlanController {
             planService.evaluatePeople(evaluation);
             r.setMsg("评价成功");
             r.setCode(0);
-
         } catch (Exception e) {
             r.setMsg("评价失败");
             r.setCode(1);
