@@ -5,47 +5,43 @@
     <title>管理员添加新景点</title>
 </head>
 <script type="text/javascript">
-function confirm()
-{
-    if(addAttraction.name.value == "")
-    {
-    alert("还没有输入景点名，请先输入！");
-    addAttraction.name.focus();
-    return false;
+    function confirm() {
+        if (addAttraction.name.value == "") {
+            alert("还没有输入景点名，请先输入！");
+            addAttraction.name.focus();
+            return false;
+        }
+        if (addAttraction.location.value == "") {
+            alert("景点位置不能为空，请输入！");
+            addAttraction.location.focus();
+            return false;
+        }
+        if (addAttraction.file.value == "") {
+            alert("景点图片不能为空，请输入！");
+            addAttraction.file.focus();
+            return false;
+        }
+        if (addAttraction.description.value == "") {
+            alert("景点位置不能为空，请输入！");
+            addAttraction.description.focus();
+            return false;
+        }
+        alert("成功提交新增的景点信息！");
+        return true;
     }
-    if(addAttraction.location.value == "")
-    {
-        alert("景点位置不能为空，请输入！");
-        addAttraction.location.focus();
-        return false;
-    }
-    if(addAttraction.url.value == "")
-    {
-        alert("景点图片不能为空，请输入！");
-        addAttraction.url.focus();
-        return false;
-    }
-    if(addAttraction.description.value == "")
-    {
-        alert("景点位置不能为空，请输入！");
-        addAttraction.description.focus();
-        return false;
-    }
-    alert("成功提交新增的景点信息！");
-    return true;
-}
 </script>
 <body>
-<font size="5" color="black"><strong>管理员添加景点信息界面</strong></font><br/><hr/>
-<form id="addAttraction" name="addAttraction" action="addAttraction" method="get" onsubmit="return confirm();">
-    景点名称：&emsp;<input type="text" name="name" size="30"><br/>
-    景点位置：&emsp;<input type="text" name="location" size="30"><br/>
-    景点图片URL：<br/>
-    <textarea name="url" cols="100"  rows="5"></textarea><br/>
-    对景点的描述：<br/>
-    <textarea name="description" cols="100"  rows="10"></textarea><br/>
-    <input type="submit" value="提交景点信息">
+<font size="5" color="black"><strong>管理员添加景点信息界面</strong></font><br/>
+<hr/>
 </form>
-<input name="quit" type="button" value="退出添加模式" onclick="javascrtpt:window.location.href='login'">
+<form id="addAttraction"  name="addAttraction" action="/api/attractions" method="post" onclick="return confirm()">
+    景点名称：&emsp;<input type="text" name="aname" size="30"><br/>
+    景点位置：&emsp;<input type="text" name="location" size="30"><br/>
+    景点图片：<input type="file" name="file"><br/>
+    对景点的描述：<br/>
+    <textarea name="description" cols="100" rows="10"></textarea><br/>
+    <input type="submit" value="提交景点信息"  onsubmit="return confirm();">
+</form>
+<input name="quit" type="button" value="退出" onclick="javascrtpt:window.location.href='/login.html'">
 </body>
 </html>

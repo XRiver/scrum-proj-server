@@ -1,6 +1,7 @@
 package com.nju.scrum.service;
 
 import com.nju.scrum.pojo.Plan;
+import com.nju.scrum.pojo.User;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface PlanService {
 
     Plan selectByPid(int pid);
 
+    List<User> selectMembersByPid(Integer pid);
 }

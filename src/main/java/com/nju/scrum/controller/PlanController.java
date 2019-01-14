@@ -1,8 +1,5 @@
 package com.nju.scrum.controller;
-import com.nju.scrum.pojo.Attraction;
-import com.nju.scrum.pojo.Plan;
-import com.nju.scrum.pojo.R;
-import com.nju.scrum.pojo.User;
+import com.nju.scrum.pojo.*;
 import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +17,7 @@ public class PlanController {
     @Autowired
     private PlanService planService;
     @PostMapping("/plan")
+    //创建新计划
     public R createPlan(@RequestBody Plan plan) {
         String number=planService.createPlan(plan);
         R r=new R();
@@ -33,22 +31,42 @@ public class PlanController {
         return r;
     }
 
+    @GetMapping("/plan/pid/{pid}")
+    //根据openid查询计划
+    public Plan2 getMembersByPid(@PathVariable("pid") Integer pid) {
+        List<User> userList=planService.selectMembersByPid(pid);
+        Plan plan=planService.selectByPid(pid);
+        Plan2 plan2=new Plan2();
+        plan2.setPid(plan.getPid());
+        plan2.setAname(plan.getAname());
+        plan2.setUname(plan.getUname());
+        plan2.setDetail(plan.getDetail());
+        plan2.setState(plan.getState());
+        plan2.setTraveltime(plan.getTraveltime());
+        plan2.setUserList(userList);
+        return plan2;
+    }
+
     @GetMapping("/plan/openid/{openid}")
+    //根据openid查询计划
     public List<Plan> getPlansByopenid(@PathVariable("openid") String openid,String state) {
         return planService.selectByCreatorOpenid(openid,state);
     }
 
     @GetMapping("/plan/uname/{uname}")
+    //根据创建者姓名查询计划
     public List<Plan> getPlansByUname(@PathVariable("uname") String uname,String state){
         return planService.selectByCreatorName(uname,state);
     }
 
     @GetMapping("/plan/attraction/{aname}")
+    //根据景点名字查询计划
     public List<Plan> getPlansByAname(@PathVariable("aname") String aname,String state){
         return planService.selectByAttraction(aname,state);
     }
 
     @PostMapping("/plan/apply")
+    //申请加入某计划
     public R applyPlan(@RequestBody Map<String,Object> params) {
         String openid=(String)params.get("openid");
         Integer pid=(Integer) params.get("pid");
@@ -67,6 +85,7 @@ public class PlanController {
     }
 
     @PutMapping("/plan/state")
+    //修改某计划的状态
     public  R confirmApply(@RequestBody Map<String,Object> params) {
         R r=new R();
         int pid = (Integer) params.get("pid");
@@ -86,4 +105,6 @@ public class PlanController {
         }
         return r;
     }
+
+
 }

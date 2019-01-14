@@ -1,5 +1,6 @@
 package com.nju.scrum.mapper;
 import com.nju.scrum.pojo.Plan;
+import com.nju.scrum.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -39,4 +40,7 @@ public interface PlanMapper {
 
     @Update("update plan set state = #{state,jdbcType=VARCHAR} where pId = #{pid,jdbcType=INTEGER}")
     void updateStateByPrimaryKey(int pid, String state);
+
+    @Select("select * from apply a,user u where a.openid=u.openId and a.pass=1 and a.pid= #{pid,jdbcType=INTEGER}")
+    List<User> selectMembersByPid(Integer pid);
 }
