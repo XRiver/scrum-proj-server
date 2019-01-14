@@ -1,6 +1,7 @@
 package com.nju.scrum.mapper;
 
 import com.nju.scrum.pojo.Attraction;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -23,4 +24,7 @@ public interface AttractionMapper {
     int updateByPrimaryKeySelective(Attraction record);
 
     int updateByPrimaryKey(Attraction record);
+
+    @Insert("insert into attraction(aName,location,pictureUrl,description) values(#{aname},#{location},#{pictureurl},#{description})")
+    void addAttraction(Attraction attraction);
 }

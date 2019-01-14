@@ -19,4 +19,9 @@ public class AttractionServiceImpl implements AttractionService {
     public Attraction selectByPrimaryKey(Integer aid) {
         return attractionMapper.selectByPrimaryKey(aid);
     }
+
+    @Override
+    public void addAttraction(Attraction attraction) {
+        attractionMapper.addAttraction(attraction);
+    }
 }

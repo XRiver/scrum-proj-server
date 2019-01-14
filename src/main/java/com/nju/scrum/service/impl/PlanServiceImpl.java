@@ -3,6 +3,7 @@ package com.nju.scrum.service.impl;
 import com.nju.scrum.mapper.ApplyMapper;
 import com.nju.scrum.mapper.PlanMapper;
 import com.nju.scrum.pojo.Apply;
+import com.nju.scrum.pojo.Evaluation;
 import com.nju.scrum.pojo.Plan;
 import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.PlanService;
@@ -159,5 +160,8 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public List<User> selectMembersByPid(Integer pid) {
         return planMapper.selectMembersByPid(pid);
-    }
+
+    public void evaluatePeople(Evaluation evaluation) {
+            planMapper.evaluatePeople(evaluation);
+        }
 }

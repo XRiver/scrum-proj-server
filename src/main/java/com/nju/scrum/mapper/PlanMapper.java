@@ -1,4 +1,5 @@
 package com.nju.scrum.mapper;
+import com.nju.scrum.pojo.Evaluation;
 import com.nju.scrum.pojo.Plan;
 import com.nju.scrum.pojo.User;
 import org.apache.ibatis.annotations.Insert;
@@ -43,4 +44,8 @@ public interface PlanMapper {
 
     @Select("select * from apply a,user u where a.openid=u.openId and a.pass=1 and a.pid= #{pid,jdbcType=INTEGER}")
     List<User> selectMembersByPid(Integer pid);
+
+    @Insert("insert into evaluation(pid,fromid,toid,mess) values(#{pid},#{fromid},#{toid},#{mess})")
+    void evaluatePeople(Evaluation evaluation);
+
 }

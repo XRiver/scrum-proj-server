@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@ResponseBody
+import java.util.Map;
+
+
 @Controller
 @RequestMapping("/api/")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @ResponseBody
     @GetMapping("/login/{openid}")
     public R login(@PathVariable("openid") String openid) {
         String number;
@@ -32,6 +36,7 @@ public class UserController {
             return r;
         }
     }
+    @ResponseBody
     @PostMapping("/register")
     public R register(@RequestBody User user) {
         String number;
@@ -47,5 +52,16 @@ public class UserController {
             r.setMsg("此openid已经存在");
         }
         return r;
+    }
+
+
+    @PostMapping(value = "/administrator/login")
+    public String adLogin(String loginname,String password,String rand) {
+        if (loginname.equals("admin") && password.equals("123456") && rand.equals("123456")) {
+            return "redirect:/admin.html";
+        } else {
+            return "redirect:/error.html";
+        }
+
     }
 }

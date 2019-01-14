@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员添加新景点</title>
+    <script type="text/javascript" src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+</head>
+<body>
+<font size="5" color="black"><strong>管理员添加景点信息界面</strong></font><br/>
+<hr/>
+</form>
+<form id="addAttraction"  name="addAttraction" >
+    景点名称：&emsp;<input type="text" name="aname" id="aname" size="30"><br/>
+    景点位置：&emsp;<input type="text" name="location" id="location" size="30"><br/>
+    景点图片：<input type="file" id="file" name="file"><br/>
+    对景点的描述：<br/>
+    <textarea name="description" id="description" cols="100" rows="10"></textarea><br/>
+    <input type="submit" value="提交景点信息"  onclick="doLogin()">
+</form>
+<input name="quit" type="button" value="退出" onclick="javascrtpt:window.location.href='/login.html'">
+<script type="text/javascript">
+    function doLogin() {
+        // if ($("#aname").val() == "") {
+        //     alert("还没有输入景点名，请先输入！");
+        //     return;
+        // }
+        // if ($("#location").val() == "") {
+        //     alert("景点位置不能为空，请输入！");
+        //     return;
+        // }
+        // if ($("#file").val() == "") {
+        //     alert("景点图片不能为空，请输入！");
+        //     return ;
+        // }
+        // if ($("#description").val() == "") {
+        //     alert("景点位置不能为空，请输入！");
+        //     return ;
+        // }
+
+        alert("成功提交新增的景点信息！");
+        var formdata = new FormData();
+        formdata.append("aname",$("#aname").val());
+        formdata.append("location",$("#location").val());
+        formdata.append("file",$("#file")[0].files[0]);
+        formdata.append("description",$("#description").val());
+        $.ajax({
+            type: "post",
+            url:"/api/attractions",
+            data:formdata,
+            processData:false,
+            contentType: "multipart/form-data",
+            async:true
+        });
+        alert("after ajax");
+
+    }
+</script>
+</body>
+</html>

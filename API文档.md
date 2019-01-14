@@ -410,6 +410,57 @@ response
 {
     'code'： number  //0-评价成功  1-评价失败
     'msg':   string  //说明 
-    'data':  {Evaluation实体类}    //json对象
+    'data':  {}    //空
+}
+```
+
+##### 14.管理员登录
+
+request
+
+```shell
+post /api/administrator/login
+```
+
+```json
+{
+	loginname:String //用户名
+    password:String //密码
+}
+
+```
+
+response
+
+```json
+{
+	'code'： number  //0-登录成功  1-登录失败
+    'msg':   string  //说明 
+    'data':  {}    //空
+}
+```
+
+##### 15.管理员添加新景点。
+request
+
+```shell
+post /api/attractions
+```
+
+```json
+{
+	aname: String; // 景点名称
+    location: String; // 景点位置
+    file: File; // 景点图片，以文件格式上传
+    description: String; // 对景点的描述
+}
+
+```
+
+response
+
+```json
+{
+	
 }
 ```

@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -50,19 +48,33 @@ public class PlanController {
     @GetMapping("/plan/openid/{openid}")
     //根据openid查询计划
     public List<Plan> getPlansByopenid(@PathVariable("openid") String openid,String state) {
-        return planService.selectByCreatorOpenid(openid,state);
+        try {
+
+            return planService.selectByCreatorOpenid(openid, state);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/plan/uname/{uname}")
     //根据创建者姓名查询计划
     public List<Plan> getPlansByUname(@PathVariable("uname") String uname,String state){
-        return planService.selectByCreatorName(uname,state);
+        try {
+            return planService.selectByCreatorName(uname, state);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/plan/attraction/{aname}")
     //根据景点名字查询计划
     public List<Plan> getPlansByAname(@PathVariable("aname") String aname,String state){
-        return planService.selectByAttraction(aname,state);
+        try {
+
+            return planService.selectByAttraction(aname, state);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @PostMapping("/plan/apply")
@@ -106,5 +118,21 @@ public class PlanController {
         return r;
     }
 
+    @PostMapping("/plan/evaluation")
+    public R evaluatePeople(@RequestBody Evaluation evaluation) {
+        R r = new R();
+        try {
+            planService.evaluatePeople(evaluation);
+            r.setMsg("评价成功");
+            r.setCode(0);
+
+        } catch (Exception e) {
+            r.setMsg("评价失败");
+            r.setCode(1);
+            return r;
+        }
+        return r;
+
+    }
 
 }
