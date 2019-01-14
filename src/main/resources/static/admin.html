@@ -9,49 +9,60 @@
 <font size="5" color="black"><strong>管理员添加景点信息界面</strong></font><br/>
 <hr/>
 </form>
-<form id="addAttraction"  name="addAttraction" >
+<form id="addAttraction"  name="addAttraction" enctype="multipart/form-data" >
     景点名称：&emsp;<input type="text" name="aname" id="aname" size="30"><br/>
     景点位置：&emsp;<input type="text" name="location" id="location" size="30"><br/>
     景点图片：<input type="file" id="file" name="file"><br/>
     对景点的描述：<br/>
     <textarea name="description" id="description" cols="100" rows="10"></textarea><br/>
-    <input type="submit" value="提交景点信息"  onclick="doLogin()">
+    <input type="button" value="提交景点信息"  onclick="doLogin()">
 </form>
 <input name="quit" type="button" value="退出" onclick="javascrtpt:window.location.href='/login.html'">
 <script type="text/javascript">
     function doLogin() {
-        // if ($("#aname").val() == "") {
-        //     alert("还没有输入景点名，请先输入！");
-        //     return;
-        // }
-        // if ($("#location").val() == "") {
-        //     alert("景点位置不能为空，请输入！");
-        //     return;
-        // }
-        // if ($("#file").val() == "") {
-        //     alert("景点图片不能为空，请输入！");
-        //     return ;
-        // }
-        // if ($("#description").val() == "") {
-        //     alert("景点位置不能为空，请输入！");
-        //     return ;
-        // }
+        if ($("#aname").val() == "") {
+            alert("还没有输入景点名，请先输入！");
+            return;
+        }
+        if ($("#location").val() == "") {
+            alert("景点位置不能为空，请输入！");
+            return;
+        }
+        if ($("#file").val() == "") {
+            alert("景点图片不能为空，请输入！");
+            return ;
+        }
+        if ($("#description").val() == "") {
+            alert("景点位置不能为空，请输入！");
+            return ;
+        }
 
-        alert("成功提交新增的景点信息！");
+
         var formdata = new FormData();
         formdata.append("aname",$("#aname").val());
         formdata.append("location",$("#location").val());
         formdata.append("file",$("#file")[0].files[0]);
         formdata.append("description",$("#description").val());
+        //contentType不要再ajax里手动设置为mutitype,而是在form的encType里写,或者干脆不写
+        alert("已提交新增的景点信息！");
         $.ajax({
             type: "post",
             url:"/api/attractions",
             data:formdata,
             processData:false,
-            contentType: "multipart/form-data",
-            async:true
+            contentType: false,
+            async:true,
+            success:function (result) {
+                if (result == "success") {
+                    alert("上传成功");
+                    $("#addAttraction")[0].reset();
+                } else {
+                    alert("上传失败,请重试");
+                    $("#addAttraction"[0].reset());
+                }
+            }
         });
-        alert("after ajax");
+
 
     }
 </script>

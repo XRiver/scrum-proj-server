@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-
+@ResponseBody
 @Controller
 //上面两者叠加等价于@RestController
 @RequestMapping("/api/")
@@ -24,7 +24,7 @@ public class AttractionController {
     @Autowired
     private AttractionService attractionService;
 
-    @ResponseBody
+
     @GetMapping("/attractions/{aid}")
     public List<Attraction> getAttraction(@PathVariable("aid") Integer aid) {
 
@@ -35,7 +35,7 @@ public class AttractionController {
 
     }
 
-    @ResponseBody
+
     @GetMapping("/attractions")
     public List<Attraction> getAttractions() {
         return attractionService.selectAll();
@@ -66,14 +66,14 @@ public class AttractionController {
             //把图片URL存入Attraction中
             attraction.setPictureurl("images/attractions/"+fileName);
         } catch (IOException e) {
-            return "forward:/UploadFail.html";
+            return "error";
         }
         try {
             attractionService.addAttraction(attraction);
-            return "forward:/UploadSuccess.html";
+            return "success";
         } catch (Exception e) {
             e.printStackTrace();
-            return "forward:/UploadFail.html";
+            return "error";
         }
 
 
