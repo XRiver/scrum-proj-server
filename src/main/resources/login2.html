@@ -68,65 +68,31 @@
         }
     }
 
-    function lastUser(user) {
-        var date = new Date();
-        date.setDate(date.getDate() + 5);
-        document.cookie = "demolastuser=" + user + ";expires=" + date.toGMTString();
-    }
 
-    function getUser() {
-        var s = document.cookie;
-        var u = "";
-        var idx = s.indexOf("demolastuser=");
-        if (idx == -1) {
-            return u;
-        }
-        var idx1 = s.indexOf(";", idx + 13);
-        if (idx1 == -1) {
-            u = s.substring(idx + 13);
-        } else {
-            u = s.substring(idx + 13, idx1);
-        }
-        return u;
-    }
-
-    function next() {
-        if (window.event.keyCode == 13)
-            window.event.keyCode = 9;
-    }
 
     function login() {
         if (LoginForm.loginname.value == "") {
             alert("还没有输入用户名，请先输入！");
             LoginForm.loginname.focus();
-            return false;
+            return;
         }
         if (LoginForm.password.value == "") {
             alert("密码不能为空，请输入！");
             LoginForm.password.focus();
-            return false;
+            return;
         }
-        // if(LoginForm.rand.value == "")
-        // {
-        // 	alert("附加码不能为空，请输入！");
-        // 	LoginForm.rand.focus();
-        // 	return false;
-        // }
-
-        // lastUser(LoginForm.loginname.value);
-        // $.ajax({
-        //     url:"/api/administrator/login",
-        //     type:"post",
-        //     data:$("#LoginForm").serialize(),
-        //     success:function (result) {
-        //         if (result.code == 0) {
-        //             window.location.href = "/administrator";
-        //         } else {
-        //             alert("用户名或密码不正确");
-        //         }
-        //     }
-        // });
-        return true;
+        $.ajax({
+            type:"post",
+            url:"localhost:8081/api/administrator/login",
+            data:$("#LoginForm").serialize(),
+            success:function (result) {
+                if (result== "success") {
+                    window.location.href = "/admin.html";
+                } else {
+                    alert("用户名或密码不正确");
+                }
+            }
+        });
     }
 
     function cancel() {
@@ -136,7 +102,7 @@
 </script>
 <body onload="init()">
 <center>
-    <form id="LoginForm" name="LoginForm" method="post" action="/api/administrator/login" onsubmit="return login();">
+    <form id="LoginForm" name="LoginForm" method="post">
         <table border="0" cellpadding="0" cellspacing="0" width="446">
             <!-- fwtable fwsrc="未命名" fwbase="manager_login.gif" fwstyle="Dreamweaver" fwdocid = "951626001" fwnested="0" -->
             <tr>
@@ -208,7 +174,7 @@
                 <td rowspan="2"><img name="manager_login_r8_c2" src="images/manager_login_r8_c2.gif" width="2"
                                      height="60" border="0" id="manager_login_r8_c2" alt=""/></td>
                 <td bgcolor="#C9E5F9"><label>
-                    <input name="Submit" type="submit" class="bluesubmit" value=""/>
+                    <input name="Submit" type="submit" class="bluesubmit" value="" onclick="login2()"/>
                 </label></td>
                 <td rowspan="2"><img name="manager_login_r8_c4" src="images/manager_login_r8_c4.gif" width="41"
                                      height="60" border="0" id="manager_login_r8_c4" alt=""/></td>

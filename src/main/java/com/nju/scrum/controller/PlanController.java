@@ -30,17 +30,31 @@ public class PlanController {
 
     @GetMapping("/plan/openid/{openid}")
     public List<Plan> getPlansByopenid(@PathVariable("openid") String openid,String state) {
-        return planService.selectByCreatorOpenid(openid,state);
+        try {
+
+            return planService.selectByCreatorOpenid(openid, state);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/plan/uname/{uname}")
     public List<Plan> getPlansByUname(@PathVariable("uname") String uname,String state){
-        return planService.selectByCreatorName(uname,state);
+        try {
+            return planService.selectByCreatorName(uname, state);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/plan/attraction/{aname}")
     public List<Plan> getPlansByAname(@PathVariable("aname") String aname,String state){
-        return planService.selectByAttraction(aname,state);
+        try {
+
+            return planService.selectByAttraction(aname, state);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @PostMapping("/plan/apply")
