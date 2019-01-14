@@ -62,6 +62,5 @@ public class UserController {
         } else {
             return "redirect:/error.html";
         }
-
     }
 }
