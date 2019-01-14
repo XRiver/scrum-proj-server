@@ -440,3 +440,55 @@ response
 }
 
 ```
+
+##### 15 管理员登录
+
+request
+
+```shell
+POST /api/administrator/login
+```
+
+```json
+{
+	loginname:String //管理员账户 只有admin
+	password:String //密码 123456
+	rand:String //固定验证码 123456
+}
+    //不是json格式上传,而是以key=value&的形式上传
+
+```
+
+
+response
+
+```json
+    /admin.html  //跳转到添加景点页面
+    /error.html  //跳转到错误页面
+    //不是返回json格式,而是进行页面跳转
+```
+
+##### 16 管理员新增景点
+
+request
+
+```shell
+POST /api/attractions
+```
+
+```json
+{
+	aname: String; // 景点名称
+    location: String; // 景点位置
+    file: file; // 景点图片文件
+    description: String; // 对景点的描述
+}
+
+```
+
+
+response
+
+```json
+    "success"或"error" //表示添加景点成功与否
+```
