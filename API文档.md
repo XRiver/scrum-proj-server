@@ -36,10 +36,8 @@ Plan {
     aid: Integer; // 景点编号
     traveltime: String; // 出行时间 时间戳
 	detail: String; // 计划详细信息
-	applylist: String; // 申请者的列表，存放申请加入此出行计划的用户openid
 	aname：String；   //景点名称
 	uname：String；   //创建者姓名
-	applylist：String； //申请者的编号，以逗号分隔
     state: String  //出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 }
 ```
@@ -66,6 +64,7 @@ Evaluation {
     fromid: String; // 评价者的微信openid
     toid: String;  // 被评价者的微信openid
     mess: String; // 评价信息
+    star: Integer //星级评价，分为0-5，5星为最优评价
 }
 ```
 
@@ -232,7 +231,7 @@ response
 	//uname：String；   创建者姓名
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
-	//applylist：String； 申请者的编号，以逗号分隔
+	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 ```
 
 ##### 7 按照用户姓名搜索出行计划
@@ -258,7 +257,7 @@ response
 	//uname：String；   创建者姓名
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
-	//applylist：String； 申请者的编号，以逗号分隔
+	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 ```
 ##### 8 按照景点名搜索出行计划
 
@@ -283,7 +282,7 @@ response
 	//uname：String；   创建者姓名
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
-	//applylist：String； 申请者的编号，以逗号分隔
+	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 ```
 
 ##### 9 申请加入某个出行计划
@@ -397,13 +396,13 @@ post /api/plan/evaluation
 
 ```json
 {
-	Evaluation的Json对象（包含Evaluation属性：eid pid fromid toid mess）
+	Evaluation的Json对象（包含Evaluation属性:pid fromid toid mess）
 }
-	//eid: Integer;    数据库自增id，也是唯一标识
     //pid: Integer     出行计划编号pid
     //fromid: String;  评价者的微信openid
     //toid: String;    被评价者的微信openid
     //mess: String;    评价信息
+    //star: Integer    星级评价，分为0-5，5星为最优评价
 ```
 
 response
@@ -412,57 +411,32 @@ response
 {
     'code'： number  //0-评价成功  1-评价失败
     'msg':   string  //说明 
-    'data':  {}    //空
+    'data':  {Evaluation实体类}    //json对象
 }
 ```
 
-##### 14.管理员登录
+##### 14 查询计划信息以及计划中所有成员的详细信息
 
 request
 
 ```shell
-post /api/administrator/login
-```
-
-```json
-{
-	loginname:String //用户名
-    password:String //密码
-}
-
+GET /api/plan/pid/{pid}
 ```
 
 response
 
 ```json
 {
-	'code'： number  //0-登录成功  1-登录失败
-    'msg':   string  //说明 
-    'data':  {}    //空
-}
-```
-
-##### 15.管理员添加新景点。
-request
-
-```shell
-post /api/attractions
-```
-
-```json
-{
-	aname: String; // 景点名称
-    location: String; // 景点位置
-    file: File; // 景点图片，以文件格式上传
-    description: String; // 对景点的描述
+    ‘pid’：Integer   //计划编号
+    'aname':String   //景点名称
+    'uname':String   //创建者姓名
+    'traveltime':String  //出行时间时间戳
+    'detail':String      //计划详细信息
+    'state': String      //出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
+    'userList'=[
+               		{User实体类1},{User实体类1}...
+               ]
+      //返回的列表是已经审批通过的申请者（团队正式成员）的User实体类列表
 }
 
-```
-
-response
-
-```json
-{
-	
-}
 ```
