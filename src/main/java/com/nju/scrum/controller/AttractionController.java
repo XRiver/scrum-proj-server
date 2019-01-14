@@ -47,7 +47,7 @@ public class AttractionController {
     public String addAttraction(@RequestParam("file") MultipartFile file, Attraction attraction) {
         //先保存文件
         if (file.isEmpty()) {
-            return "forward:/UploadFail.html";
+            return "error";
         }
         try {
             //获取类路径的绝对根目录
