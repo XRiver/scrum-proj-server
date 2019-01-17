@@ -44,25 +44,25 @@ public class ScrumProjServerApplicationTests {
 //      要初始化mockmvc对象，需要mvc的ioc容器本身
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
-    @Test
-    public void testLogin() throws Exception {
-        //this.mockMvc.perform 返回ResultAction接口的实现类 有andReturn andDo等方法
-        //andReturn返回MvcResult类型 有getResponse等方法
-        //getResponse返回MockHttpServletResponse类型，有getXXX等一些列Resp应有属性的方法
-        //可以通过getContentAsString获得Response中Content属性的值，可以后续转成JSON格式
-        MvcResult res = this.mockMvc.perform(get("/api/login/o9VBV4yQfCMsqJif_6DdAEhKzAIo")
-                ).andDo(print()).andReturn();
-        String  content = res.getResponse().getContentAsString();
-        int statusNum = res.getResponse().getStatus();
-        JSONObject json = new JSONObject(content);
-        //使用spring自己的断言类Assert
-        Assert.isTrue(statusNum==200,"http状态码不是200");
-        Assert.isTrue(json.getInt("code") == 0 ,"返回状态码不是0");
-        Assert.isTrue(json.getString("msg").equals("登录成功"),"不是登录成功");
-        Assert.isTrue(json.getJSONObject("data").getInt("uid") == 1,"uid不对");
-        Assert.isTrue(json.getJSONObject("data").getString("openid").equals("111"),"openid不对");
-        Assert.isTrue(json.getJSONObject("data").getString("uname").equals("张三"), "uname不对");
-    }
+//    @Test
+//    public void testLogin() throws Exception {
+//        //this.mockMvc.perform 返回ResultAction接口的实现类 有andReturn andDo等方法
+//        //andReturn返回MvcResult类型 有getResponse等方法
+//        //getResponse返回MockHttpServletResponse类型，有getXXX等一些列Resp应有属性的方法
+//        //可以通过getContentAsString获得Response中Content属性的值，可以后续转成JSON格式
+//        MvcResult res = this.mockMvc.perform(get("/api/login/o9VBV4yQfCMsqJif_6DdAEhKzAIo")
+//                ).andDo(print()).andReturn();
+//        String  content = res.getResponse().getContentAsString();
+//        int statusNum = res.getResponse().getStatus();
+//        JSONObject json = new JSONObject(content);
+//        //使用spring自己的断言类Assert
+//        Assert.isTrue(statusNum==200,"http状态码不是200");
+//        Assert.isTrue(json.getInt("code") == 0 ,"返回状态码不是0");
+//        Assert.isTrue(json.getString("msg").equals("登录成功"),"不是登录成功");
+//        Assert.isTrue(json.getJSONObject("data").getInt("uid") == 1,"uid不对");
+//        Assert.isTrue(json.getJSONObject("data").getString("openid").equals("111"),"openid不对");
+//        Assert.isTrue(json.getJSONObject("data").getString("uname").equals("张三"), "uname不对");
+//    }
     @Test
     public void testRegister() throws Exception {
         Map<String, String> map = new HashMap<String, String>();
