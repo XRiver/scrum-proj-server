@@ -50,7 +50,7 @@ public class ScrumProjServerApplicationTests {
         //andReturn返回MvcResult类型 有getResponse等方法
         //getResponse返回MockHttpServletResponse类型，有getXXX等一些列Resp应有属性的方法
         //可以通过getContentAsString获得Response中Content属性的值，可以后续转成JSON格式
-        MvcResult res = this.mockMvc.perform(get("/api/login/111")
+        MvcResult res = this.mockMvc.perform(get("/api/login/o9VBV4yQfCMsqJif_6DdAEhKzAIo")
                 ).andDo(print()).andReturn();
         String  content = res.getResponse().getContentAsString();
         int statusNum = res.getResponse().getStatus();
