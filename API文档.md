@@ -492,3 +492,61 @@ response
 ```json
     "success"或"error" //表示添加景点成功与否
 ```
+
+##### 17.活动发起人创建公告
+request
+
+```shell
+POST /api/plan/announcement
+```
+
+```json
+{
+	openid: string; // 活动发起人的openid  
+    pid: Integer; // 出行计划的唯一标识号
+	picUrls: String; // 图片URL之间以逗号，隔开
+    content: String;//公告的文字内容
+    open: String;//标识是否公开 1表示愿意公开 0表示不公开
+}
+
+```
+
+
+response
+
+```json
+    {
+        'code'： number  //0-上传成功  1-上传失败
+        'msg':   string  //说明 
+        'data':  null    //无
+    }
+```
+
+##### 18.活动发起人上传照片和总结文字
+
+request
+
+```shell
+POST /api/plan/summary
+```
+
+```json
+{
+	openid: string; // 标识上传者的身份
+    pid: Integer; // 出行计划的唯一标识号
+	picUrls: String; // 图片URL之间以逗号，隔开
+    content: String;//公告的文字内容
+}
+
+```
+
+
+response
+
+```json
+    {
+        'code'： number  //0-上传成功  1-上传失败
+        'msg':   string  //说明 
+        'data':  null    //无
+    }
+```
