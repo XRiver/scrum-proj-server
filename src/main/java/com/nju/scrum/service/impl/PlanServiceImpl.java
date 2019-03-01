@@ -2,10 +2,7 @@ package com.nju.scrum.service.impl;
 
 import com.nju.scrum.mapper.ApplyMapper;
 import com.nju.scrum.mapper.PlanMapper;
-import com.nju.scrum.pojo.Apply;
-import com.nju.scrum.pojo.Evaluation;
-import com.nju.scrum.pojo.Plan;
-import com.nju.scrum.pojo.User;
+import com.nju.scrum.pojo.*;
 import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -167,5 +164,10 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public void evaluatePeople(Evaluation evaluation) {
         planMapper.evaluatePeople(evaluation);
+    }
+
+    @Override
+    public void createAnnouncement(Announcement announcement) {
+        planMapper.createAnnouncement(announcement);
     }
 }

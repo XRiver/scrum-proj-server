@@ -506,7 +506,7 @@ POST /api/plan/announcement
     pid: Integer; // 出行计划的唯一标识号
 	picUrls: String; // 图片URL之间以逗号，隔开
     content: String;//公告的文字内容
-    open: String;//标识是否公开 1表示愿意公开 0表示不公开
+    open: Integer;//标识是否公开 1表示愿意公开 0表示不公开
 }
 
 ```

@@ -1,5 +1,6 @@
 package com.nju.scrum.service;
 
+import com.nju.scrum.pojo.Announcement;
 import com.nju.scrum.pojo.Evaluation;
 import com.nju.scrum.pojo.Plan;
 import com.nju.scrum.pojo.User;
@@ -22,5 +23,7 @@ public interface PlanService {
     List<User> selectMembersByPid(Integer pid);
 
     void evaluatePeople(Evaluation evaluation);
+
+    void createAnnouncement(Announcement announcement);
 
 }
