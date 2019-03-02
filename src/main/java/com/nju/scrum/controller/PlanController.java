@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @ResponseBody
 @Controller
@@ -131,4 +134,22 @@ public class PlanController {
         }
         return r;
     }
+
+    @PostMapping("/plan/announcement")
+    public R createAnnouncement(@RequestBody Announcement announcement) {
+        //增加当前时间
+        announcement.setCreateDate(new Date());
+        R r = new R();
+        try {
+            planService.createAnnouncement(announcement);
+            r.setCode(0);
+            r.setMsg("上传公告成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.setMsg("上传公告失败");
+            r.setCode(1);
+        }
+        return r;
+    }
+
 }

@@ -1,4 +1,5 @@
 package com.nju.scrum.mapper;
+import com.nju.scrum.pojo.Announcement;
 import com.nju.scrum.pojo.Evaluation;
 import com.nju.scrum.pojo.Plan;
 import com.nju.scrum.pojo.User;
@@ -48,4 +49,6 @@ public interface PlanMapper {
     @Insert("insert into evaluation(pid,fromid,toid,mess,star) values(#{pid},#{fromid},#{toid},#{mess},#{star})")
     void evaluatePeople(Evaluation evaluation);
 
+    @Insert("insert into announcement(pid,openid,createDate,picUrls,content,open) values(#{pid},#{openid},#{createDate},#{picUrls},#{content},#{open})")
+    void createAnnouncement(Announcement announcement);
 }
