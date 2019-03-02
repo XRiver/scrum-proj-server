@@ -11,6 +11,7 @@ public class Announcement {
     private String picUrls;//url之间按逗号，分隔
     private String content;//公告的内容或者总结体会的文字
     private Integer open;//表示公告是否愿意公开 1表示愿意 0表示不愿意公开
+    private Integer type;//0表示是公告，1表示是体会
 
 
     public Integer getAnnouncementId() {
@@ -67,6 +68,14 @@ public class Announcement {
 
     public void setOpen(Integer open) {
         this.open = open;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     @Override

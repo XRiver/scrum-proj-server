@@ -68,6 +68,20 @@ Evaluation {
 }
 ```
 
+##### 6 公布的内容（同时代表“公告”和“结束后总结体会”两类实体）
+
+> ```typescript
+> Announcement{
+>     announcementId: Integer;//数据库自增id，也是唯一标识
+>     pid: String ;//对应Plan的id
+>     createDate: String ;//创建的时间
+>     openid: String ; //提交者的openid
+>     picUrls: String ;//图片url之间按逗号，分隔
+>     content: String ;//公告的内容或者总结体会的文字
+>     open: Integer ;//表示公告是否愿意公开 1表示愿意 0表示不愿意公开
+>     type: Integer ；//0表示是公告，1表示是总结体会
+> }
+> ```
 
 ### 二、对于空的处理
 
@@ -232,6 +246,7 @@ response
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
+	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
 ```
 
 ##### 7 按照用户姓名搜索出行计划
@@ -258,6 +273,7 @@ response
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
+	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
 ```
 ##### 8 按照景点名搜索出行计划
 
@@ -283,6 +299,7 @@ response
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
+	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
 ```
 
 ##### 9 申请加入某个出行计划

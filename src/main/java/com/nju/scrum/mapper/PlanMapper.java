@@ -50,7 +50,7 @@ public interface PlanMapper {
     @Insert("insert into evaluation(pid,fromid,toid,mess,star) values(#{pid},#{fromid},#{toid},#{mess},#{star})")
     void evaluatePeople(Evaluation evaluation);
 
-    @Insert("insert into announcement(pid,openid,createDate,picUrls,content,open) values(#{pid},#{openid},#{createDate},#{picUrls},#{content},#{open})")
+    @Insert("insert into announcement(pid,openid,createDate,picUrls,content,open,type) values(#{pid},#{openid},#{createDate},#{picUrls},#{content},#{open},#{type})")
     void createAnnouncement(Announcement announcement);
 
     @Select("select * from announcement where pid=#{pid}")
