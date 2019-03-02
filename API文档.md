@@ -39,6 +39,7 @@ Plan {
 	aname：String；   //景点名称
 	uname：String；   //创建者姓名
     state: String  //出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
+    announcementList：[Announcement实体] ；//公告（总结体会）对象数组
 }
 ```
 
