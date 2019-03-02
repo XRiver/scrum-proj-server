@@ -5,7 +5,7 @@ import java.util.Date;
 //Plan的公告和Plan的总结 的实体类，对应两个实体
 public class Announcement {
     private Integer announcementId;
-    private String pid;
+    private Integer pid;
     private Date createDate;
     private String openid;
     private String picUrls;//url之间按逗号，分隔
@@ -22,11 +22,11 @@ public class Announcement {
         this.announcementId = announcementId;
     }
 
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 

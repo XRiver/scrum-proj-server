@@ -55,4 +55,7 @@ public interface PlanMapper {
 
     @Select("select * from announcement where pid=#{pid}")
     ArrayList<Announcement> selectAnnouncementsByPid(int pid);
+
+    @Select("select pid from apply where openid=#{openid} and pass = 1")
+    ArrayList<Integer> selectJoinedPids(String openid);
 }

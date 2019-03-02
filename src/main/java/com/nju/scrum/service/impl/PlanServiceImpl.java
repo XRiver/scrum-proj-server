@@ -7,8 +7,11 @@ import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.plaf.metal.MetalBorders;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -188,5 +191,35 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public void createAnnouncement(Announcement announcement) {
         planMapper.createAnnouncement(announcement);
+    }
+
+    @Override
+    public List<Plan> selectJoinedPlanByOpenid(String openid, String state) {
+        //根据openid查所有参加的Plan，并根绝state筛选，这里不包括自己创建的Plan
+
+        //根据openid查所有的通过的apply，得到对应的所有的pid。
+        ArrayList<Integer> joinedPids = planMapper.selectJoinedPids(openid);
+        //去重
+        Set<Integer> s = new HashSet<>();
+        s.addAll(joinedPids);
+        //查出每个plan并判断是否符合state
+        List<Plan> res = new ArrayList<>();
+        for (Integer pid : s) {
+            //对于每个pid
+            Plan plan = planMapper.selectByPid(pid);
+            //从中过滤掉不满足state状态要求的计划
+            boolean flag=false;
+            for (int i=0;i<state.length();i++) {
+                char c=state.charAt(i);
+                if (plan.getState().equals(String.valueOf(c))){
+                    flag=true;
+                    break;
+                }
+            }
+            if (flag) {
+                res.add(plan);
+            }
+        }
+        return res;
     }
 }
