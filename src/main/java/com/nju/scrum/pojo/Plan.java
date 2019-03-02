@@ -1,5 +1,6 @@
 package com.nju.scrum.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Plan {
@@ -12,7 +13,7 @@ public class Plan {
     private String detail;
     private String applylist;
     private String state;
-
+    private ArrayList<Announcement> announcementList;
     public Plan() {
     }
 
@@ -86,6 +87,14 @@ public class Plan {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public ArrayList<Announcement> getAnnouncementList() {
+        return announcementList;
+    }
+
+    public void setAnnouncementList(ArrayList<Announcement> announcementList) {
+        this.announcementList = announcementList;
     }
 
     @Override

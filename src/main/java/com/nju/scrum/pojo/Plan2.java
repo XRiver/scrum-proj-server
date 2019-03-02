@@ -1,5 +1,6 @@
 package com.nju.scrum.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Plan2 {
@@ -10,9 +11,9 @@ public class Plan2 {
     private String detail;
     private String state;
     private List<User> userList;
+    private ArrayList<Announcement> announcementList;
     public Plan2() {
     }
-
     public Integer getPid() {
         return this.pid;
     }
@@ -67,5 +68,13 @@ public class Plan2 {
 
     public void setUserList(List<User> userList) {
         this.userList = userList;
+    }
+
+    public ArrayList<Announcement> getAnnouncementList() {
+        return announcementList;
+    }
+
+    public void setAnnouncementList(ArrayList<Announcement> announcementList) {
+        this.announcementList = announcementList;
     }
 }

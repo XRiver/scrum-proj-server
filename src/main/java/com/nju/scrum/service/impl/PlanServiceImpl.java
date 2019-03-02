@@ -7,6 +7,7 @@ import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +20,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public List<Plan> selectByAttraction(String aName, String state) {
         List<Plan> list=planMapper.selectByAttraction(aName);
+        //从中过滤掉不满足state状态要求的计划
         for (int j=0;j<list.size();j++){
             Plan plan=list.get(j);
             boolean flag=false;
@@ -34,6 +36,11 @@ public class PlanServiceImpl implements PlanService {
                 list.remove(plan);
                 j--;
             }
+        }
+        //将每个plan对应的公告及总结列表注入后一起返回
+        for (Plan plan:list){
+            int pid = plan.getPid();
+            plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
         }
         return list;
     }
@@ -41,6 +48,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public List<Plan> selectByCreatorName(String name, String state) {
         List<Plan> list=planMapper.selectByCreatorName(name);
+        //从中过滤掉不满足state状态要求的计划
         for (int j=0;j<list.size();j++){
             Plan plan=list.get(j);
             boolean flag=false;
@@ -57,10 +65,16 @@ public class PlanServiceImpl implements PlanService {
                 j--;
             }
         }
+        //将每个plan对应的公告及总结列表注入后一起返回
+        for (Plan plan:list){
+            int pid = plan.getPid();
+            plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
+        }
         return list;
     }
     public List<Plan> selectByCreatorOpenid(String openid, String state) {
         List<Plan> list = planMapper.selectByCreatorOpenId(openid);
+        //从中过滤掉不满足state状态要求的计划
         for (int j=0;j<list.size();j++){
             Plan plan=list.get(j);
             boolean flag=false;
@@ -76,6 +90,11 @@ public class PlanServiceImpl implements PlanService {
                 list.remove(plan);
                 j--;
             }
+        }
+        //将每个plan对应的公告及总结列表注入后一起返回
+        for (Plan plan:list){
+            int pid = plan.getPid();
+            plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
         }
         return list;
     }
@@ -151,14 +170,14 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public Plan selectByPid(int pid) {
-        return planMapper.selectByPid(pid);
+        Plan plan=planMapper.selectByPid(pid);
+        plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
+        return plan;
     }
 
     @Override
     public List<User> selectMembersByPid(Integer pid) {
         return planMapper.selectMembersByPid(pid);
-
-
     }
 
     @Override

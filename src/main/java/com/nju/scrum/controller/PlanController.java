@@ -45,6 +45,7 @@ public class PlanController {
         plan2.setState(plan.getState());
         plan2.setTraveltime(plan.getTraveltime());
         plan2.setUserList(userList);
+        plan2.setAnnouncementList(plan.getAnnouncementList());
         return plan2;
     }
 
@@ -52,7 +53,6 @@ public class PlanController {
     //根据openid查询计划
     public List<Plan> getPlansByopenid(@PathVariable("openid") String openid,String state) {
         try {
-
             return planService.selectByCreatorOpenid(openid, state);
         } catch (Exception e) {
             return null;
@@ -147,6 +147,24 @@ public class PlanController {
         } catch (Exception e) {
             e.printStackTrace();
             r.setMsg("上传公告失败");
+            r.setCode(1);
+        }
+        return r;
+    }
+
+    @PostMapping("/plan/summary")
+    public R createSummary(@RequestBody Announcement announcement) {
+        //增加当前时间
+        announcement.setCreateDate(new Date());
+        announcement.setOpen(1);
+        R r = new R();
+        try {
+            planService.createAnnouncement(announcement);
+            r.setCode(0);
+            r.setMsg("上传总结成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            r.setMsg("上传总结失败");
             r.setCode(1);
         }
         return r;

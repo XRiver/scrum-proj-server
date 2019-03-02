@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 @Mapper
 public interface PlanMapper {
@@ -51,4 +52,7 @@ public interface PlanMapper {
 
     @Insert("insert into announcement(pid,openid,createDate,picUrls,content,open) values(#{pid},#{openid},#{createDate},#{picUrls},#{content},#{open})")
     void createAnnouncement(Announcement announcement);
+
+    @Select("select * from announcement where pid=#{pid}")
+    ArrayList<Announcement> selectAnnouncementsByPid(int pid);
 }
