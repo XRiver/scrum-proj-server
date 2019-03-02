@@ -150,5 +150,12 @@ public class ScrumProjServerApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                 .content(js.toString())).andDo(print()).andReturn();
     }
+    @Test
+    public void testGetJoinedPlansByOpenid() throws Exception {
+        MvcResult res1 = this.mockMvc.perform(get("/api/plan/joined/openid/o9VBV44gvvycu-kp8dnCoBI8npe8")
+                .param("state","2")
+                .characterEncoding("utf-8"))
+                .andDo(print()).andReturn();
+    }
 }
 

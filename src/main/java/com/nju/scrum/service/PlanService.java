@@ -18,4 +18,6 @@ public interface PlanService {
     List<User> selectMembersByPid(Integer pid);
     void evaluatePeople(Evaluation evaluation);
     void createAnnouncement(Announcement announcement);
+
+    List<Plan> selectJoinedPlanByOpenid(String openid, String state);
 }

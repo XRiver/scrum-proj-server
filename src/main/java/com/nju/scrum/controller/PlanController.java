@@ -172,4 +172,13 @@ public class PlanController {
         return r;
     }
 
+    @GetMapping("/plan/joined/openid/{openid}")
+    public List<Plan> getJoinedPlansByOpenid(@PathVariable("openid") String openid,String state) {
+        try {
+            return planService.selectJoinedPlanByOpenid(openid, state);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

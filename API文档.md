@@ -74,7 +74,7 @@ Evaluation {
 > ```typescript
 > Announcement{
 >     announcementId: Integer;//数据库自增id，也是唯一标识
->     pid: String ;//对应Plan的id
+>     pid: Integer ;//对应Plan的id
 >     createDate: String ;//创建的时间
 >     openid: String ; //提交者的openid
 >     picUrls: String ;//图片url之间按逗号，分隔
@@ -567,4 +567,32 @@ response
         'msg':   string  //说明 
         'data':  null    //无
     }
+```
+
+##### 19.根据openid搜索参加的出行计划
+
+request
+
+```shell
+GET /api/plan/joined/openid/{openid}？state=value
+//传入的state是一个字符串，为几种状态码的组合，其中状态吗0-未出行、1-正在进行、2-行程结束、3-过期作废
+//state形如 "0"、"3"、"012"、"013"、"0123" 等
+```
+
+
+response
+
+```json
+[
+    {Plan实体1}，{Plan实体2}...
+]
+	//pid: Integer;  计划编号
+	//aid: Integer;  景点编号
+    //openid: String;  创建者openid
+	//aname：String；   景点名称
+	//uname：String；   创建者姓名
+    //traveltime: String;出行时间 时间戳
+	//detail: String;  计划详细信息
+	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
+	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
 ```
