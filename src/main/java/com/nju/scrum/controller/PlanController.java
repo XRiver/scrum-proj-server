@@ -139,6 +139,7 @@ public class PlanController {
     public R createAnnouncement(@RequestBody Announcement announcement) {
         //增加当前时间
         announcement.setCreateDate(new Date());
+        announcement.setType(0);
         R r = new R();
         try {
             planService.createAnnouncement(announcement);
@@ -157,6 +158,7 @@ public class PlanController {
         //增加当前时间
         announcement.setCreateDate(new Date());
         announcement.setOpen(1);
+        announcement.setType(1);
         R r = new R();
         try {
             planService.createAnnouncement(announcement);
