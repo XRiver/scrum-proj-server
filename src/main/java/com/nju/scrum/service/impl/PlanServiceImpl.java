@@ -1,7 +1,9 @@
 package com.nju.scrum.service.impl;
 
 import com.nju.scrum.mapper.ApplyMapper;
+import com.nju.scrum.mapper.AttractionMapper;
 import com.nju.scrum.mapper.PlanMapper;
+import com.nju.scrum.mapper.UserMapper;
 import com.nju.scrum.pojo.*;
 import com.nju.scrum.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;

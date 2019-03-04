@@ -38,7 +38,8 @@ public interface PlanMapper {
     @Select("select * from plan,user,attraction where plan.openId=user.openId and attraction.aId = plan.aId and user.openId=#{openid}")
     List<Plan> selectByCreatorOpenId(String openid);
 
-    @Select("select * from plan where pId=#{pid}")
+    @Select("select * from plan,user,attraction where plan.openId=user.openId and attraction.aId = plan.aId and pId=#{pid}")
+//    @Select("select * from plan where pId=#{pid}")
     Plan selectByPid(Integer pid);
 
     @Update("update plan set state = #{state,jdbcType=VARCHAR} where pId = #{pid,jdbcType=INTEGER}")
