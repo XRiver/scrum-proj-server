@@ -220,6 +220,11 @@ public class PlanServiceImpl implements PlanService {
                 res.add(plan);
             }
         }
+        //将每个plan对应的公告及总结列表注入后一起返回
+        for (Plan plan:res){
+            int pid = plan.getPid();
+            plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
+        }
         return res;
     }
 }
