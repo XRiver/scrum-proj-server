@@ -24,4 +24,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     @Select("select * from user where openId=#{openid}")
     List<User> selectByOpenId(String openid);
+
+    @Select("select uname from user where openId=#{openid}")
+    String selectUnameByOpenId(String openid);
 }

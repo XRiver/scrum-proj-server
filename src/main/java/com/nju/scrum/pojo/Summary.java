@@ -7,17 +7,18 @@ public class Summary {
     private Integer summaryId;
     private Integer pid;
     private Date createDate;
-    private String openid;
+    private String openid; //评价者微信标识
+    private String uname;  //评价者姓名(数据库中没有此字段，在返回Summary对象时临时查询并加入)
     private String picUrls;//url之间按逗号，分隔
     private String content;//总结体会的文字
     private Integer star;//星级评价，分为0-5，5星为最优评价
 
-    public Integer getAnnouncementId() {
+    public Integer getSummaryId() {
         return summaryId;
     }
 
-    public void setAnnouncementId(Integer announcementId) {
-        this.summaryId = announcementId;
+    public void setSummaryId(Integer summaryId) {
+        this.summaryId = summaryId;
     }
 
     public Integer getPid() {
@@ -66,6 +67,14 @@ public class Summary {
 
     public void setStar(Integer star) {
         this.star = star;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     @Override

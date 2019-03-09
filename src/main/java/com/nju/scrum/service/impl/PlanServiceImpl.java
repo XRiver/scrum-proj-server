@@ -21,6 +21,8 @@ public class PlanServiceImpl implements PlanService {
     private PlanMapper planMapper;
     @Autowired
     private ApplyMapper applyMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public List<Plan> selectByAttraction(String aName, String state) {
@@ -227,7 +229,13 @@ public class PlanServiceImpl implements PlanService {
         for (Plan plan:res){
             int pid = plan.getPid();
             plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
-            plan.setSummaryList(planMapper.selectSummarysByPid(pid));
+            ArrayList<Summary> summaryList = planMapper.selectSummarysByPid(pid);
+            for (Summary summary:summaryList){
+                String openid = summary.getOpenid();
+                String uname = userMapper.selectUnameByOpenId(openid);
+                summary.setUname(uname);
+            }
+            plan.setSummaryList(summaryList);
         }
     }
 }
