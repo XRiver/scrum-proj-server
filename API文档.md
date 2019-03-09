@@ -69,18 +69,31 @@ Evaluation {
 }
 ```
 
-##### 6 公布的内容（同时代表“公告”和“结束后总结体会”两类实体）
+##### 6 公布（由发起人创建，可设置公开或私密）
 
 > ```typescript
 > Announcement{
->     announcementId: Integer;//数据库自增id，也是唯一标识
->     pid: Integer ;//对应Plan的id
->     createDate: String ;//创建的时间
->     openid: String ; //提交者的openid
->     picUrls: String ;//图片url之间按逗号，分隔
->     content: String ;//公告的内容或者总结体会的文字
->     open: Integer ;//表示公告是否愿意公开 1表示愿意 0表示不愿意公开
->     type: Integer ；//0表示是公告，1表示是总结体会
+>  announcementId: Integer;//数据库自增id，也是唯一标识
+>  pid: Integer ;//对应Plan的id
+>  createDate: String ;//创建的时间
+>  openid: String ; //提交者的openid
+>  picUrls: String ;//图片url之间按逗号，分隔
+>  content: String ;//公告的内容或者总结体会的文字
+>  open: Integer ;//表示公告是否愿意公开 1表示愿意 0表示不愿意公开
+> }
+> ```
+>
+##### 7 总结评价（发起人、参与者皆可创建）
+
+> ```typescript
+> Announcement{
+>  announcementId: Integer;//数据库自增id，也是唯一标识
+>  pid: Integer ;//对应Plan的id
+>  createDate: String ;//创建的时间
+>  openid: String ; //提交者的openid
+>  picUrls: String ;//图片url之间按逗号，分隔
+>  content: String ;//公告的内容或者总结体会的文字
+>  star: Integer;//星级评价，分为0-5，5星为最优评价
 > }
 > ```
 
@@ -540,7 +553,7 @@ response
     }
 ```
 
-##### 18.活动发起人上传照片和总结文字
+##### 18.上传照片和总结文字（发起人和参与者皆可）
 
 request
 
@@ -554,6 +567,7 @@ POST /api/plan/summary
     pid: Integer; // 出行计划的唯一标识号
 	picUrls: String; // 图片URL之间以逗号，隔开
     content: String;//公告的文字内容
+    star: Integer;//星级评价，分为0-5，5星为最优评价
 }
 
 ```
@@ -594,5 +608,6 @@ response
     //traveltime: String;出行时间 时间戳
 	//detail: String;  计划详细信息
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
-	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
+	//announcementList：[Announcement实体] ；公告对象的数组
+	//summaryList：[Summary实体] ；总结评价对象的数组
 ```

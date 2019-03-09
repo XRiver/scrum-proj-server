@@ -2,23 +2,22 @@ package com.nju.scrum.pojo;
 
 import java.util.Date;
 
-//Plan的公告实体类，包括上传图片、文字评价、公开与否
-public class Announcement {
-    private Integer announcementId;
+//Plan的总结的实体类，包括上传图片、文字评价、对旅行景点的星级评价
+public class Summary {
+    private Integer summaryId;
     private Integer pid;
     private Date createDate;
     private String openid;
     private String picUrls;//url之间按逗号，分隔
-    private String content;//公告的内容
-    private Integer open;//表示公告是否愿意公开 1表示愿意 0表示不愿意公开
-
+    private String content;//总结体会的文字
+    private Integer star;//星级评价，分为0-5，5星为最优评价
 
     public Integer getAnnouncementId() {
-        return announcementId;
+        return summaryId;
     }
 
     public void setAnnouncementId(Integer announcementId) {
-        this.announcementId = announcementId;
+        this.summaryId = announcementId;
     }
 
     public Integer getPid() {
@@ -61,25 +60,24 @@ public class Announcement {
         this.content = content;
     }
 
-    public Integer getOpen() {
-        return open;
+    public Integer getStar() {
+        return star;
     }
 
-    public void setOpen(Integer open) {
-        this.open = open;
+    public void setStar(Integer star) {
+        this.star = star;
     }
-
 
     @Override
     public String toString() {
         return "Announcement{" +
-                "announcementId='" + announcementId + '\'' +
+                "announcementId='" + summaryId + '\'' +
                 ", pid='" + pid + '\'' +
                 ", createDate=" + createDate +
                 ", openid='" + openid + '\'' +
                 ", picUrls='" + picUrls + '\'' +
                 ", content='" + content + '\'' +
-                ", open=" + open +
+                ", open=" + star +
                 '}';
     }
 }

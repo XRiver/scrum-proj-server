@@ -14,6 +14,7 @@ public class Plan {
     private String applylist;
     private String state;
     private ArrayList<Announcement> announcementList;
+    private ArrayList<Summary> summaryList;
     public Plan() {
     }
 
@@ -97,15 +98,28 @@ public class Plan {
         this.announcementList = announcementList;
     }
 
+    public ArrayList<Summary> getSummaryList() {
+        return summaryList;
+    }
+
+    public void setSummaryList(ArrayList<Summary> summaryList) {
+        this.summaryList = summaryList;
+    }
+
     @Override
     public String toString() {
         return "Plan{" +
                 "pid=" + pid +
                 ", openid='" + openid + '\'' +
+                ", uname='" + uname + '\'' +
                 ", aid=" + aid +
+                ", aname='" + aname + '\'' +
                 ", traveltime='" + traveltime + '\'' +
                 ", detail='" + detail + '\'' +
                 ", applylist='" + applylist + '\'' +
+                ", state='" + state + '\'' +
+                ", announcementList=" + announcementList +
+                ", summaryList=" + summaryList +
                 '}';
     }
 }

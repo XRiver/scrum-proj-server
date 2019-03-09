@@ -121,6 +121,7 @@ public class PlanController {
     }
 
     @PostMapping("/plan/evaluation")
+    //评价团队成员并进行星际评价
     public R evaluatePeople(@RequestBody Evaluation evaluation) {
         R r = new R();
         try {
@@ -136,10 +137,10 @@ public class PlanController {
     }
 
     @PostMapping("/plan/announcement")
+    //活动发起人创建公告
     public R createAnnouncement(@RequestBody Announcement announcement) {
         //增加当前时间
         announcement.setCreateDate(new Date());
-        announcement.setType(0);
         R r = new R();
         try {
             planService.createAnnouncement(announcement);
@@ -154,14 +155,13 @@ public class PlanController {
     }
 
     @PostMapping("/plan/summary")
-    public R createSummary(@RequestBody Announcement announcement) {
+    //活动发起人上传照片和文字总结
+    public R createSummary(@RequestBody Summary summary) {
         //增加当前时间
-        announcement.setCreateDate(new Date());
-        announcement.setOpen(1);
-        announcement.setType(1);
+        summary.setCreateDate(new Date());
         R r = new R();
         try {
-            planService.createAnnouncement(announcement);
+            planService.createSummary(summary);
             r.setCode(0);
             r.setMsg("上传总结成功");
         } catch (Exception e) {
@@ -173,6 +173,7 @@ public class PlanController {
     }
 
     @GetMapping("/plan/joined/openid/{openid}")
+    //根据自己的openid搜索自己参加的出行计划
     public List<Plan> getJoinedPlansByOpenid(@PathVariable("openid") String openid,String state) {
         try {
             return planService.selectJoinedPlanByOpenid(openid, state);

@@ -1,8 +1,5 @@
 package com.nju.scrum.mapper;
-import com.nju.scrum.pojo.Announcement;
-import com.nju.scrum.pojo.Evaluation;
-import com.nju.scrum.pojo.Plan;
-import com.nju.scrum.pojo.User;
+import com.nju.scrum.pojo.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -51,12 +48,19 @@ public interface PlanMapper {
     @Insert("insert into evaluation(pid,fromid,toid,mess,star) values(#{pid},#{fromid},#{toid},#{mess},#{star})")
     void evaluatePeople(Evaluation evaluation);
 
-    @Insert("insert into announcement(pid,openid,createDate,picUrls,content,open,type) values(#{pid},#{openid},#{createDate},#{picUrls},#{content},#{open},#{type})")
+    @Insert("insert into announcement(pid,openid,createDate,picUrls,content,open) values(#{pid},#{openid},#{createDate},#{picUrls},#{content},#{open})")
     void createAnnouncement(Announcement announcement);
+
+    @Insert("insert into summary(pid,openid,createDate,picUrls,content,star) values(#{pid},#{openid},#{createDate},#{picUrls},#{content},#{star})")
+    void createSummary(Summary summary);
 
     @Select("select * from announcement where pid=#{pid}")
     ArrayList<Announcement> selectAnnouncementsByPid(int pid);
 
+    @Select("select * from summary where pid=#{pid}")
+    ArrayList<Summary> selectSummarysByPid(int pid);
+
     @Select("select pid from apply where openid=#{openid} and pass = 1")
     ArrayList<Integer> selectJoinedPids(String openid);
+
 }

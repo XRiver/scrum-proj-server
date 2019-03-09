@@ -43,10 +43,7 @@ public class PlanServiceImpl implements PlanService {
             }
         }
         //将每个plan对应的公告及总结列表注入后一起返回
-        for (Plan plan:list){
-            int pid = plan.getPid();
-            plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
-        }
+        joinAnnouncementsAndSummarys(list);
         return list;
     }
 
@@ -71,10 +68,7 @@ public class PlanServiceImpl implements PlanService {
             }
         }
         //将每个plan对应的公告及总结列表注入后一起返回
-        for (Plan plan:list){
-            int pid = plan.getPid();
-            plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
-        }
+        joinAnnouncementsAndSummarys(list);
         return list;
     }
     public List<Plan> selectByCreatorOpenid(String openid, String state) {
@@ -97,10 +91,7 @@ public class PlanServiceImpl implements PlanService {
             }
         }
         //将每个plan对应的公告及总结列表注入后一起返回
-        for (Plan plan:list){
-            int pid = plan.getPid();
-            plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
-        }
+        joinAnnouncementsAndSummarys(list);
         return list;
     }
 
@@ -196,6 +187,11 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    public void createSummary(Summary summary) {
+        planMapper.createSummary(summary);
+    }
+
+    @Override
     public List<Plan> selectJoinedPlanByOpenid(String openid, String state) {
         //根据openid查所有参加的Plan，并根绝state筛选，这里不包括自己创建的Plan
 
@@ -223,10 +219,15 @@ public class PlanServiceImpl implements PlanService {
             }
         }
         //将每个plan对应的公告及总结列表注入后一起返回
+        joinAnnouncementsAndSummarys(res);
+        return res;
+    }
+
+    public void joinAnnouncementsAndSummarys(List<Plan> res){
         for (Plan plan:res){
             int pid = plan.getPid();
             plan.setAnnouncementList(planMapper.selectAnnouncementsByPid(pid));
+            plan.setSummaryList(planMapper.selectSummarysByPid(pid));
         }
-        return res;
     }
 }
