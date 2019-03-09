@@ -90,13 +90,15 @@ Evaluation {
 
 > ```typescript
 > Announcement{
->  announcementId: Integer;//数据库自增id，也是唯一标识
->  pid: Integer ;//对应Plan的id
->  createDate: String ;//创建的时间
->  openid: String ; //提交者的openid
->  picUrls: String ;//图片url之间按逗号，分隔
->  content: String ;//公告的内容或者总结体会的文字
->  star: Integer;//星级评价，分为0-5，5星为最优评价
+> announcementId: Integer;//数据库自增id，也是唯一标识
+> pid: Integer ;//对应Plan的id
+> createDate: String ;//创建的时间
+> openid: String ; //提交者的openid
+> uname:String ;   //评价者姓名
+> uhead:String ;   //评价者头像地址
+> picUrls: String ;//图片url之间按逗号，分隔
+> content: String ;//公告的内容或者总结体会的文字
+> star: Integer;//星级评价，分为0-5，5星为最优评价
 > }
 > ```
 

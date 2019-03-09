@@ -9,6 +9,7 @@ public class Summary {
     private Date createDate;
     private String openid; //评价者微信标识
     private String uname;  //评价者姓名(数据库中没有此字段，在返回Summary对象时临时查询并加入)
+    private String uhead;  //评价者微信头像(数据库中没有此字段，在返回Summary对象时临时查询并加入)
     private String picUrls;//url之间按逗号，分隔
     private String content;//总结体会的文字
     private Integer star;//星级评价，分为0-5，5星为最优评价
@@ -75,6 +76,14 @@ public class Summary {
 
     public void setUname(String uname) {
         this.uname = uname;
+    }
+
+    public String getUhead() {
+        return uhead;
+    }
+
+    public void setUhead(String uhead) {
+        this.uhead = uhead;
     }
 
     @Override

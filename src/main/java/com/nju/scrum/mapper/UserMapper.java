@@ -25,6 +25,6 @@ public interface UserMapper {
     @Select("select * from user where openId=#{openid}")
     List<User> selectByOpenId(String openid);
 
-    @Select("select uname from user where openId=#{openid}")
-    String selectUnameByOpenId(String openid);
+    @Select("select * from user where openId=#{openid}")
+    User selectUserByOpenId(String openid);
 }

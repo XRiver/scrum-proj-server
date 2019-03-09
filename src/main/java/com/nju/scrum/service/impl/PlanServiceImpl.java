@@ -254,8 +254,9 @@ public class PlanServiceImpl implements PlanService {
             ArrayList<Summary> summaryList = planMapper.selectSummarysByPid(pid);
             for (Summary summary:summaryList){
                 String openid = summary.getOpenid();
-                String uname = userMapper.selectUnameByOpenId(openid);
-                summary.setUname(uname);
+                User user = userMapper.selectUserByOpenId(openid);
+                summary.setUname(user.getUname());
+                summary.setUhead(user.getPictureurl());
             }
             plan.setSummaryList(summaryList);
         }
