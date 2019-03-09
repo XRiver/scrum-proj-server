@@ -1,4 +1,4 @@
-### 一、实体类
+### 已经一、实体类
 
 ##### 1 用户
 
@@ -12,6 +12,7 @@ User {
     sex: string;      //性别
     nickname:string  //用户昵称
     city: string    //用户所在城市
+    credit：Integer //表示没有参与活动的次数 初始为0
 }
 ```
 
@@ -40,6 +41,8 @@ Plan {
 	uname：String；   //创建者姓名
     state: String  //出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
     announcementList：[Announcement实体] ；//公告（总结体会）对象数组
+    summaryList：[Summary实体] ；//总结评价对象的数组
+    confirmed:String //是否确认过参与者 1确认过 0未确认
 }
 ```
 
@@ -261,6 +264,9 @@ response
 	//detail: String;  计划详细信息
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
+	//summaryList：[Summary实体] ；总结评价对象的数组
+	//confirmed:String //是否确认过参与者 1确认过 0未确认
+
 ```
 
 ##### 7 按照用户姓名搜索出行计划
@@ -288,6 +294,8 @@ response
 	//detail: String;  计划详细信息
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
+	//summaryList：[Summary实体] ；总结评价对象的数组
+	//confirmed:String //是否确认过参与者 1确认过 0未确认
 ```
 ##### 8 按照景点名搜索出行计划
 
@@ -314,6 +322,8 @@ response
 	//detail: String;  计划详细信息
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 	//announcementList：[Announcement实体] ；公告（总结体会）对象数组
+	//summaryList：[Summary实体] ；总结评价对象的数组
+	//confirmed:String //是否确认过参与者 1确认过 0未确认
 ```
 
 ##### 9 申请加入某个出行计划
@@ -610,4 +620,51 @@ response
 	//state: String;  出行计划的状态 0-未出行、1-正在进行、2-行程结束、3-过期作废
 	//announcementList：[Announcement实体] ；公告对象的数组
 	//summaryList：[Summary实体] ；总结评价对象的数组
+	//confirmed:String //是否确认过参与者 1确认过 0未确认
+```
+
+##### 20.查询某出行计划是否已经确认过参与者
+
+request
+
+```shell
+GET /api/plan/confirmed/{pid}
+```
+
+
+response
+
+```json
+    {
+        'code'： number  //0-未确认过参与者  1-已经确认过参与者
+        'msg':   string  //说明：已确认-表示已经确认过参与者/未确认-未确认过参与者
+        'data':  null    //无
+    }
+```
+
+##### 21.发起人确认活动实际参与者
+
+request
+
+```shell
+POST /api/plan/confirmed/{pid}
+```
+
+```json
+{
+	openid: string; // 活动发起人的openid，身份验证
+	members:[openid] // 实际到场的成员的openid数组
+}
+
+```
+
+
+response
+
+```json
+    {
+        'code'： number  //0-确认成功  1-确认失败
+        'msg':   string  //说明 
+        'data':  null    //无
+    }
 ```

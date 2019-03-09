@@ -13,6 +13,7 @@ public class Plan {
     private String detail;
     private String applylist;
     private String state;
+    private String confirmed;//表示是否确认过参与者
     private ArrayList<Announcement> announcementList;
     private ArrayList<Summary> summaryList;
     public Plan() {
@@ -104,6 +105,14 @@ public class Plan {
 
     public void setSummaryList(ArrayList<Summary> summaryList) {
         this.summaryList = summaryList;
+    }
+
+    public String getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(String confirmed) {
+        this.confirmed = confirmed;
     }
 
     @Override

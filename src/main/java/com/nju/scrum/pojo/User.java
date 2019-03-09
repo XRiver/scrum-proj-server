@@ -8,6 +8,7 @@ public class User {
     private String sex;
     private String nickname;
     private String city;
+    private Integer credit;//表示没有参与活动的次数 初始为0
     public Integer getUid() {
         return uid;
     }

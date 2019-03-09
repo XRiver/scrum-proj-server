@@ -12,9 +12,9 @@ public interface PlanMapper {
 
     int deleteByPrimaryKey(Integer pid);
 
-    @Insert("insert into plan (openId, aId, travelTime, detail) " +
+    @Insert("insert into plan (openId, aId, travelTime, detail,state,confirmed) " +
             "values ( #{openid,jdbcType=VARCHAR}, #{aid,jdbcType=INTEGER}, " +
-            "#{traveltime,jdbcType=DATE}, #{detail,jdbcType=VARCHAR})")
+            "#{traveltime,jdbcType=DATE}, #{detail,jdbcType=VARCHAR},0,0)")
     int insert(Plan record);
 
     int insertSelective(Plan record);
@@ -63,4 +63,15 @@ public interface PlanMapper {
     @Select("select pid from apply where openid=#{openid} and pass = 1")
     ArrayList<Integer> selectJoinedPids(String openid);
 
+    @Select("select confirmed from plan where pid = #{pid}")
+    String confirmState(int pid);
+
+    @Update("update user set credit = credit - 1 where openid = #{openid}")
+    void downCredit(String openid);
+
+    @Select("select state from plan where pid =#{pid}")
+    String selectPlanState(Integer pid);
+
+    @Update("update plan set confirmed = '1' where pid = #{pid}")
+    void setConfirmedState(Integer pid);
 }

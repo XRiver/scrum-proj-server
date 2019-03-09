@@ -10,9 +10,9 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(Integer uid);
 
-    @Insert("insert into user (openId, uName, school, pictureUrl, sex, nickName, city) values " +
+    @Insert("insert into user (openId, uName, school, pictureUrl, sex, nickName, city,credit) values " +
             "(#{openid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{pictureurl,jdbcType=VARCHAR}" +
-            ", #{sex,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR})")
+            ", #{sex,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},0)")
     int insert(User record);
 
     int insertSelective(User record);

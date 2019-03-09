@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class PlanServiceImpl implements PlanService {
@@ -225,6 +226,27 @@ public class PlanServiceImpl implements PlanService {
         return res;
     }
 
+    @Override
+    public String confirmState(int pid) {
+        return planMapper.confirmState(pid);
+
+    }
+
+    @Override
+    public void downCredit(String id) {
+        planMapper.downCredit(id);
+    }
+
+    @Override
+    public String selectPlanState(Integer pid) {
+        return planMapper.selectPlanState(pid);
+    }
+
+    @Override
+    public void setConfirmedState(Integer pid) {
+        planMapper.setConfirmedState(pid);
+    }
+
     public void joinAnnouncementsAndSummarys(List<Plan> res){
         for (Plan plan:res){
             int pid = plan.getPid();
@@ -238,4 +260,5 @@ public class PlanServiceImpl implements PlanService {
             plan.setSummaryList(summaryList);
         }
     }
+
 }

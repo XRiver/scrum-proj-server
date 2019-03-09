@@ -137,25 +137,44 @@ public class ScrumProjServerApplicationTests {
                 .content(js.toString())).andDo(print()).andReturn();
     }
 
-    @Test
-    public void testCreateAnnouncement() throws Exception {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("openid", "o9VBV4yQfCMsqJif_6DdAEhKzAIo");
-        map.put("pid","43");
-        map.put("picUrls","http://www.baidu.com,http://www.1234.com");
-        map.put("content","你是个好人");
-        map.put("open",1);
-        JSONObject js = new JSONObject(map);
-        MvcResult res1 = this.mockMvc.perform(post("/api/plan/announcement")
-                .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
-                .content(js.toString())).andDo(print()).andReturn();
-    }
+//    @Test
+//    public void testCreateAnnouncement() throws Exception {
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("openid", "o9VBV4yQfCMsqJif_6DdAEhKzAIo");
+//        map.put("pid","43");
+//        map.put("picUrls","http://www.baidu.com,http://www.1234.com");
+//        map.put("content","你是个好人");
+//        map.put("open",1);
+//        JSONObject js = new JSONObject(map);
+//        MvcResult res1 = this.mockMvc.perform(post("/api/plan/announcement")
+//                .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+//                .content(js.toString())).andDo(print()).andReturn();
+//    }
     @Test
     public void testGetJoinedPlansByOpenid() throws Exception {
         MvcResult res1 = this.mockMvc.perform(get("/api/plan/joined/openid/o9VBV44gvvycu-kp8dnCoBI8npe8")
                 .param("state","2")
                 .characterEncoding("utf-8"))
                 .andDo(print()).andReturn();
+    }
+
+    @Test
+    public void testPlanConfirmedState() throws Exception {
+        MvcResult res1 = this.mockMvc.perform(get("/api/plan/confirmed/43")
+                .characterEncoding("utf-8"))
+                .andDo(print()).andReturn();
+    }
+
+    @Test
+    public void testPlanConfirmMembers() throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("openid", "o9VBV44gvvycu-kp8dnCoBI8npe8");
+        map.put("members",new String[] {"o9VBV44gvvycu-kp8dnCoBI8npe8"});
+        JSONObject js = new JSONObject(map);
+        MvcResult res1 = this.mockMvc.perform(post("/api/plan/confirmed/47")
+                .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+                .content(js.toString())).andDo(print()).andReturn();
+
     }
 }
 

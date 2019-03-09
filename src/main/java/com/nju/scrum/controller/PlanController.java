@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @ResponseBody
 @Controller
@@ -180,6 +177,57 @@ public class PlanController {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @GetMapping("/plan/confirmed/{pid}")
+    //根据pid查询某出行计划是否已经确认过参与者
+    public R planConfirmedState(@PathVariable("pid") int pid) {
+        R r = new R();
+        //查询结果为 1 表示已经确认过了
+        String state = planService.confirmState(pid);
+        r.setCode(Integer.parseInt(state));
+        if (state.equals("1")) {
+            r.setMsg("已确认");
+        } else {
+            r.setMsg("未确认");
+        }
+        return r;
+
+    }
+
+    @PostMapping("/plan/confirmed/{pid}")
+    public R planConfirmMembers(@PathVariable("pid") Integer pid, @RequestBody Map<String, Object> params) {
+        String openid = (String)params.get("openid");
+        ArrayList<String> members = (ArrayList<String>) params.get("members");
+        R r = new R();
+        if (planService.confirmState(pid).equals("1") || !planService.selectPlanState(pid).equals("1")) {
+            //已经确认过了 或者 plan不处于正在进行状态
+            r.setMsg("已确认过或活动不处于正在进行状态");
+            r.setCode(1);
+        } else {
+            //查询该plan的所有成员(User对象形式)
+            List<User> userMembers = planService.selectMembersByPid(pid);
+            //转化为openid数组形式
+            ArrayList<String> allMembers = new ArrayList<>();
+            for (User u : userMembers) {
+                allMembers.add(u.getOpenid());
+            }
+            //检查是否传入的members都是出行成员
+            for (String id : members) {
+                if (allMembers.contains(id)) {
+                    allMembers.remove(id);
+                }
+            }
+            //如果allMember还有剩余，表示没有参加
+            for (String id : allMembers) {
+                planService.downCredit(id);
+            }
+            //把Plan的confirmed字段设为1 表示已经确认过了
+            planService.setConfirmedState(pid);
+            r.setCode(0);
+            r.setMsg("成功确认参与者");
+        }
+        return r;
     }
 
 }

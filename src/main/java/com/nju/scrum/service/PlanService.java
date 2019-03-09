@@ -17,4 +17,12 @@ public interface PlanService {
     void createAnnouncement(Announcement announcement);
     void createSummary(Summary summary);
     List<Plan> selectJoinedPlanByOpenid(String openid, String state);
+
+    String confirmState(int pid);
+
+    void downCredit(String id);
+
+    String selectPlanState(Integer pid);
+
+    void setConfirmedState(Integer pid);
 }
