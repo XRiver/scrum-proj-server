@@ -24,7 +24,9 @@ public interface ApplyMapper {
             @Result(column = "pictureUrl",property = "applicant.pictureurl"),
             @Result(column = "sex",property = "applicant.sex"),
             @Result(column = "nickName",property = "applicant.nickname"),
-            @Result(column = "city",property = "applicant.city")
+            @Result(column = "city",property = "applicant.city"),
+            @Result(column = "credit",property = "applicant.credit"),
+            @Result(column = "unlockTime",property = "applicant.unlockTime")
     })
     List<Apply> selectByPid(int pid);
 

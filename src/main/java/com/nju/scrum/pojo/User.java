@@ -9,6 +9,7 @@ public class User {
     private String nickname;
     private String city;
     private Integer credit;//表示没有参与活动的次数 初始为0
+    private Integer unlockTime;//解封时间 初始化为0 即时间戳的初始时间1970年1月1日
     public Integer getUid() {
         return uid;
     }
@@ -56,6 +57,22 @@ public class User {
     }
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Integer getCredit() {
+        return credit;
+    }
+
+    public void setCredit(Integer credit) {
+        this.credit = credit;
+    }
+
+    public Integer getUnlockTime() {
+        return unlockTime;
+    }
+
+    public void setUnlockTime(Integer unlockTime) {
+        this.unlockTime = unlockTime;
     }
 
     @Override

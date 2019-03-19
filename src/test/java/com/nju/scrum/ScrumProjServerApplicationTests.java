@@ -90,7 +90,7 @@ public class ScrumProjServerApplicationTests {
 
     @Test
     public void testSelectByPid() throws Exception{
-        MvcResult res = this.mockMvc.perform(get("/api/plan/apply/3")
+        MvcResult res = this.mockMvc.perform(get("/api/plan/apply/44")
                 ).andDo(print()).andReturn();
     }
 

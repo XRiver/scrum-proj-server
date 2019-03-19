@@ -13,6 +13,7 @@ User {
     nickname:string  //用户昵称
     city: string    //用户所在城市
     credit：Integer //表示没有参与活动的次数 初始为0
+    unlockTime:Integer //解封时间 初始化为0 即时间戳的初始时间1970年1月1日
 }
 ```
 
@@ -153,6 +154,8 @@ POST /api/register
     //sex: string;  (必须为汉字"男"或“女”)  性别
     //nickname:string  用户昵称
     //city: string    用户所在城市
+    //credit：Integer 表示没有参与活动的次数 初始为0
+    //unlockTime:Integer 解封时间 初始化为0 即时间戳的初始时间1970年1月1日
 ```
 
 response
@@ -377,6 +380,8 @@ response
     //sex: string;  (必须为汉字"男"或“女”)  性别
     //nickname:string  用户昵称
     //city: string    用户所在城市
+    //credit：Integer 表示没有参与活动的次数 初始为0
+    //unlockTime:Integer 解封时间 初始化为0 即时间戳的初始时间1970年1月1日
 ```
 
 //返回的是申请的mess+申请的applyid+每个申请的申请人的信息（封装成一个嵌套的User实体类）
