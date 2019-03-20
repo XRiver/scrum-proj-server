@@ -3,9 +3,12 @@ package com.nju.scrum.service.impl;
 import com.nju.scrum.mapper.UserMapper;
 import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.UserService;
+import org.apache.tomcat.util.security.Escape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+import java.util.Date;
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
@@ -50,4 +53,23 @@ public class UserServiceImpl implements UserService {
     public void updateUnlockTime(long unlockTime, String openid) {
         userMapper.updateUnlockTime(unlockTime,openid);
     }
+
+    @Override
+    //查询一个用户有没有被封禁
+    public boolean isLocked(String openid) {
+
+        try {
+            long unlockTime = userMapper.selectUnlockTimeByOpenid(openid);
+            long now = new Date().getTime();
+            if (unlockTime >= now) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
 }

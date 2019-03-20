@@ -15,4 +15,5 @@ public interface UserService {
 
     void updateUnlockTime(long unlockTime, String openid);
 
+    boolean isLocked(String openid);
 }
