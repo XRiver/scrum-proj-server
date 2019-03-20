@@ -24,4 +24,19 @@ public class AttractionServiceImpl implements AttractionService {
     public void addAttraction(Attraction attraction) {
         attractionMapper.addAttraction(attraction);
     }
+
+    @Override
+    public List<Attraction> selectByAname(String aname) {
+        return attractionMapper.selectByAname(aname);
+    }
+
+    @Override
+    public void updateAttraction(Attraction attraction) {
+        Integer aid = attraction.getAid();
+        String aname = attraction.getAname();
+        String location = attraction.getLocation();
+        String pictureurl = attraction.getPictureurl();
+        String description = attraction.getDescription();
+        attractionMapper.updateByPrimaryKey(aid,aname,location,pictureurl,description);
+    }
 }

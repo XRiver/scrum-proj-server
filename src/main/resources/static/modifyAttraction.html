@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+<!--<p th:text="'Hello！, ' + ${name} + '!'">3333</p>-->
+
+<div class="showing">
+    <h2>请管理员选择要改动的景点 </h2>
+    <form action="#" th:action="@{/chosenAttraction}" method="post">
+        <select class="form-select-button" name="attraction" >
+            <option>请选择景点</option>
+            <option th:each="p:${a}" th:value="${p.aname}" th:selected="${p.aid==1}" th:text="${p.aname}" ></option>
+        </select>
+        <br/>
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,13 +1,13 @@
 package com.nju.scrum.controller;
 
+import com.nju.scrum.pojo.Attraction;
 import com.nju.scrum.pojo.User;
+import com.nju.scrum.service.AttractionService;
 import com.nju.scrum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +17,8 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private AttractionService attractionService;
 
     @GetMapping("/unCredit.html")
     public String unCredit(Model model) {
@@ -47,5 +49,33 @@ public class AdminController {
         //更新封禁时间
         userService.updateUnlockTime(unlockTime,openid);
         return "redirect:/unCredit.html";
+    }
+
+    @GetMapping("/modifyAttraction")
+    public String modifyAttraction(Model model) {
+//        String name = "jiangbei";
+//        model.addAttribute("name", name);
+        List<Attraction> attractions = attractionService.selectAll();
+        String htmlContent = "<p style='color:red'> 红色文字</p>";
+        boolean testBoolean = true;
+        model.addAttribute("htmlContent", htmlContent);
+        model.addAttribute("testBoolean", testBoolean);
+        model.addAttribute("a",attractions);
+        return "modifyAttraction";
+    }
+    @PostMapping("/chosenAttraction")
+    public String chosenAttraction(@RequestParam("attraction") String aname, Model model) {
+        List<Attraction> attractions = attractionService.selectByAname(aname);
+        Attraction attraction = attractions.get(0);
+        model.addAttribute("p",attraction);
+        return "chosenAttraction";
+    }
+
+    @PostMapping("/modify")
+    public String modify(@ModelAttribute Attraction attraction,Model model) {
+        attractionService.updateAttraction(attraction);
+        List<Attraction> attractions = attractionService.selectAll();
+        model.addAttribute("a",attractions);
+        return "modifyAttraction";
     }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<h2>景点信息</h2>
+<form action="#" th:action="@{/modify}" th:object="${p}" method="post">
+    <table >
+        <tr>
+            <th>景点编号</th>
+            <th>景点名称</th>
+            <th>景点地址</th>
+            <th>景点图片</th>
+            <th>景点描述</th>
+        </tr>
+        <tr >
+            <td height="300"><input type="text" th:field="*{aid}" /></td>
+            <td height="300"><input type="text" th:field="*{aname}" /></td>
+            <td height="300"><input type="text" th:field="*{location}" /></td>
+            <td height="300"><input type="url" th:field="*{pictureurl}" /></td>
+            <!--<td><img th:src="${p.pictureurl}"></td>-->
+            <td height="300"><input type="text" th:field="*{description}" /></td>
+        </tr>
+    </table>
+    <input type="submit" />
+</form>
+
+</body>
+</html>

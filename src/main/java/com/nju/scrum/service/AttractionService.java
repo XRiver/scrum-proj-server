@@ -8,4 +8,8 @@ public interface AttractionService {
     Attraction selectByPrimaryKey(Integer aid);
 
     void addAttraction(Attraction attraction);
+
+    List<Attraction> selectByAname(String aname);
+
+    void updateAttraction(Attraction attraction);
 }
