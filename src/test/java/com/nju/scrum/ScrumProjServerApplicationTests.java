@@ -1,8 +1,9 @@
 package com.nju.scrum;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nju.scrum.pojo.User;
 import com.nju.scrum.service.ApplyService;
+import com.nju.scrum.service.UserService;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,18 +15,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Assert;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
 //静态导入 省的写MockMvcRequestBuilders 这几个Builder了
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //一般自动装配的是bean，如果需要装配ioc容器本身，要用这个注解
 @WebAppConfiguration
@@ -37,6 +37,8 @@ public class ScrumProjServerApplicationTests {
     WebApplicationContext context;
     @Autowired
     ApplyService applyService;
+    @Autowired
+    UserService userService;
     //  虚拟mvc请求，获取到处理结果
     private MockMvc mockMvc;
 
@@ -176,5 +178,20 @@ public class ScrumProjServerApplicationTests {
                 .content(js.toString())).andDo(print()).andReturn();
 
     }
+    @Test
+    public void testSelectUncreditUser() throws Exception {
+        List<User> userList = userService.selectUncreditUser(new Date().getTime());
+        for (User u : userList) {
+            System.out.println(u);
+
+        }
+    }
+    @Test
+    public void testLock() throws Exception {
+        MvcResult res1 = this.mockMvc.perform(get("/api/lock?openid=o9VBV4yQfCMsqJif_6DdAEhKzAIo&length=month")
+                .characterEncoding("utf-8"))
+                .andDo(print()).andReturn();
+    }
+
 }
 

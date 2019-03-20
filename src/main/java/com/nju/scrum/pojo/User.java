@@ -86,6 +86,8 @@ public class User {
                 ", sex='" + sex + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", city='" + city + '\'' +
+                ", credit=" + credit +
+                ", unlockTime=" + unlockTime +
                 '}';
     }
 }

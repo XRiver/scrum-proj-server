@@ -6,7 +6,28 @@
     <meta content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<!--/*@thymesVar id="name" type="java.lang.String"*/-->
-<p th:text="'Hello！, ' + ${name} + '!'">3333</p>
+<font size="5" color="black"><strong>管理员封禁失信用户</strong></font><br/>
+<hr/>
+<table>
+    <tr>
+        <th>openID</th>
+        <th>姓名</th>
+        <th>学校</th>
+        <th>昵称</th>
+        <th>性别</th>
+        <th>信用度</th>
+        <th>封禁时间</th>
+    </tr>
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.openid}">null</td>
+        <td th:text="${user.uname}">null</td>
+        <td th:text="${user.school}">null</td>
+        <td th:text="${user.nickname}">null</td>
+        <td th:text="${user.sex}">null</td>
+        <td th:text="${user.credit}">null</td>
+        <td><a th:href="@{/api/lock(openid=${user.openid},length='month')}">一个月</a>/<a th:href="@{/api/lock(openid=${user.openid},length='year')}">一年</a></td>
+    </tr>
+</table>
+
 </body>
 </html>

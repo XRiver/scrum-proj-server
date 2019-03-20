@@ -40,4 +40,14 @@ public class UserServiceImpl implements UserService {
     public User selectUserByOpenId(String openid) {
         return userMapper.selectByOpenId(openid).get(0);
     }
+
+    @Override
+    public List<User> selectUncreditUser(long timeStamp) {
+        return userMapper.selectUncreditUser(timeStamp);
+    }
+
+    @Override
+    public void updateUnlockTime(long unlockTime, String openid) {
+        userMapper.updateUnlockTime(unlockTime,openid);
+    }
 }

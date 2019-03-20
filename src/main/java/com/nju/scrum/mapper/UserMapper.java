@@ -1,8 +1,6 @@
 package com.nju.scrum.mapper;
 import com.nju.scrum.pojo.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 @Mapper
@@ -27,4 +25,10 @@ public interface UserMapper {
 
     @Select("select * from user where openId=#{openid}")
     User selectUserByOpenId(String openid);
+
+    @Select("select * from user where credit < 0 and unlockTime < #{timeStamp}")
+    List<User> selectUncreditUser(long timeStamp);
+
+    @Update("update user set unlockTime = #{unlockTime} where openId = #{openid}")
+    void updateUnlockTime(@Param("unlockTime") long unlockTime,@Param("openid") String openid);
 }
