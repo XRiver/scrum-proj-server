@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="text/html; charset=UTF-8">
     <title>管理员添加新景点</title>
     <script type="text/javascript" src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
 </head>
@@ -21,6 +21,9 @@
 <br/>
 <font size="5" color="black"><strong>管理员封禁失信用户</strong></font><br/>
 <hr/>
+<!--防止idea报错-->
+<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+<button onclick="javascrtpt:window.location.href='/unCredit.html'">查询失信用户</button>
 
 
 <script type="text/javascript">
