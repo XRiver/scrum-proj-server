@@ -676,7 +676,7 @@ response
     }
 ```
 
-##### 21.管理员封禁用户
+##### 22.管理员封禁用户
 
 request
 
@@ -697,4 +697,27 @@ response
 
 ```json
     "redirect:/unCredit.html"
+```
+
+
+##### 23.管理员修改景点信息
+
+request
+
+```shell
+GET /modifyAttraction
+```
+
+```json
+[
+    {attraction实体1}，{attraction实体2}...//在下拉列表中
+]
+
+```
+
+
+response
+
+```json
+    "redirect:/modifyAttraction.html"
 ```
