@@ -6,7 +6,7 @@
     <script type="text/javascript" src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
 </head>
 <body>
-<font size="5" color="black"><strong>管理员添加景点信息界面</strong></font><br/>
+<font size="5" color="black"><strong>管理员添加景点信息</strong></font><br/>
 <hr/>
 </form>
 <form id="addAttraction"  name="addAttraction" enctype="multipart/form-data" >
@@ -18,6 +18,11 @@
     <input type="button" value="提交景点信息"  onclick="doLogin()">
 </form>
 <input name="quit" type="button" value="退出" onclick="javascrtpt:window.location.href='/login.html'">
+<br/>
+<font size="5" color="black"><strong>管理员封禁失信用户</strong></font><br/>
+<hr/>
+
+
 <script type="text/javascript">
     function doLogin() {
         if ($("#aname").val() == "") {
