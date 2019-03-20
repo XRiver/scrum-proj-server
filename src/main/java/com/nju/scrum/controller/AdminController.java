@@ -26,15 +26,6 @@ public class AdminController {
         return "unCredit";
     }
 
-//    @GetMapping("/api/lock/month/{openid}")
-//    public String lockMonth(@PathVariable("openid") String openid) {
-//        Calendar now = Calendar.getInstance();
-//        now.add(Calendar.MONTH, 1);
-//        long futureTime = now.getTime().getTime();
-//        //更新封禁时间
-//        userService.updateUnlockTime(futureTime,openid);
-//        return "redirect:/unCredit.html";
-//    }
     @GetMapping("/api/lock")
     public String lockYear(@RequestParam("openid") String openid,@RequestParam("length") String length) {
         Calendar now = Calendar.getInstance();

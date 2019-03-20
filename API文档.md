@@ -129,7 +129,7 @@ response
 
 ```json
 {
-    'code'： number  //0-登录成功   1-未传入openid   2-无此用户,需要注册
+    'code'： number  //0-登录成功   1-未传入openid   2-无此用户,需要注册  3-用户被封禁
     'msg':   string  //说明 
     'data':  {User实体}    //登录成功时返回json对象
 }
@@ -674,4 +674,27 @@ response
         'msg':   string  //说明 
         'data':  null    //无
     }
+```
+
+##### 21.管理员封禁用户
+
+request
+
+```shell
+GET /api/unlock/
+```
+
+```json
+{
+	openid: string; // 活动发起人的openid，身份验证
+	length:string // month表示一个月 year表示一年
+}
+
+```
+
+
+response
+
+```json
+    "redirect:/unCredit.html"
 ```
