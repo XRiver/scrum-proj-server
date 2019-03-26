@@ -30,7 +30,7 @@ public interface UserMapper {
     List<User> selectUncreditUser(long timeStamp);
 
     @Update("update user set unlockTime = #{unlockTime} where openId = #{openid}")
-    void updateUnlockTime(@Param("unlockTime") long unlockTime,@Param("openid") String openid);
+    void updateUnlockTime(@Param("unlockTime") Long unlockTime,@Param("openid") String openid);
 
     @Select("select unlockTime from user where openid = #{openid}")
     long selectUnlockTimeByOpenid(String openid);

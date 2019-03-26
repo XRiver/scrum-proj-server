@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUnlockTime(long unlockTime, String openid) {
+    public void updateUnlockTime(Long unlockTime, String openid) {
         userMapper.updateUnlockTime(unlockTime,openid);
     }
 

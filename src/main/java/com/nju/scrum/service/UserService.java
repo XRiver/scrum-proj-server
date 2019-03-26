@@ -2,6 +2,7 @@ package com.nju.scrum.service;
 
 import com.nju.scrum.pojo.User;
 
+import java.lang.ref.SoftReference;
 import java.util.List;
 
 public interface UserService {
@@ -13,7 +14,7 @@ public interface UserService {
 
     List<User> selectUncreditUser(long timeStamp);
 
-    void updateUnlockTime(long unlockTime, String openid);
+    void updateUnlockTime(Long unlockTime, String openid);
 
     boolean isLocked(String openid);
 }

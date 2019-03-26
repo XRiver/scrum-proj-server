@@ -36,7 +36,7 @@ public class AdminController {
         } else if (length.equals("year")) {
             now.add(Calendar.YEAR, 1);
         }
-        long unlockTime = now.getTime().getTime()  ;
+        Long unlockTime = Long.valueOf(now.getTime().getTime());
         //更新封禁时间
         userService.updateUnlockTime(unlockTime,openid);
         return "redirect:/unCredit.html";
